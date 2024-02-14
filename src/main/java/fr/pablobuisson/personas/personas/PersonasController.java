@@ -1,5 +1,6 @@
 package fr.pablobuisson.personas.personas;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -28,7 +29,7 @@ public class PersonasController {
         return personas.values();
     }
 
-    @GetMapping(path = "/persona/{id}")
+    @GetMapping(path = "/personas/{id}")
     public Persona getById(@PathVariable String id) {
         Persona persona = personas.get(id);
 
@@ -37,7 +38,7 @@ public class PersonasController {
         return persona;
     }
 
-    @DeleteMapping(path = "/persona/{id}")
+    @DeleteMapping(path = "/personas/{id}")
     public void deleteById(@PathVariable String id) {
         Persona persona = personas.remove(id);
 
@@ -45,7 +46,7 @@ public class PersonasController {
     }
 
     @PostMapping(path = "/personas")
-    public Persona create(@RequestBody Persona persona) {
+    public Persona create(@RequestBody @Valid Persona persona) {
         persona.setId(UUID.randomUUID().toString());
         this.personas.put(persona.getId(), persona);
         return persona;
