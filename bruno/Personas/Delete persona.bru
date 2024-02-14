@@ -1,0 +1,19 @@
+meta {
+  name: Delete persona
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{baseUrl}}/personas/e6d509c4-52f8-4ff4-be3d-4612fcae5193
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Frodon",
+    "age": "16",
+    "story": "Wants to chill and having a good time"
+  }
+}
