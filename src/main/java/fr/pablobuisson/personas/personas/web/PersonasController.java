@@ -1,23 +1,20 @@
-package fr.pablobuisson.personas.personas;
+package fr.pablobuisson.personas.personas.web;
 
+import fr.pablobuisson.personas.personas.model.Persona;
+import fr.pablobuisson.personas.personas.service.PersonaService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
+@AllArgsConstructor
 @RestController
 public class PersonasController {
 
-    private final Map<String, Persona> personas = new HashMap<String, Persona>() {
-        {
-            put("1", new Persona("1", "Bilbo", "28", "A hobbit longing for a great adventure."));
-        }
-    };
+    private final PersonaService personaService;
 
     @GetMapping(path = "/hello")
     public String displayHelloWorld() {
@@ -26,12 +23,12 @@ public class PersonasController {
 
     @GetMapping(path = "/personas")
     public Collection<Persona> getAll() {
-        return personas.values();
+        return personaService.getAll();
     }
 
     @GetMapping(path = "/personas/{id}")
     public Persona getById(@PathVariable String id) {
-        Persona persona = personas.get(id);
+        Persona persona = personaService.getById(id);
 
         if (persona == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
@@ -40,15 +37,13 @@ public class PersonasController {
 
     @DeleteMapping(path = "/personas/{id}")
     public void deleteById(@PathVariable String id) {
-        Persona persona = personas.remove(id);
+        Persona persona = personaService.delete(id);
 
         if (persona == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(path = "/personas")
     public Persona create(@RequestBody @Valid Persona persona) {
-        persona.setId(UUID.randomUUID().toString());
-        this.personas.put(persona.getId(), persona);
-        return persona;
+        return personaService.create(persona);
     }
 }

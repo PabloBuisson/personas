@@ -1,4 +1,4 @@
-package fr.pablobuisson.personas.personas;
+package fr.pablobuisson.personas.personas.model;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
