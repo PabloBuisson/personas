@@ -8,7 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -22,7 +23,7 @@ public class PersonasController {
     }
 
     @GetMapping(path = "/personas")
-    public Collection<Persona> getAll() {
+    public Iterable<Persona> getAll() {
         return personaService.getAll();
     }
 
@@ -37,13 +38,13 @@ public class PersonasController {
 
     @DeleteMapping(path = "/personas/{id}")
     public void deleteById(@PathVariable String id) {
-        Persona persona = personaService.delete(id);
-
-        if (persona == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        personaService.delete(id);
     }
 
     @PostMapping(path = "/personas")
     public Persona create(@RequestBody @Valid Persona persona) {
+        //TODO create function in database
+        persona.setId(UUID.randomUUID().toString());
         return personaService.create(persona);
     }
 }

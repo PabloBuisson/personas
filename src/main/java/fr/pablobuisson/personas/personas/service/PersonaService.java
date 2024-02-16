@@ -1,39 +1,36 @@
 package fr.pablobuisson.personas.personas.service;
 
 import fr.pablobuisson.personas.personas.model.Persona;
+import fr.pablobuisson.personas.personas.repository.PersonaRepository;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
+@AllArgsConstructor
 @Data
 @Service
 public class PersonaService {
 
-    private Map<String, Persona> personas = new HashMap<String, Persona>() {
-        {
-            put("1", new Persona("1", "Bilbo", "28", "A hobbit longing for a great adventure."));
-        }
-    };
+    private final PersonaRepository personaRepository;
 
-    public Collection<Persona> getAll() {
-        return this.personas.values();
+    public Iterable<Persona> getAll() {
+        return this.personaRepository.findAll();
     }
 
     public Persona getById(String id) {
-        return this.personas.get(id);
+        return this.personaRepository.findById(id).orElse(null);
     }
 
     public Persona create(Persona persona) {
-        persona.setId(UUID.randomUUID().toString());
-        this.personas.put(persona.getId(), persona);
-        return persona;
+        return this.personaRepository.save(persona);
     }
 
-    public Persona delete(String id) {
-        return this.personas.remove(id);
+    public void delete(String id) {
+        this.personaRepository.deleteById(id);
     }
 }

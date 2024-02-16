@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS persona (
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    age VARCHAR(255) NOT NULL,
+    story TEXT NOT NULL
+);
