@@ -8,9 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
-import java.util.UUID;
-
 @AllArgsConstructor
 @RestController
 public class PersonasController {
@@ -43,8 +40,6 @@ public class PersonasController {
 
     @PostMapping(path = "/personas")
     public Persona create(@RequestBody @Valid Persona persona) {
-        //TODO create function in database
-        persona.setId(UUID.randomUUID().toString());
         return personaService.create(persona);
     }
 }
