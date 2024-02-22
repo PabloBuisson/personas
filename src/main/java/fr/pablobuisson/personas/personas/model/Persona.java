@@ -15,14 +15,18 @@ import lombok.NoArgsConstructor;
 public class Persona {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
-    String id;
+    private String id;
 
     @NotNull(message = "The name of the persona is requested.")
-    String name;
+    private String name;
 
     @NotNull(message = "The age of the persona is requested.")
-    String age;
+    private String age;
 
     @NotNull(message = "The story of the persona is requested.")
-    String story;
+    private String story;
+
+    @ManyToOne()
+    @JoinColumn(name = "project_id")
+    private Project project;
 }
