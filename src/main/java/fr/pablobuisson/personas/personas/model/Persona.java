@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 
 @Entity
 @Table(name = "persona")
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Persona {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
-    private String id;
+    private UUID id;
 
     @NotNull(message = "The name of the persona is requested.")
     private String name;

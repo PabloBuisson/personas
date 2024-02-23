@@ -13,7 +13,5 @@ CREATE TABLE IF NOT EXISTS persona (
     project_id INT
 );
 
-ALTER TABLE persona
-ADD CONSTRAINT persona_project_id_fk
-FOREIGN KEY (project_id)
-REFERENCES project (id);
+ALTER TABLE persona DROP CONSTRAINT IF EXISTS persona_project_id_fk;
+ALTER TABLE persona ADD CONSTRAINT persona_project_id_fk FOREIGN KEY (project_id) REFERENCES project (id);
