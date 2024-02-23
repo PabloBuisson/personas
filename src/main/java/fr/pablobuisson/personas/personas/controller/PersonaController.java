@@ -1,6 +1,6 @@
-package fr.pablobuisson.personas.personas.web;
+package fr.pablobuisson.personas.personas.controller;
 
-import fr.pablobuisson.personas.personas.model.Persona;
+import fr.pablobuisson.personas.personas.dto.PersonaDto;
 import fr.pablobuisson.personas.personas.service.PersonaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -18,17 +20,17 @@ public class PersonaController {
     private final PersonaService personaService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Persona> getAll() {
+    public List<PersonaDto> getAll() {
         return personaService.getAll();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Persona getById(@PathVariable String id) {
-        Persona persona = personaService.getById(id);
+    public PersonaDto getById(@PathVariable String id) {
+        PersonaDto personaSavedDto = personaService.getById(id);
 
-        if (persona == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if (personaSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        return persona;
+        return personaSavedDto;
     }
 
     @DeleteMapping(path = "/{id}")
@@ -37,7 +39,7 @@ public class PersonaController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Persona create(@RequestBody @Valid Persona persona) {
-        return personaService.create(persona);
+    public PersonaDto create(@RequestBody @Valid PersonaDto personaDto) {
+        return personaService.create(personaDto);
     }
 }

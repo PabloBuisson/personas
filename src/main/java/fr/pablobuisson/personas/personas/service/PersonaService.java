@@ -1,15 +1,14 @@
 package fr.pablobuisson.personas.personas.service;
 
+import fr.pablobuisson.personas.personas.dto.PersonaDto;
+import fr.pablobuisson.personas.personas.mapper.PersonaMapper;
 import fr.pablobuisson.personas.personas.model.Persona;
 import fr.pablobuisson.personas.personas.repository.PersonaRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @AllArgsConstructor
 @Data
@@ -17,17 +16,20 @@ import java.util.UUID;
 public class PersonaService {
 
     private final PersonaRepository personaRepository;
+    private final PersonaMapper personaMapper;
 
-    public Iterable<Persona> getAll() {
-        return this.personaRepository.findAll();
+    public List<PersonaDto> getAll() {
+        return this.personaRepository.findAll().stream().map(personaMapper::toDto).toList();
     }
 
-    public Persona getById(String id) {
-        return this.personaRepository.findById(id).orElse(null);
+    public PersonaDto getById(String id) {
+        return this.personaMapper.toDto(this.personaRepository.findById(id).orElse(null));
     }
 
-    public Persona create(Persona persona) {
-        return this.personaRepository.save(persona);
+    public PersonaDto create(PersonaDto personaDto) {
+        Persona persona = this.personaMapper.toEntity(personaDto);
+        Persona savedPersona = this.personaRepository.save(persona);
+        return this.personaMapper.toDto(savedPersona);
     }
 
     public void delete(String id) {

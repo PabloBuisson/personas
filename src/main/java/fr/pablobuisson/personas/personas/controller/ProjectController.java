@@ -1,6 +1,6 @@
-package fr.pablobuisson.personas.personas.web;
+package fr.pablobuisson.personas.personas.controller;
 
-import fr.pablobuisson.personas.personas.model.Project;
+import fr.pablobuisson.personas.personas.dto.ProjectDto;
 import fr.pablobuisson.personas.personas.service.ProjectService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(ProjectController.API_URL)
@@ -20,17 +22,17 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<Project> getAll() {
+    public List<ProjectDto> getAll() {
         return projectService.getAll();
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Project getById(@PathVariable Long id) {
-        Project project = projectService.getById(id);
+    public ProjectDto getById(@PathVariable Long id) {
+        ProjectDto projectSavedDto = projectService.getById(id);
 
-        if (project == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if (projectSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        return project;
+        return projectSavedDto;
     }
 
     @DeleteMapping(path = "/{id}")
@@ -39,7 +41,7 @@ public class ProjectController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Project create(@RequestBody @Valid Project project) {
+    public ProjectDto create(@RequestBody @Valid ProjectDto project) {
         return projectService.create(project);
     }
 }

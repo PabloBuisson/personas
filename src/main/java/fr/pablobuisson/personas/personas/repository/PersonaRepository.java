@@ -1,9 +1,9 @@
 package fr.pablobuisson.personas.personas.repository;
 
 import fr.pablobuisson.personas.personas.model.Persona;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PersonaRepository extends CrudRepository<Persona, String> {
+public interface PersonaRepository extends ListCrudRepository<Persona, String> {
 }
