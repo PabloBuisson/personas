@@ -1,0 +1,24 @@
+meta {
+  name: Create project with tag
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{baseUrl}}/projects
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Project one",
+    "description": "My first project",
+    "tags": [
+      {
+        "id": 1,
+        "label": "First tag"
+      }
+    ]
+  }
+}

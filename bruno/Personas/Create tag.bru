@@ -1,0 +1,18 @@
+meta {
+  name: Create tag
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{baseUrl}}/tags
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "label": "First tag",
+    "color": "#ff0000"
+  }
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Create persona with new project
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/personas
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Frodon",
+    "age": "16",
+    "story": "Wants to chill and have a good time",
+    "project": {
+      "name": "My new project with this persona"
+    }
+  }
+}

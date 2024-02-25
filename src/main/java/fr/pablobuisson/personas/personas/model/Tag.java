@@ -10,26 +10,24 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "project")
+@Table(name = "tag")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Project {
+public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String name;
+    private String label;
 
-    private String description;
+    private String color;
 
-    private String icon;
-
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private Set<Persona> personas = new LinkedHashSet<>();
-
-    @ManyToMany(mappedBy = "projects", cascade = CascadeType.ALL)
-    private Set<Tag> tags = new LinkedHashSet<>();
+    @ManyToMany
+    @JoinTable(name = "tag_project",
+            joinColumns = @JoinColumn(name = "tag_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    private Set<Project> projects = new LinkedHashSet<>();
 }

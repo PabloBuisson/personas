@@ -11,9 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping(PersonaController.API_URL)
+@AllArgsConstructor
 public class PersonaController {
     public final static String API_URL = "/api/personas";
 
