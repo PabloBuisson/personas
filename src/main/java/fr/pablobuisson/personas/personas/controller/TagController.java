@@ -33,6 +33,11 @@ public class TagController {
         return tagSavedDto;
     }
 
+    @GetMapping(path = "/projects/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<TagDto> getTagsByProjectId(@PathVariable Long id) {
+        return tagService.getByProjectId(id);
+    }
+
     @DeleteMapping(path = "/{id}")
     public void deleteById(@PathVariable Long id) {
         tagService.delete(id);
