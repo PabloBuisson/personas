@@ -2,18 +2,18 @@ package fr.pablobuisson.personas.personas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "ProjectEntity")
 @Table(name = "project")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Project {
 
     @Id
@@ -27,9 +27,14 @@ public class Project {
 
     private String icon;
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<Persona> personas = new LinkedHashSet<>();
 
-    @ManyToMany(mappedBy = "projects", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ManyToMany
+    @JoinTable(name = "tag_project",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = new LinkedHashSet<>();
 }

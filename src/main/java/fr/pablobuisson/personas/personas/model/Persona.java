@@ -2,18 +2,18 @@ package fr.pablobuisson.personas.personas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.UUID;
 
 
-@Entity
+@Entity(name = "PersonaEntity")
 @Table(name = "persona")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Persona {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
@@ -28,7 +28,8 @@ public class Persona {
     @NotNull(message = "The story of the persona is requested.")
     private String story;
 
-    @ManyToOne()
+    @EqualsAndHashCode.Exclude
+    @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
 }

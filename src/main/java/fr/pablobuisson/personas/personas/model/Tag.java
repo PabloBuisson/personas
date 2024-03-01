@@ -2,18 +2,18 @@ package fr.pablobuisson.personas.personas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "TagEntity")
 @Table(name = "tag")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Tag {
 
     @Id
@@ -24,10 +24,4 @@ public class Tag {
     private String label;
 
     private String color;
-
-    @ManyToMany
-    @JoinTable(name = "tag_project",
-            joinColumns = @JoinColumn(name = "tag_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id"))
-    private Set<Project> projects = new LinkedHashSet<>();
 }

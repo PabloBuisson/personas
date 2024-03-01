@@ -22,7 +22,7 @@ public class PersonaService {
         return this.personaRepository.findAll().stream().map(personaMapper::toDto).toList();
     }
 
-    public PersonaDto getById(String id) {
+    public PersonaDto getById(UUID id) {
         return this.personaMapper.toDto(this.personaRepository.findById(id).orElse(null));
     }
 
@@ -32,7 +32,7 @@ public class PersonaService {
         return this.personaMapper.toDto(savedPersona);
     }
 
-    public void delete(String id) {
+    public void delete(UUID id) {
         this.personaRepository.deleteById(id);
     }
 }

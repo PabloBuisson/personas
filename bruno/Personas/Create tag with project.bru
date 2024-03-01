@@ -1,7 +1,7 @@
 meta {
-  name: Create tag
+  name: Create tag with project
   type: http
-  seq: 15
+  seq: 16
 }
 
 post {
@@ -13,6 +13,11 @@ post {
 body:json {
   {
     "label": "First tag",
-    "color": "#ff0000"
+    "color": "#ff0000",
+    "projects": [
+      {
+        "id": 3
+      }
+    ]
   }
 }

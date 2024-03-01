@@ -1,6 +1,7 @@
 package fr.pablobuisson.personas.personas.service;
 
 import fr.pablobuisson.personas.personas.dto.TagDto;
+import fr.pablobuisson.personas.personas.mapper.ProjectMapper;
 import fr.pablobuisson.personas.personas.mapper.TagMapper;
 import fr.pablobuisson.personas.personas.model.Tag;
 import fr.pablobuisson.personas.personas.repository.TagRepository;
@@ -25,10 +26,10 @@ public class TagService {
         return this.tagMapper.toDto(this.tagRepository.findById(id).orElse(null));
     }
 
-    public TagDto create(TagDto projectDto) {
-        Tag projectToCreate = this.tagMapper.toEntity(projectDto);
-        Tag projectSaved = this.tagRepository.save(projectToCreate);
-        return this.tagMapper.toDto(projectSaved);
+    public TagDto create(TagDto tagDto) {
+        Tag tagToCreate = this.tagMapper.toEntity(tagDto);
+        Tag tagSaved = this.tagRepository.save(tagToCreate);
+        return this.tagMapper.toDto(tagSaved);
     }
 
     public void delete(Long id) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(PersonaController.API_URL)
@@ -25,7 +26,7 @@ public class PersonaController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonaDto getById(@PathVariable String id) {
+    public PersonaDto getById(@PathVariable UUID id) {
         PersonaDto personaSavedDto = personaService.getById(id);
 
         if (personaSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -34,7 +35,7 @@ public class PersonaController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deleteById(@PathVariable String id) {
+    public void deleteById(@PathVariable UUID id) {
         personaService.delete(id);
     }
 
