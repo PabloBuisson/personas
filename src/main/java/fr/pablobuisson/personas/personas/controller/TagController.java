@@ -34,7 +34,7 @@ public class TagController {
     }
 
     @GetMapping(path = "/projects/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<TagDto> getTagsByProjectId(@PathVariable Long id) {
+    public List<TagDto> getByProjectId(@PathVariable Long id) {
         return tagService.getByProjectId(id);
     }
 

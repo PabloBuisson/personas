@@ -21,6 +21,10 @@ public class ProjectService {
         return this.projectRepository.findAll().stream().map(this.projectMapper::toDto).toList();
     }
 
+    public List<ProjectDto> getByTagId(Long id) {
+        return this.projectRepository.findByTagsId(id).stream().map(this.projectMapper::toDto).toList();
+    }
+
     public ProjectDto getById(Long id) {
         return this.projectMapper.toDto(this.projectRepository.findById(id).orElse(null));
     }

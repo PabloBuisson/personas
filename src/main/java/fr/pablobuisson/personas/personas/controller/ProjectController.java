@@ -35,6 +35,11 @@ public class ProjectController {
         return projectSavedDto;
     }
 
+    @GetMapping(path = "/tags/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ProjectDto> getByTagId(@PathVariable Long id) {
+        return projectService.getByTagId(id);
+    }
+
     @DeleteMapping(path = "/{id}")
     public void deleteById(@PathVariable Long id) {
         projectService.delete(id);
