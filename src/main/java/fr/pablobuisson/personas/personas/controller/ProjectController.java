@@ -46,6 +46,18 @@ public class ProjectController {
         return new ResponseEntity<>(projectService.create(project), HttpStatus.CREATED);
     }
 
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<ProjectDto> fullUpdate(
+            @PathVariable("id") Long id,
+            @RequestBody ProjectDto projectDto) {
+
+        if (!projectService.existsInDB(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(projectService.update(projectDto, id), HttpStatus.OK);
+    }
+
     @DeleteMapping(path = "/{id}")
     public void deleteById(@PathVariable Long id) {
         projectService.delete(id);

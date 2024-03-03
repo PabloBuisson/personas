@@ -38,4 +38,18 @@ public class ProjectService {
     public void delete(Long id) {
         this.projectRepository.deleteById(id);
     }
+
+    public ProjectDto update(ProjectDto projectDto, Long id) {
+        Project project = this.projectMapper.toEntity(projectDto);
+        // Security to make sure that the id in the url
+        // is the same as the entity that we are about to change
+        // and to prevent undesired creation (entity without id leads to a creation of an entity)
+        project.setId(id);
+        Project savedProject = this.projectRepository.save(project);
+        return this.projectMapper.toDto(savedProject);
+    }
+
+    public boolean existsInDB(Long id) {
+        return this.projectRepository.existsById(id);
+    }
 }

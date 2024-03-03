@@ -1,0 +1,20 @@
+meta {
+  name: Update persona
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/personas/93427df4-7cf6-469e-95d6-1deaaf9c1243
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "93427df4-7cf6-469e-95d6-1deaaf9c1243",
+    "name": "Frodon",
+    "age": "18",
+    "story": "Wants to chill and have a good time"
+  }
+}

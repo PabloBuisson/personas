@@ -40,6 +40,18 @@ public class PersonaController {
         return new ResponseEntity<>(personaService.create(personaDto), HttpStatus.CREATED);
     }
 
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<PersonaDto> fullUpdate(
+            @PathVariable("id") UUID id,
+            @RequestBody PersonaDto personaDto) {
+
+        if (!personaService.existInDB(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(personaService.update(personaDto, id), HttpStatus.OK);
+    }
+
     @DeleteMapping(path = "/{id}")
     public void deleteById(@PathVariable UUID id) {
         personaService.delete(id);

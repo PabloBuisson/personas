@@ -1,0 +1,18 @@
+meta {
+  name: Update project
+  type: http
+  seq: 12
+}
+
+put {
+  url: {{baseUrl}}/projects/4
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Project four",
+    "description": "My fourth project"
+  }
+}

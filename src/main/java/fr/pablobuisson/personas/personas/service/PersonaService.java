@@ -35,4 +35,18 @@ public class PersonaService {
     public void delete(UUID id) {
         this.personaRepository.deleteById(id);
     }
+
+    public PersonaDto update(PersonaDto personaDto, UUID id) {
+        Persona persona = this.personaMapper.toEntity(personaDto);
+        // Security to make sure that the id in the url
+        // is the same as the entity that we are about to change
+        // and to prevent undesired creation (entity without id leads to a creation of an entity)
+        persona.setId(id);
+        Persona savedPersona = this.personaRepository.save(persona);
+        return this.personaMapper.toDto(savedPersona);
+    }
+
+    public boolean existInDB(UUID id) {
+        return this.personaRepository.existsById(id);
+    }
 }

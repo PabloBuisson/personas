@@ -3,6 +3,7 @@ package fr.pablobuisson.personas.personas.service;
 import fr.pablobuisson.personas.personas.dto.TagDto;
 import fr.pablobuisson.personas.personas.mapper.ProjectMapper;
 import fr.pablobuisson.personas.personas.mapper.TagMapper;
+import fr.pablobuisson.personas.personas.model.Persona;
 import fr.pablobuisson.personas.personas.model.Tag;
 import fr.pablobuisson.personas.personas.repository.TagRepository;
 import lombok.AllArgsConstructor;
@@ -38,5 +39,19 @@ public class TagService {
 
     public void delete(Long id) {
         this.tagRepository.deleteById(id);
+    }
+
+    public TagDto update(TagDto tagDto, Long id) {
+        Tag tag = this.tagMapper.toEntity(tagDto);
+        // Security to make sure that the id in the url
+        // is the same as the entity that we are about to change
+        // and to prevent undesired creation (entity without id leads to a creation of an entity)
+        tag.setId(id);
+        Tag savedTag = this.tagRepository.save(tag);
+        return this.tagMapper.toDto(savedTag);
+    }
+
+    public boolean existsInDB(Long id) {
+        return this.tagRepository.existsById(id);
     }
 }

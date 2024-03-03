@@ -1,0 +1,18 @@
+meta {
+  name: Update tag
+  type: http
+  seq: 20
+}
+
+put {
+  url: {{baseUrl}}/tags/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "label": "Second tag",
+    "color": "#ff0001"
+  }
+}
