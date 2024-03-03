@@ -2,6 +2,7 @@ package fr.pablobuisson.personas.personas.controller;
 
 import fr.pablobuisson.personas.personas.dto.ProjectDto;
 import fr.pablobuisson.personas.personas.service.ProjectService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,11 +24,15 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get all projects")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ProjectDto>> getAll() {
         return new ResponseEntity<>(projectService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get a project by its id")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> getById(@PathVariable Long id) {
         ProjectDto projectSavedDto = projectService.getById(id);
 
@@ -37,16 +42,22 @@ public class ProjectController {
     }
 
     @GetMapping(path = "/tags/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get projects by the id of one of their tags")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ProjectDto>> getByTagId(@PathVariable Long id) {
         return new ResponseEntity<>(projectService.getByTagId(id), HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create a project")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ProjectDto> create(@RequestBody @Valid ProjectDto project) {
         return new ResponseEntity<>(projectService.create(project), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
+    @Operation(summary = "Update fully a project")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> fullUpdate(
             @PathVariable("id") Long id,
             @RequestBody ProjectDto projectDto) {
@@ -59,6 +70,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Delete a project")
     public void deleteById(@PathVariable Long id) {
         projectService.delete(id);
     }

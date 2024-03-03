@@ -2,6 +2,7 @@ package fr.pablobuisson.personas.personas.controller;
 
 import fr.pablobuisson.personas.personas.dto.PersonaDto;
 import fr.pablobuisson.personas.personas.service.PersonaService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,15 @@ public class PersonaController {
     private final PersonaService personaService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get all personas")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<PersonaDto>> getAll() {
         return new ResponseEntity<>(personaService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get persona by its id")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PersonaDto> getById(@PathVariable UUID id) {
         PersonaDto personaSavedDto = personaService.getById(id);
 
@@ -35,12 +40,17 @@ public class PersonaController {
         return new ResponseEntity<>(personaSavedDto, HttpStatus.OK);
     }
 
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create a persona")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PersonaDto> create(@RequestBody @Valid PersonaDto personaDto) {
         return new ResponseEntity<>(personaService.create(personaDto), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
+    @Operation(summary = "Update fully a persona")
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PersonaDto> fullUpdate(
             @PathVariable("id") UUID id,
             @RequestBody PersonaDto personaDto) {
@@ -53,6 +63,7 @@ public class PersonaController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @Operation(summary = "Delete a persona")
     public void deleteById(@PathVariable UUID id) {
         personaService.delete(id);
     }

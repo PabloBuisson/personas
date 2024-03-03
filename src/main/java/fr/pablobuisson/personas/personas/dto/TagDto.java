@@ -1,7 +1,8 @@
 package fr.pablobuisson.personas.personas.dto;
 
-import java.io.Serializable;
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
 
-public record TagDto(Long id, String label, String color) implements Serializable {
+import java.io.Serializable;
+
+public record TagDto(Long id, @NotBlank String label, String color) implements Serializable {
 }

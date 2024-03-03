@@ -1,7 +1,7 @@
 package fr.pablobuisson.personas.personas.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.LinkedHashSet;
@@ -20,7 +20,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String name;
 
     private String description;

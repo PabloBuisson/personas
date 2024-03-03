@@ -1,7 +1,7 @@
 package fr.pablobuisson.personas.personas.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.UUID;
@@ -19,13 +19,13 @@ public class Persona {
     @Id
     private UUID id;
 
-    @NotNull(message = "The name of the persona is requested.")
+    @NotBlank(message = "The name of the persona is requested.")
     private String name;
 
-    @NotNull(message = "The age of the persona is requested.")
+    @NotBlank(message = "The age of the persona is requested.")
     private String age;
 
-    @NotNull(message = "The story of the persona is requested.")
+    @NotBlank(message = "The story of the persona is requested.")
     private String story;
 
     @EqualsAndHashCode.Exclude
