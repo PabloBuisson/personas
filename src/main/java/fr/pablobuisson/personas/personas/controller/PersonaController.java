@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,26 +22,26 @@ public class PersonaController {
     private final PersonaService personaService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PersonaDto> getAll() {
-        return personaService.getAll();
+    public ResponseEntity<List<PersonaDto>> getAll() {
+        return new ResponseEntity<>(personaService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonaDto getById(@PathVariable UUID id) {
+    public ResponseEntity<PersonaDto> getById(@PathVariable UUID id) {
         PersonaDto personaSavedDto = personaService.getById(id);
 
         if (personaSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        return personaSavedDto;
+        return new ResponseEntity<>(personaSavedDto, HttpStatus.OK);
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PersonaDto> create(@RequestBody @Valid PersonaDto personaDto) {
+        return new ResponseEntity<>(personaService.create(personaDto), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteById(@PathVariable UUID id) {
         personaService.delete(id);
-    }
-
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonaDto create(@RequestBody @Valid PersonaDto personaDto) {
-        return personaService.create(personaDto);
     }
 }

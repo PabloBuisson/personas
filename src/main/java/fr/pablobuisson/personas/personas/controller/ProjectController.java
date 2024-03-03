@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,31 +23,31 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProjectDto> getAll() {
-        return projectService.getAll();
+    public ResponseEntity<List<ProjectDto>> getAll() {
+        return new ResponseEntity<>(projectService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ProjectDto getById(@PathVariable Long id) {
+    public ResponseEntity<ProjectDto> getById(@PathVariable Long id) {
         ProjectDto projectSavedDto = projectService.getById(id);
 
         if (projectSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
-        return projectSavedDto;
+        return new ResponseEntity<>(projectSavedDto, HttpStatus.OK);
     }
 
     @GetMapping(path = "/tags/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ProjectDto> getByTagId(@PathVariable Long id) {
-        return projectService.getByTagId(id);
+    public ResponseEntity<List<ProjectDto>> getByTagId(@PathVariable Long id) {
+        return new ResponseEntity<>(projectService.getByTagId(id), HttpStatus.OK);
+    }
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProjectDto> create(@RequestBody @Valid ProjectDto project) {
+        return new ResponseEntity<>(projectService.create(project), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteById(@PathVariable Long id) {
         projectService.delete(id);
-    }
-
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ProjectDto create(@RequestBody @Valid ProjectDto project) {
-        return projectService.create(project);
     }
 }
