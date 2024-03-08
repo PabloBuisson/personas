@@ -7,6 +7,7 @@ import fr.pablobuisson.personas.personas.repository.PersonaRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -36,7 +37,17 @@ public class PersonaService {
         this.personaRepository.deleteById(id);
     }
 
-    public PersonaDto update(PersonaDto personaDto, UUID id) {
+    @Transactional
+    public PersonaDto partialUpdate(PersonaDto personaDto, UUID id) throws Exception {
+        if (id == null) {
+            throw new Exception("The id of the persona is missing");
+        }
+
+        Persona personaSaved = this.personaRepository.findById(id).orElseThrow(() -> new Exception("Not found Persona with id = " + id));;
+        return this.personaMapper.toDto(this.personaMapper.partialUpdate(personaDto, personaSaved));
+    }
+
+    public PersonaDto fullUpdate(PersonaDto personaDto, UUID id) {
         Persona persona = this.personaMapper.toEntity(personaDto);
         // Security to make sure that the id in the url
         // is the same as the entity that we are about to change

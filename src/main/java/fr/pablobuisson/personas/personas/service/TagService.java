@@ -1,9 +1,7 @@
 package fr.pablobuisson.personas.personas.service;
 
 import fr.pablobuisson.personas.personas.dto.TagDto;
-import fr.pablobuisson.personas.personas.mapper.ProjectMapper;
 import fr.pablobuisson.personas.personas.mapper.TagMapper;
-import fr.pablobuisson.personas.personas.model.Persona;
 import fr.pablobuisson.personas.personas.model.Tag;
 import fr.pablobuisson.personas.personas.repository.TagRepository;
 import lombok.AllArgsConstructor;
@@ -41,7 +39,16 @@ public class TagService {
         this.tagRepository.deleteById(id);
     }
 
-    public TagDto update(TagDto tagDto, Long id) {
+    public TagDto partialUpdate(TagDto tagDto, Long id) throws Exception {
+        if (id == null) {
+            throw new Exception("The id of the tag is missing");
+        }
+
+        Tag tagSaved = this.tagRepository.findById(id).orElseThrow(() -> new Exception("Not found Tag with id = " + id));;
+        return this.tagMapper.toDto(this.tagMapper.partialUpdate(tagDto, tagSaved));
+    }
+
+    public TagDto fullUpdate(TagDto tagDto, Long id) {
         Tag tag = this.tagMapper.toEntity(tagDto);
         // Security to make sure that the id in the url
         // is the same as the entity that we are about to change

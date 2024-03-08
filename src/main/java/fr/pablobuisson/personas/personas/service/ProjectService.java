@@ -39,7 +39,16 @@ public class ProjectService {
         this.projectRepository.deleteById(id);
     }
 
-    public ProjectDto update(ProjectDto projectDto, Long id) {
+    public ProjectDto partialUpdate(ProjectDto projectDto, Long id) throws Exception {
+        if (id == null) {
+            throw new Exception("The id of the project is missing");
+        }
+
+        Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new Exception("Not found Persona with id = " + id));;
+        return this.projectMapper.toDto(this.projectMapper.partialUpdate(projectDto, projectSaved));
+    }
+
+    public ProjectDto fullUpdate(ProjectDto projectDto, Long id) {
         Project project = this.projectMapper.toEntity(projectDto);
         // Security to make sure that the id in the url
         // is the same as the entity that we are about to change

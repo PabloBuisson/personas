@@ -2,10 +2,7 @@ package fr.pablobuisson.personas.personas.mapper;
 
 import fr.pablobuisson.personas.personas.dto.ProjectDto;
 import fr.pablobuisson.personas.personas.model.Project;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingConstants;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -19,4 +16,7 @@ public interface ProjectMapper {
 
     @Mapping(target = "personas", ignore = true)
     ProjectDto toDto(Project project);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Project partialUpdate(ProjectDto projectDto, @MappingTarget Project project);
 }

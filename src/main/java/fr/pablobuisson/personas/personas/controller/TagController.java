@@ -1,8 +1,6 @@
 package fr.pablobuisson.personas.personas.controller;
 
-import fr.pablobuisson.personas.personas.dto.ProjectDto;
 import fr.pablobuisson.personas.personas.dto.TagDto;
-import fr.pablobuisson.personas.personas.model.Tag;
 import fr.pablobuisson.personas.personas.service.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -60,13 +58,13 @@ public class TagController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TagDto> fullUpdate(
             @PathVariable("id") Long id,
-            @RequestBody TagDto tagDto) {
+            @RequestBody TagDto tagDto) throws Exception {
 
         if (!tagService.existsInDB(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(tagService.update(tagDto, id), HttpStatus.OK);
+        return new ResponseEntity<>(tagService.partialUpdate(tagDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")

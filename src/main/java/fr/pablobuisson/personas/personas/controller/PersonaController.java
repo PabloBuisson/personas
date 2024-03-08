@@ -53,13 +53,13 @@ public class PersonaController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PersonaDto> fullUpdate(
             @PathVariable("id") UUID id,
-            @RequestBody PersonaDto personaDto) {
+            @RequestBody PersonaDto personaDto) throws Exception {
 
         if (!personaService.existInDB(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(personaService.update(personaDto, id), HttpStatus.OK);
+        return new ResponseEntity<>(personaService.partialUpdate(personaDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")

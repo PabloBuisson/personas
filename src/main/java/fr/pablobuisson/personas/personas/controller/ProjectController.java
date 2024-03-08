@@ -60,13 +60,13 @@ public class ProjectController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> fullUpdate(
             @PathVariable("id") Long id,
-            @RequestBody ProjectDto projectDto) {
+            @RequestBody ProjectDto projectDto) throws Exception {
 
         if (!projectService.existsInDB(id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(projectService.update(projectDto, id), HttpStatus.OK);
+        return new ResponseEntity<>(projectService.partialUpdate(projectDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
