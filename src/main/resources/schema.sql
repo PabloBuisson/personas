@@ -5,6 +5,14 @@ CREATE TABLE IF NOT EXISTS project (
     description TEXT
 );
 
+CREATE TABLE IF NOT EXISTS job_details (
+    id SERIAL PRIMARY KEY,
+    company VARCHAR(255),
+    industry VARCHAR(255),
+    salary VARCHAR(255),
+    title VARCHAR(255)
+);
+
 CREATE TABLE IF NOT EXISTS persona (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -37,3 +45,19 @@ ALTER TABLE tag_project DROP CONSTRAINT IF EXISTS project_tag_id_fk;
 ALTER TABLE tag_project ADD CONSTRAINT tag_project_pk PRIMARY KEY (tag_id, project_id);
 ALTER TABLE tag_project ADD CONSTRAINT tag_project_id_fk FOREIGN KEY (tag_id) REFERENCES tag (id);
 ALTER TABLE tag_project ADD CONSTRAINT project_tag_id_fk FOREIGN KEY (project_id) REFERENCES project (id);
+
+-- JOIN TABLE JOB / PERSONA (@ONE-TO-ONE RELATIONSHIP)
+CREATE TABLE IF NOT EXISTS persona_job (
+     persona_id UUID NOT NULL,
+     job_id INT NOT NULL
+);
+
+-- Drop existing constraints if they exist
+ALTER TABLE persona_job DROP CONSTRAINT IF EXISTS persona_job_pk;
+ALTER TABLE persona_job DROP CONSTRAINT IF EXISTS persona_job_id_fk;
+ALTER TABLE persona_job DROP CONSTRAINT IF EXISTS job_persona_id_fk;
+
+-- Add new constraints
+ALTER TABLE persona_job ADD CONSTRAINT persona_job_pk PRIMARY KEY (persona_id, job_id);
+ALTER TABLE persona_job ADD CONSTRAINT persona_job_id_fk FOREIGN KEY (persona_id) REFERENCES persona (id);
+ALTER TABLE persona_job ADD CONSTRAINT job_persona_id_fk FOREIGN KEY (job_id) REFERENCES job_details (id);

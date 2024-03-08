@@ -32,4 +32,13 @@ public class Persona {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @EqualsAndHashCode.Exclude
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "persona_job",
+            joinColumns =
+                    { @JoinColumn(name = "persona_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "job_id", referencedColumnName = "id") })
+    private JobDetails job;
 }

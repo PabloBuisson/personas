@@ -1,20 +1,27 @@
 meta {
   name: Update persona
   type: http
-  seq: 4
+  seq: 6
 }
 
 put {
-  url: {{baseUrl}}/personas/93427df4-7cf6-469e-95d6-1deaaf9c1243
+  url: {{baseUrl}}/personas/9d4d403a-2f80-401f-97cc-ee71e97a8195
   body: json
   auth: none
 }
 
 body:json {
   {
-    "id": "93427df4-7cf6-469e-95d6-1deaaf9c1243",
+    "id": "9d4d403a-2f80-401f-97cc-ee71e97a8195",
     "name": "Frodon",
     "age": "18",
-    "story": "Wants to chill and have a good time"
+    "story": "Wants to chill and have a good time",
+    "job": {
+      "id": 1,
+      "industry": "Hobbit&Co",
+      "company": "Himself",
+      "salary": "00.0000µ",
+      "title": "Wanderer"
+    }
   }
 }
