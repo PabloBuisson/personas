@@ -1,7 +1,7 @@
-package fr.pablobuisson.personas.personas.mapper;
+package fr.pablobuisson.personas.mapper;
 
-import fr.pablobuisson.personas.personas.dto.PersonaDto;
-import fr.pablobuisson.personas.personas.model.Persona;
+import fr.pablobuisson.personas.dto.PersonaDto;
+import fr.pablobuisson.personas.model.Persona;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 

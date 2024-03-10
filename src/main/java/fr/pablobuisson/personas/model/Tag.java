@@ -1,4 +1,4 @@
-package fr.pablobuisson.personas.personas.model;
+package fr.pablobuisson.personas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class Tag {
 
     @Id

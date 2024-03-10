@@ -1,4 +1,4 @@
-package fr.pablobuisson.personas.personas.model;
+package fr.pablobuisson.personas.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -14,6 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class Persona {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id

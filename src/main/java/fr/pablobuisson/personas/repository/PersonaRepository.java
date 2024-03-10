@@ -1,6 +1,6 @@
-package fr.pablobuisson.personas.personas.repository;
+package fr.pablobuisson.personas.repository;
 
-import fr.pablobuisson.personas.personas.model.Persona;
+import fr.pablobuisson.personas.model.Persona;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 

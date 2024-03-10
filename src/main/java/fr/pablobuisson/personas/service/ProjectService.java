@@ -1,9 +1,9 @@
-package fr.pablobuisson.personas.personas.service;
+package fr.pablobuisson.personas.service;
 
-import fr.pablobuisson.personas.personas.dto.ProjectDto;
-import fr.pablobuisson.personas.personas.mapper.ProjectMapper;
-import fr.pablobuisson.personas.personas.model.Project;
-import fr.pablobuisson.personas.personas.repository.ProjectRepository;
+import fr.pablobuisson.personas.dto.ProjectDto;
+import fr.pablobuisson.personas.mapper.ProjectMapper;
+import fr.pablobuisson.personas.model.Project;
+import fr.pablobuisson.personas.repository.ProjectRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package fr.pablobuisson.personas.personas;
+package fr.pablobuisson.personas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

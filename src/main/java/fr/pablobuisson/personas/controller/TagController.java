@@ -1,7 +1,7 @@
-package fr.pablobuisson.personas.personas.controller;
+package fr.pablobuisson.personas.controller;
 
-import fr.pablobuisson.personas.personas.dto.TagDto;
-import fr.pablobuisson.personas.personas.service.TagService;
+import fr.pablobuisson.personas.dto.TagDto;
+import fr.pablobuisson.personas.service.TagService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

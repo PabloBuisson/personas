@@ -1,4 +1,4 @@
-package fr.pablobuisson.personas.personas.dto;
+package fr.pablobuisson.personas.dto;
 
 import java.io.Serializable;
 

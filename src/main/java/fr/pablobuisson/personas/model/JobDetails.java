@@ -1,4 +1,4 @@
-package fr.pablobuisson.personas.personas.model;
+package fr.pablobuisson.personas.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 public class JobDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
