@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 public class PersonaRepositoryIntegrationTests {
 
-    private PersonaRepository repository;
+    private final PersonaRepository repository;
 
     @Autowired
     public PersonaRepositoryIntegrationTests(PersonaRepository repository) {

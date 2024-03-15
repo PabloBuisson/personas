@@ -5,6 +5,8 @@ import fr.pablobuisson.personas.model.Persona;
 import fr.pablobuisson.personas.model.Project;
 import fr.pablobuisson.personas.model.Tag;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public final class TestDataUtil {
@@ -28,11 +30,31 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static Project createTestProjectA() {
+    public static Project createTestProjectBase() {
         return Project.builder()
                 .id(1L)
                 .description("A very interesting project")
                 .name("Project number one")
+                .icon("rocket")
+                .build();
+    }
+
+    public static Project createTestProjectDetailed() {
+        Set<Persona> personas = new HashSet<Persona>();
+        Persona personaOne = TestDataUtil.createTestPersonaWithJob();
+        personaOne.setId(null);
+        personas.add(personaOne);
+        Set<Tag> tags = new HashSet<Tag>();
+        Tag tagOne = TestDataUtil.createTestTagA();
+        tagOne.setId(null);
+        tags.add(tagOne);
+        return Project.builder()
+                .id(1L)
+                .description("A very interesting project")
+                .name("Project number one")
+                .icon("rocket")
+                .personas(personas)
+                .tags(tags)
                 .build();
     }
 

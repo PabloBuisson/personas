@@ -3,6 +3,7 @@ package fr.pablobuisson.personas.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -33,7 +34,7 @@ public class Project {
     private Set<Persona> personas = new LinkedHashSet<>();
 
     @EqualsAndHashCode.Exclude
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "tag_project",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))

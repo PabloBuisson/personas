@@ -11,10 +11,8 @@ import org.mapstruct.factory.Mappers;
 public interface ProjectMapper {
     ProjectMapper INSTANCE = Mappers.getMapper( ProjectMapper.class );
 
-    @Mapping(target = "personas", ignore = true)
     Project toEntity(ProjectDto projectDto);
 
-    @Mapping(target = "personas", ignore = true)
     ProjectDto toDto(Project project);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

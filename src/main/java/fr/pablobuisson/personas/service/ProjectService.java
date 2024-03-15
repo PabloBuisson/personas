@@ -31,6 +31,11 @@ public class ProjectService {
 
     public ProjectDto create(ProjectDto projectDto) {
         Project projectToCreate = this.projectMapper.toEntity(projectDto);
+
+        if (projectToCreate.getPersonas() != null && !projectToCreate.getPersonas().isEmpty()) {
+            projectToCreate.getPersonas().forEach(persona -> persona.setProject(projectToCreate));
+        }
+
         Project projectSaved = this.projectRepository.save(projectToCreate);
         return this.projectMapper.toDto(projectSaved);
     }

@@ -147,7 +147,7 @@ public class PersonaControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Frodo"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.age").value("18"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.project").isEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.job.title").value("Wanderer"));;
+                .andExpect(MockMvcResultMatchers.jsonPath("$.job.title").value("Wanderer"));
     }
 
     @Test
