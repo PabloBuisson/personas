@@ -25,7 +25,7 @@ public class PersonaRepositoryIntegrationTests {
 
     @Test
     public void testThatPersonaIsCreatedAndRetrieved() {
-        Persona persona = TestDataUtil.createTestPersonaA();
+        Persona persona = TestDataUtil.createTestPersonaBase();
         persona.setId(null);
         Persona personaSaved = this.repository.save(persona);
 

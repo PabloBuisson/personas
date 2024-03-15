@@ -64,7 +64,9 @@ public class PersonaController {
 
     @DeleteMapping(path = "/{id}")
     @Operation(summary = "Delete a persona")
-    public void deleteById(@PathVariable UUID id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable UUID id) {
         personaService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
