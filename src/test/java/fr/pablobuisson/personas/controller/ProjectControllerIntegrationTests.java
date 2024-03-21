@@ -180,12 +180,12 @@ public class ProjectControllerIntegrationTests {
     @Test
     public void testThatUpdateProjectReturnsStatus404WhenNoProjectExists() throws Exception {
         Project project = TestDataUtil.createTestProjectDetailed();
-        String projectJson = objectMapper.writeValueAsString(project);
+        String projectJSON = objectMapper.writeValueAsString(project);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put(ProjectController.API_URL + "/999999999999999999")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(projectJson))
+                        .content(projectJSON))
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
@@ -196,12 +196,12 @@ public class ProjectControllerIntegrationTests {
 
         Project projectUpdated = TestDataUtil.createTestProjectDetailed();
         projectUpdated.setId(projectSaved.getId());
-        String projectUpdatedJson = objectMapper.writeValueAsString(projectUpdated);
+        String projectUpdatedJSON = objectMapper.writeValueAsString(projectUpdated);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put(ProjectController.API_URL + "/" + projectSaved.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(projectUpdatedJson))
+                        .content(projectUpdatedJSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
@@ -212,12 +212,12 @@ public class ProjectControllerIntegrationTests {
 
         Project projectUpdated = TestDataUtil.createTestProjectDetailed();
         projectUpdated.setId(projectSaved.getId());
-        String projectUpdatedJson = objectMapper.writeValueAsString(projectUpdated);
+        String projectUpdatedJSON = objectMapper.writeValueAsString(projectUpdated);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put(ProjectController.API_URL + "/" + projectSaved.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(projectUpdatedJson))
+                        .content(projectUpdatedJSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(projectSaved.getId().toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(projectSaved.getName()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(projectSaved.getDescription()))
@@ -233,12 +233,12 @@ public class ProjectControllerIntegrationTests {
 
         Project projectUpdated = TestDataUtil.createTestProjectPartialWithNewTags();
         projectUpdated.setId(projectSaved.getId());
-        String projectUpdatedJson = objectMapper.writeValueAsString(projectUpdated);
+        String projectUpdatedJSON = objectMapper.writeValueAsString(projectUpdated);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put(ProjectController.API_URL + "/" + projectSaved.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(projectUpdatedJson))
+                        .content(projectUpdatedJSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(projectSaved.getId().toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(projectSaved.getName()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(projectSaved.getDescription()))
