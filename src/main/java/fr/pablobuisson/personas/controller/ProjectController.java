@@ -56,7 +56,7 @@ public class ProjectController {
     }
 
     @PutMapping(path = "/{id}")
-    @Operation(summary = "Update fully a project")
+    @Operation(summary = "Update partially a project")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> fullUpdate(
             @PathVariable("id") Long id,

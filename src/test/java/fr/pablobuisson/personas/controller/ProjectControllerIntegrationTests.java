@@ -2,8 +2,11 @@ package fr.pablobuisson.personas.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.pablobuisson.personas.TestDataUtil;
+import fr.pablobuisson.personas.dto.ProjectDto;
+import fr.pablobuisson.personas.mapper.ProjectMapper;
 import fr.pablobuisson.personas.model.Project;
 import fr.pablobuisson.personas.repository.ProjectRepository;
+import fr.pablobuisson.personas.service.ProjectService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.hamcrest.Matchers.hasSize;
+
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 // Empty the Test Database after each test ↓
@@ -26,13 +31,19 @@ public class ProjectControllerIntegrationTests {
 
     private final ProjectRepository projectRepository;
 
+    private final ProjectService projectService;
+
+    private final ProjectMapper projectMapper;
+
     private final MockMvc mockMvc;
 
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public ProjectControllerIntegrationTests(ProjectRepository projectRepository, MockMvc mockMvc) {
+    public ProjectControllerIntegrationTests(ProjectRepository projectRepository, ProjectService projectService, ProjectMapper projectMapper, MockMvc mockMvc) {
         this.projectRepository = projectRepository;
+        this.projectService = projectService;
+        this.projectMapper = projectMapper;
         this.mockMvc = mockMvc;
         this.objectMapper = new ObjectMapper();
     }
@@ -213,6 +224,28 @@ public class ProjectControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.icon").value(projectSaved.getIcon()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.personas").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.tags").isNotEmpty());
+    }
+
+    @Test
+    public void testThatUpdatePartialUpdatesExistingProject() throws Exception {
+        ProjectDto projectBase = projectMapper.toDto(TestDataUtil.createTestProjectDetailed());
+        Project projectSaved = projectMapper.toEntity(projectService.create(projectBase));
+
+        Project projectUpdated = TestDataUtil.createTestProjectPartialWithNewTags();
+        projectUpdated.setId(projectSaved.getId());
+        String projectUpdatedJson = objectMapper.writeValueAsString(projectUpdated);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put(ProjectController.API_URL + "/" + projectSaved.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(projectUpdatedJson))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(projectSaved.getId().toString()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(projectSaved.getName()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(projectSaved.getDescription()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.icon").value(projectSaved.getIcon()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.personas", hasSize(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.tags", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.tags[0]").value(projectUpdated.getTags().toArray()[0]));
     }
 
     // ***** [DELETE] TESTS ***** //

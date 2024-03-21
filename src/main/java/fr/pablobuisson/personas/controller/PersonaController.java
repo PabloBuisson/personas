@@ -49,7 +49,7 @@ public class PersonaController {
     }
 
     @PutMapping(path = "/{id}")
-    @Operation(summary = "Update fully a persona")
+    @Operation(summary = "Update partially a persona")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PersonaDto> fullUpdate(
             @PathVariable("id") UUID id,

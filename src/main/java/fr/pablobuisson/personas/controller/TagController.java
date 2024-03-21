@@ -54,7 +54,7 @@ public class TagController {
     }
 
     @PutMapping(path = "/{id}")
-    @Operation(summary = "Update fully a tag")
+    @Operation(summary = "Update partially a tag")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TagDto> fullUpdate(
             @PathVariable("id") Long id,

@@ -58,11 +58,40 @@ public final class TestDataUtil {
                 .build();
     }
 
+    public static Project createTestProjectPartialWithNewTags() {
+        Set<Tag> tags = new HashSet<Tag>();
+        Tag tagB = TestDataUtil.createTestTagB();
+        tagB.setId(null);
+        tags.add(tagB);
+        Tag tagC = TestDataUtil.createTestTagC();
+        tagC.setId(null);
+        tags.add(tagC);
+        return Project.builder()
+                .tags(tags)
+                .build();
+    }
+
     public static Tag createTestTagA() {
         return Tag.builder()
                 .id(1L)
                 .label("Tag one")
                 .color("#ff0000")
+                .build();
+    }
+
+    public static Tag createTestTagB() {
+        return Tag.builder()
+                .id(1L)
+                .label("Tag two")
+                .color("#ff0002")
+                .build();
+    }
+
+    public static Tag createTestTagC() {
+        return Tag.builder()
+                .id(1L)
+                .label("Tag three")
+                .color("#ff0003")
                 .build();
     }
 
