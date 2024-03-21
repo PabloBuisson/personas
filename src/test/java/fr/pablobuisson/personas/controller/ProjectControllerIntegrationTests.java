@@ -5,6 +5,7 @@ import fr.pablobuisson.personas.TestDataUtil;
 import fr.pablobuisson.personas.dto.ProjectDto;
 import fr.pablobuisson.personas.mapper.ProjectMapper;
 import fr.pablobuisson.personas.model.Project;
+import fr.pablobuisson.personas.model.Tag;
 import fr.pablobuisson.personas.repository.ProjectRepository;
 import fr.pablobuisson.personas.service.ProjectService;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
 
@@ -233,6 +236,11 @@ public class ProjectControllerIntegrationTests {
 
         Project projectUpdated = TestDataUtil.createTestProjectPartialWithNewTags();
         projectUpdated.setId(projectSaved.getId());
+
+        // Test merge of tags
+        projectUpdated.getTags().addAll(projectSaved.getTags());
+        projectUpdated.setTags(projectUpdated.getTags());
+
         String projectUpdatedJSON = objectMapper.writeValueAsString(projectUpdated);
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -244,7 +252,7 @@ public class ProjectControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.description").value(projectSaved.getDescription()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.icon").value(projectSaved.getIcon()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.personas", hasSize(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.tags", hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.tags", hasSize(3)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.tags[0]").value(projectUpdated.getTags().toArray()[0]));
     }
 
