@@ -1,6 +1,6 @@
 package fr.pablobuisson.personas.exception;
 
-import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@PropertySource("classpath:/validationMessages.properties")
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
@@ -54,7 +52,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         List<String> fieldErrors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .map(field -> field.getDefaultMessage() != null ? field.getDefaultMessage().replaceAll("\\$\\{field}", field.getField()) : field.getField())
                 .collect(Collectors.toList());
 
         body.put("errors", fieldErrors);

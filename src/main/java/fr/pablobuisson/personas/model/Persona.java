@@ -20,13 +20,13 @@ public class Persona {
     @Id
     private UUID id;
 
-    @NotBlank(message = "The name of the persona is required")
+    @NotBlank
     private String name;
 
-    @NotBlank(message = "The age of the persona is required")
+    @NotBlank
     private String age;
 
-    @NotBlank(message = "The story of the persona is required")
+    @NotBlank
     private String story;
 
     @EqualsAndHashCode.Exclude
