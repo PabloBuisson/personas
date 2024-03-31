@@ -29,6 +29,23 @@ public class Persona {
     @NotBlank
     private String story;
 
+    private String image;
+
+    private String color;
+
+    private String location;
+
+    private String family;
+
+    @Column(name="personality")
+    private String personalityTraits;
+
+    private String education;
+
+    private String idols;
+
+    private String brands;
+
     @EqualsAndHashCode.Exclude
     @ManyToOne
     @JoinColumn(name = "project_id")
@@ -42,4 +59,22 @@ public class Persona {
             inverseJoinColumns =
                     { @JoinColumn(name = "job_id", referencedColumnName = "id") })
     private JobDetails job;
+
+    @EqualsAndHashCode.Exclude
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "persona_culture",
+            joinColumns =
+                    { @JoinColumn(name = "persona_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "culture_id", referencedColumnName = "id") })
+    private CultureFavorites culture;
+
+    @EqualsAndHashCode.Exclude
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "persona_emotions",
+            joinColumns =
+                    { @JoinColumn(name = "persona_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "emotions_id", referencedColumnName = "id") })
+    private EmotionalMotivations emotions;
 }

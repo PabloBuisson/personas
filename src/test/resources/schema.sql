@@ -13,11 +13,39 @@ CREATE TABLE IF NOT EXISTS job_details (
     title VARCHAR(255)
 );
 
+CREATE TABLE IF NOT EXISTS culture_favorites (
+    id SERIAL PRIMARY KEY,
+    movies TEXT,
+    books TEXT,
+    comics TEXT,
+    tv TEXT,
+    music TEXT,
+    games TEXT
+);
+
+CREATE TABLE IF NOT EXISTS emotional_motivations (
+    id SERIAL PRIMARY KEY,
+    passions TEXT,
+    goals TEXT,
+    joys TEXT,
+    fears TEXT,
+    frustrations TEXT,
+    habits TEXT
+);
+
 CREATE TABLE IF NOT EXISTS persona (
     id UUID PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     age VARCHAR(255) NOT NULL,
     story TEXT NOT NULL,
+    image VARCHAR(255),
+    color VARCHAR(255),
+    location VARCHAR(255),
+    family TEXT,
+    personality TEXT,
+    education TEXT,
+    idols TEXT,
+    brands TEXT,
     project_id INT
 );
 
@@ -61,3 +89,35 @@ ALTER TABLE persona_job DROP CONSTRAINT IF EXISTS job_persona_id_fk;
 ALTER TABLE persona_job ADD CONSTRAINT persona_job_pk PRIMARY KEY (persona_id, job_id);
 ALTER TABLE persona_job ADD CONSTRAINT persona_job_id_fk FOREIGN KEY (persona_id) REFERENCES persona (id);
 ALTER TABLE persona_job ADD CONSTRAINT job_persona_id_fk FOREIGN KEY (job_id) REFERENCES job_details (id);
+
+-- JOIN TABLE CULTURE / PERSONA (@ONE-TO-ONE RELATIONSHIP)
+CREATE TABLE IF NOT EXISTS persona_culture (
+     persona_id UUID NOT NULL,
+     culture_id INT NOT NULL
+);
+
+-- Drop existing constraints if they exist
+ALTER TABLE persona_culture DROP CONSTRAINT IF EXISTS persona_culture_pk;
+ALTER TABLE persona_culture DROP CONSTRAINT IF EXISTS persona_culture_id_fk;
+ALTER TABLE persona_culture DROP CONSTRAINT IF EXISTS culture_persona_id_fk;
+
+-- Add new constraints
+ALTER TABLE persona_culture ADD CONSTRAINT persona_culture_pk PRIMARY KEY (persona_id, culture_id);
+ALTER TABLE persona_culture ADD CONSTRAINT persona_culture_id_fk FOREIGN KEY (persona_id) REFERENCES persona (id);
+ALTER TABLE persona_culture ADD CONSTRAINT culture_persona_id_fk FOREIGN KEY (culture_id) REFERENCES culture_favorites (id);
+
+-- JOIN TABLE EMOTIONS / PERSONA (@ONE-TO-ONE RELATIONSHIP)
+CREATE TABLE IF NOT EXISTS persona_emotions (
+     persona_id UUID NOT NULL,
+     emotions_id INT NOT NULL
+);
+
+-- Drop existing constraints if they exist
+ALTER TABLE persona_emotions DROP CONSTRAINT IF EXISTS persona_emotions_pk;
+ALTER TABLE persona_emotions DROP CONSTRAINT IF EXISTS persona_emotions_id_fk;
+ALTER TABLE persona_emotions DROP CONSTRAINT IF EXISTS emotions_persona_id_fk;
+
+-- Add new constraints
+ALTER TABLE persona_emotions ADD CONSTRAINT persona_emotions_pk PRIMARY KEY (persona_id, emotions_id);
+ALTER TABLE persona_emotions ADD CONSTRAINT persona_emotions_id_fk FOREIGN KEY (persona_id) REFERENCES persona (id);
+ALTER TABLE persona_emotions ADD CONSTRAINT emotions_persona_id_fk FOREIGN KEY (emotions_id) REFERENCES emotional_motivations (id);

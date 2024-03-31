@@ -1,6 +1,6 @@
 # PERSONAS
 
-A REST API for managing personas.
+A REST API for creating and managing personas.
 
 Online demo : *TODO*
 
@@ -10,17 +10,19 @@ Online demo : *TODO*
 * Explore **Spring Boot**
 * Learn **API conventions**
 * Go further with **Docker**
-* Improve documentaion with **OPENAPI**
+* Improve documentation with **OPENAPI**
+* Be familiar with a **new API Client** (Bruno)
 * Add **security**
 
 ## :dart: Presentation of the project
 
-* **Personas** is a REST API for managing personas.
+* **Personas** is a REST API for creating and managing personas.
+* For now, you can test the project with [Bruno](https://www.usebruno.com/), a new API Client.
 
 ## :white_check_mark: Todos
 
 * Add a Front (Next.js)
-* Add basic security
+* Add basic security with Spring Security
   
 ## :iphone: Images
 
@@ -31,13 +33,14 @@ Online demo : *TODO*
 2. Install Docker
 3. Inside the Spring Boot project :
 ```bash
-# Create files for mapping
-.\mvnw clean install -DskipTest
-
 # Launch docker
 docker compose up -d
+
+# Create files for mapping
+.\mvnw clean install -DskipTest
 ```
 4. Launch project
+5. Import Bruno files (bruno/) to test the project with Bruno (API client)
 
 ## :package: Packages
 
@@ -49,5 +52,7 @@ docker compose up -d
 
 * Spring Boot 3.2.2
 * Java 17
-* Docker Desktop *TODO version*
+* Docker version 25.0.3, build 4debf41
+* Docker Desktop 4.27.2 (137060)
 * Postgresql
+* Bruno v1.8.0
