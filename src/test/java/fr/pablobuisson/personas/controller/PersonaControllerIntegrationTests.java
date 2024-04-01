@@ -53,8 +53,8 @@ public class PersonaControllerIntegrationTests {
     }
 
     @Test
-    public void testThatCreatePersonaWithJobReturnsStatus201() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+    public void testThatCreatePersonaDetailedReturnsStatus201() throws Exception {
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         persona.setId(null);
         String personaAsJSON = objectMapper.writeValueAsString(persona);
 
@@ -83,8 +83,8 @@ public class PersonaControllerIntegrationTests {
     }
 
     @Test
-    public void testThatCreatePersonaWithJobReturnsSavedPersona() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+    public void testThatCreatePersonaDetailedReturnsSavedPersona() throws Exception {
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         persona.setId(null);
         String personaAsJSON = objectMapper.writeValueAsString(persona);
 
@@ -96,7 +96,11 @@ public class PersonaControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Frodo"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.age").value("18"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.project").isEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.job.title").value("Wanderer"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.location").value("Middle Earth"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.personalityTraits").value("Dreamer, Smart, Anxious"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.job.title").value("Wanderer"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.culture.games").value("Hates losing at board games"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.emotions.passions").value("Cryptic books, Bonsais"));
     }
 
     // ***** [GET] TESTS ***** //
@@ -111,7 +115,7 @@ public class PersonaControllerIntegrationTests {
 
     @Test
     public void testThatGetListPersonasReturnsListOfPersonas() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         personaRepository.save(persona);
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -121,12 +125,16 @@ public class PersonaControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Frodo"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].age").value("18"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].project").isEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].job.title").value("Wanderer"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].job.title").value("Wanderer"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].location").value("Middle Earth"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].personalityTraits").value("Dreamer, Smart, Anxious"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].culture.games").value("Hates losing at board games"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].emotions.passions").value("Cryptic books, Bonsais"));
     }
 
     @Test
     public void testThatGetPersonaReturnsStatus200WhenPersonaExist() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         Persona personaSaved = personaRepository.save(persona);
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -137,7 +145,7 @@ public class PersonaControllerIntegrationTests {
 
     @Test
     public void testThatGetPersonaReturnsPersonaWhenPersonaExist() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         Persona personaSaved = personaRepository.save(persona);
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -147,7 +155,11 @@ public class PersonaControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Frodo"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.age").value("18"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.project").isEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.job.title").value("Wanderer"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.location").value("Middle Earth"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.personalityTraits").value("Dreamer, Smart, Anxious"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.job.title").value("Wanderer"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.culture.games").value("Hates losing at board games"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.emotions.passions").value("Cryptic books, Bonsais"));
     }
 
     @Test
@@ -170,7 +182,7 @@ public class PersonaControllerIntegrationTests {
 
     @Test
     public void testThatUpdatePersonaReturnsStatus404WhenNoPersonaExists() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         String personaJson = objectMapper.writeValueAsString(persona);
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -185,7 +197,7 @@ public class PersonaControllerIntegrationTests {
         Persona personaBase = TestDataUtil.createTestPersonaBase();
         Persona personaSaved = personaRepository.save(personaBase);
 
-        Persona personaUpdated = TestDataUtil.createTestPersonaWithJob();
+        Persona personaUpdated = TestDataUtil.createTestPersonaDetailed();
         personaUpdated.setId(personaSaved.getId());
         String personaUpdatedJson = objectMapper.writeValueAsString(personaUpdated);
 
@@ -201,7 +213,7 @@ public class PersonaControllerIntegrationTests {
         Persona personaBase = TestDataUtil.createTestPersonaBase();
         Persona personaSaved = personaRepository.save(personaBase);
 
-        Persona personaUpdated = TestDataUtil.createTestPersonaWithJob();
+        Persona personaUpdated = TestDataUtil.createTestPersonaDetailed();
         personaUpdated.setId(personaSaved.getId());
         String personaUpdatedJson = objectMapper.writeValueAsString(personaUpdated);
 
@@ -212,8 +224,12 @@ public class PersonaControllerIntegrationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(personaSaved.getId().toString()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(personaSaved.getName()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(personaSaved.getAge()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.location").value(personaUpdated.getLocation()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.personalityTraits").value(personaUpdated.getPersonalityTraits()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.project").isEmpty())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.job").value(personaUpdated.getJob()));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.job").value(personaUpdated.getJob()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.culture").value(personaUpdated.getCulture()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.emotions").value(personaUpdated.getEmotions()));
     }
 
     // ***** [DELETE] TESTS ***** //
@@ -228,7 +244,7 @@ public class PersonaControllerIntegrationTests {
 
     @Test
     public void testThatDeletePersonaReturnsStatus204ForExistingPersona() throws Exception {
-        Persona persona = TestDataUtil.createTestPersonaWithJob();
+        Persona persona = TestDataUtil.createTestPersonaDetailed();
         Persona personaSaved = personaRepository.save(persona);
 
         mockMvc.perform(MockMvcRequestBuilders

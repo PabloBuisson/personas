@@ -1,9 +1,6 @@
 package fr.pablobuisson.personas;
 
-import fr.pablobuisson.personas.model.JobDetails;
-import fr.pablobuisson.personas.model.Persona;
-import fr.pablobuisson.personas.model.Project;
-import fr.pablobuisson.personas.model.Tag;
+import fr.pablobuisson.personas.model.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,13 +17,18 @@ public final class TestDataUtil {
                 .build();
     }
 
-    public static Persona createTestPersonaWithJob() {
+    public static Persona createTestPersonaDetailed() {
         return Persona.builder()
                 .id(UUID.randomUUID())
                 .age("18")
                 .name("Frodo")
                 .story("Wants a big change in his life")
+                .family("Has a very big family")
+                .location("Middle Earth")
+                .personalityTraits("Dreamer, Smart, Anxious")
                 .job(TestDataUtil.createJobA())
+                .culture(TestDataUtil.createCultureA())
+                .emotions(TestDataUtil.createEmotionsA())
                 .build();
     }
 
@@ -41,7 +43,7 @@ public final class TestDataUtil {
 
     public static Project createTestProjectDetailed() {
         Set<Persona> personas = new HashSet<Persona>();
-        Persona personaOne = TestDataUtil.createTestPersonaWithJob();
+        Persona personaOne = TestDataUtil.createTestPersonaDetailed();
         personaOne.setId(null);
         personas.add(personaOne);
         Set<Tag> tags = new HashSet<Tag>();
@@ -101,6 +103,28 @@ public final class TestDataUtil {
                 .industry("Hobbit&Co")
                 .salary("00.00µ")
                 .title("Wanderer")
+                .build();
+    }
+
+    public static CultureFavorites createCultureA() {
+        return CultureFavorites.builder()
+                .books("Good Omens, Martian Chronicles, Shutter Island, British literature")
+                .tv("Lost, Breaking Bad (TV show) | Survivor, The Traitors (Reality TV)")
+                .music("The Killers, Oasis, Indie rock")
+                .comics("Walking Dead, Calvin and Hobbes, De cape et de crocs")
+                .games("Hates losing at board games")
+                .movies("Dead Poets Society, Kingsman: The Secret Service, To Be or Not to Be")
+                .build();
+    }
+
+    public static EmotionalMotivations createEmotionsA() {
+        return EmotionalMotivations.builder()
+                .fears("Watching his life fly by without accomplish anything")
+                .frustrations("The space where he lives is too crowded, He wants a place for himself")
+                .goals("Going on a big adventure, Prove himself that he can do anything, Find a place where he belongs")
+                .habits("Knocking on wood before any challenge")
+                .joys("Seeing the sun rising")
+                .passions("Cryptic books, Bonsais")
                 .build();
     }
 }

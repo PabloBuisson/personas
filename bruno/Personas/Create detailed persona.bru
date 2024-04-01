@@ -1,0 +1,44 @@
+meta {
+  name: Create detailed persona
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/personas
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Frodo",
+    "age": "16",
+    "story": "Wants a big change in his life",
+    "family": "Has a very big family",
+    "location": "Middle Earth",
+    "personalityTraits": "Dreamer, Smart, Anxious",
+    "job": {
+      "company": "Himself",
+      "industry": "Hobbit&Co",
+      "salary": "00.00µ",
+      "title": "Wanderer"
+    },
+    "culture": {
+      "books": "Good Omens, Martian Chronicles, Shutter Island, British literature",
+      "tv": "Lost, Breaking Bad (TV show) | Survivor, The Traitors (Reality TV)",
+      "music": "The Killers, Oasis, Indie rock",
+      "comics": "Walking Dead, Calvin and Hobbes, De cape et de crocs",
+      "games": "Hates losing at board games",
+      "movies": "Dead Poets Society, Kingsman: The Secret Service, To Be or Not to Be"
+    },
+    "emotions": {
+      "fears": "Watching his life fly by without accomplish anything",
+      "frustrations": "The space where he lives is too crowded, He wants a place for himself",
+      "goals": "Going on a big adventure, Prove himself that he can do anything, Find a place where he belongs",
+      "habits": "Knocking on wood before any challenge",
+      "joys": "Seeing the sun rising",
+      "passions": "Cryptic books, Bonsais"
+    }
+  }
+}
