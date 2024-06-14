@@ -15,7 +15,7 @@ export default function Tag({
   if (link) {
     return (
       <li
-        className={`bg-gray-50 border-[0.1em] border-gray-300 rounded-lg font-medium ${size}`}
+        className={`bg-gray-50 border-[0.15em] border-gray-300 rounded-lg font-medium ${size}`}
         key={id}
       >
         <Link className="block px-[1em] py-[0.3em]" href={link}>
