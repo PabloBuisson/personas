@@ -1,8 +1,21 @@
 import ProjectCard from "@/components/ProjectCard";
 import Tag from "@/components/Tag";
-import { MOCK_DATA_PROJECTS, MOCK_DATA_TAGS } from "../mock/mock-data";
+import { MOCK_DATA_TAGS } from "../mock/mock-data";
 
-export default function Projects() {
+export default async function Projects() {
+  let projects = null;
+  const response = await fetch(`${process.env.BACKEND_API_URL}/projects`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  projects = await response.json();
+  console.log(projects);
+
   return (
     <main className="p-16 flex flex-col gap-16">
       <h1 className="text-5xl font-extrabold">My projects</h1>
@@ -13,7 +26,7 @@ export default function Projects() {
           ))}
         </ul>
         <ul className="flex flex-wrap gap-8">
-          {MOCK_DATA_PROJECTS.map((project) => (
+          {projects.map((project: any) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </ul>
