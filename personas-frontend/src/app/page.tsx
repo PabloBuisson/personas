@@ -1,4 +1,6 @@
 import HomeSummaryList from "@/components/HomeSummaryList";
+import ButtonPrimary from "@/components/buttons/ButtonPrimary";
+import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,18 +23,16 @@ export default function Home() {
       </div>
 
       <div className="flex items-start gap-8">
-        <Link
-          className="bg-gray-300 border-[0.2em] border-gray-300 px-8 py-6 rounded-lg text-xl font-medium"
-          href={"projects/new"}
-        >
-          Start a project
-        </Link>
-        <Link
-          className="bg-gray-50 border-[0.2em] border-gray-300 px-8 py-6 rounded-lg text-xl font-medium"
-          href={"personas/new"}
-        >
-          Create a persona
-        </Link>
+        <ButtonPrimary
+          label="Start a project"
+          url="projects/new"
+          additionalCSS="text-xl font-medium"
+        />
+        <ButtonSecondary
+          label="Create a persona"
+          url="personas/new"
+          additionalCSS="text-xl font-medium"
+        />
       </div>
 
       <HomeSummaryList targetName="projects" />
