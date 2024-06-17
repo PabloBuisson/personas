@@ -1,18 +1,9 @@
+import { getTags } from "@/app/api/endpoints";
 import Tag from "./Tag";
 import { TagDto } from "@/app/api";
 
 export default async function TagList() {
-  let tags: TagDto[];
-  const response = await fetch(`${process.env.BACKEND_API_URL}/tags`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  tags = await response.json();
+  let tags: TagDto[] = await getTags();
 
   return (
     tags &&

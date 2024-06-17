@@ -1,4 +1,5 @@
 import { ProjectDto } from "@/app/api";
+import { getProjectById } from "@/app/api/endpoints";
 import CreatePersonaCard from "@/components/CreatePersonaCard";
 import PersonaCard from "@/components/PersonaCard";
 import Tag from "@/components/Tag";
@@ -6,24 +7,15 @@ import Tag from "@/components/Tag";
 export default async function Project({
   params,
 }: {
-  params: { projectId: string };
+  params: { projectId: number | string };
 }) {
   const projectId = params.projectId;
 
-  let project: ProjectDto;
-  const response = await fetch(
-    `${process.env.BACKEND_API_URL}/projects/${projectId}`,
-    {
-      cache: "no-store",
-    }
-  );
-
-  if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+  if (projectId === "new") {
+    return <h1>New project</h1>;
   }
 
-  project = await response.json();
+  let project: ProjectDto = await getProjectById(projectId);
 
   return (
     <main className="p-16 flex flex-col gap-8">
@@ -36,10 +28,12 @@ export default async function Project({
             {project.tags.map((tag) => (
               <Tag key={tag.id} id={tag.id} name={tag.label} size="text-sm" />
             ))}
+            <input id="new-tag" name="new-tag"></input>
+            <button>Add a tag</button>
           </ul>
         )}
         <ul className="flex flex-wrap gap-16">
-          <CreatePersonaCard key={"new-persona"} />
+          <CreatePersonaCard id={"new-persona"} />
           {project?.personas && (
             <>
               {project.personas.map((persona) => (
