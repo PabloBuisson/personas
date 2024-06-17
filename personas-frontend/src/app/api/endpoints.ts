@@ -33,6 +33,25 @@ export async function getProjects(): Promise<ProjectDto[]> {
   return response.json();
 }
 
+export async function createProject(
+  createdProject: ProjectDto
+): Promise<ProjectDto> {
+  const response = await fetch(`${process.env.BACKEND_API_URL}/projects`, {
+    method: "POST",
+    body: JSON.stringify(createdProject),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
+
 // ********** TAGS **********
 
 export async function getTags(): Promise<TagDto[]> {

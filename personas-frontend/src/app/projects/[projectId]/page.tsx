@@ -3,6 +3,7 @@ import { getProjectById } from "@/app/api/endpoints";
 import CreatePersonaCard from "@/components/CreatePersonaCard";
 import PersonaCard from "@/components/PersonaCard";
 import Tag from "@/components/Tag";
+import CreateProjectForm from "@/components/forms/CreateProjectForm";
 
 export default async function Project({
   params,
@@ -12,7 +13,11 @@ export default async function Project({
   const projectId = params.projectId;
 
   if (projectId === "new") {
-    return <h1>New project</h1>;
+    return (
+      <main className="p-16">
+        <CreateProjectForm />
+      </main>
+    );
   }
 
   let project: ProjectDto = await getProjectById(projectId);
