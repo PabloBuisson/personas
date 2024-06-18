@@ -1,28 +1,24 @@
-import Link from "next/link";
+import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+
+interface ButtonPrimaryProps {
+  label: string;
+  callback?: () => {};
+  additionalCSS?: string;
+}
 
 export default function ButtonPrimary({
   label,
-  url,
   callback,
   additionalCSS,
   ...props
-}: {
-  label: string;
-  url: string;
-  callback?: () => {};
-  additionalCSS?: string;
-}) {
+}: ButtonPrimaryProps &
+  DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >) {
   let finalCSS = `bg-gray-300 border-[0.2em] border-gray-300 px-[1.6em] py-[1.2em] rounded-lg ${
     additionalCSS ?? ""
   }`;
-
-  if (url) {
-    return (
-      <Link {...props} className={finalCSS} href={url}>
-        {label}
-      </Link>
-    );
-  }
 
   return (
     <button {...props} className={finalCSS} onClick={callback}>
