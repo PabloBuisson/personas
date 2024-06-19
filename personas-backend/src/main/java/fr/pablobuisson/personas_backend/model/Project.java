@@ -33,7 +33,7 @@ public class Project {
     private Set<Persona> personas = new LinkedHashSet<>();
 
     @EqualsAndHashCode.Exclude
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "tag_project",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))

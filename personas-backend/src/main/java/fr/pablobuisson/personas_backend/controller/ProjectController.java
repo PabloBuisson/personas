@@ -51,7 +51,7 @@ public class ProjectController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create a project")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<ProjectDto> create(@RequestBody @Valid ProjectDto project) {
+    public ResponseEntity<ProjectDto> create(@RequestBody @Valid ProjectDto project) throws Exception {
         return new ResponseEntity<>(projectService.create(project), HttpStatus.CREATED);
     }
 

@@ -29,6 +29,14 @@ public class TagService {
         return this.tagRepository.findTagsByProjectsId(id).stream().map(this.tagMapper::toDto).toList();
     }
 
+    public Tag tagDtoToTagEntity(TagDto tagDto) {
+        return this.tagMapper.toEntity(tagDto);
+    }
+
+    public TagDto tagEntityToTagDto(Tag tag) {
+        return this.tagMapper.toDto(tag);
+    }
+
     public TagDto create(TagDto tagDto) {
         Tag tagToCreate = this.tagMapper.toEntity(tagDto);
         Tag tagSaved = this.tagRepository.save(tagToCreate);

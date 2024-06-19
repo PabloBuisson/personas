@@ -1,14 +1,18 @@
 package fr.pablobuisson.personas_backend.service;
 
+import fr.pablobuisson.personas_backend.dto.TagDto;
+import fr.pablobuisson.personas_backend.model.Tag;
 import fr.pablobuisson.personas_backend.repository.ProjectRepository;
 import fr.pablobuisson.personas_backend.dto.ProjectDto;
 import fr.pablobuisson.personas_backend.mapper.ProjectMapper;
 import fr.pablobuisson.personas_backend.model.Project;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +20,7 @@ import java.util.List;
 public class ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
+    private final TagService tagService;
 
     public List<ProjectDto> getAll() {
         return this.projectRepository.findAll().stream().map(this.projectMapper::toDto).toList();
@@ -29,12 +34,48 @@ public class ProjectService {
         return this.projectMapper.toDto(this.projectRepository.findById(id).orElse(null));
     }
 
-    public ProjectDto create(ProjectDto projectDto) {
+    @Transactional
+    public ProjectDto create(ProjectDto projectDto) throws Exception {
         Project projectToCreate = this.projectMapper.toEntity(projectDto);
 
         if (projectToCreate.getPersonas() != null && !projectToCreate.getPersonas().isEmpty()) {
             projectToCreate.getPersonas().forEach(persona -> persona.setProject(projectToCreate));
         }
+
+        if (projectToCreate.getTags() != null && !projectToCreate.getTags().isEmpty()) {
+            List<TagDto> savedTags = this.tagService.getAll();
+            Set<Tag> createdTags = projectToCreate.getTags();
+            Set<Tag> updatedTags = new HashSet<Tag>();
+
+            for (Tag createdTag : createdTags) {
+                if (createdTag.getId() != null) {
+                    TagDto savedTag = savedTags
+                            .stream()
+                            .filter((tag) -> tag.id().equals(createdTag.getId()))
+                            .findAny()
+                            .orElseThrow(() -> new Exception("Tag with id " + createdTag.getId() + " not found"));
+
+                    updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
+                    continue;
+                }
+
+                TagDto savedTag = savedTags
+                        .stream()
+                        .filter((tag) -> tag.label().equals(createdTag.getLabel()))
+                        .findAny()
+                        .orElse(null);
+
+                if (savedTag != null) {
+                    updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
+                } else {
+                    TagDto newTag = tagService.create(tagService.tagEntityToTagDto(createdTag));
+                    updatedTags.add(tagService.tagDtoToTagEntity(newTag));
+                }
+            }
+
+            projectToCreate.setTags(updatedTags);
+        }
+
 
         Project projectSaved = this.projectRepository.save(projectToCreate);
         return this.projectMapper.toDto(projectSaved);
@@ -49,7 +90,8 @@ public class ProjectService {
             throw new Exception("The id of the project is missing");
         }
 
-        Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new Exception("Not found Persona with id = " + id));;
+        Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new Exception("Not found Persona with id = " + id));
+        ;
         return this.projectMapper.toDto(this.projectMapper.partialUpdate(projectDto, projectSaved));
     }
 

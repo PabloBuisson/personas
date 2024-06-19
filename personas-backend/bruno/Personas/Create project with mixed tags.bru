@@ -1,7 +1,7 @@
 meta {
-  name: Create project with tag
+  name: Create project with mixed tags
   type: http
-  seq: 17
+  seq: 14
 }
 
 post {
@@ -16,10 +16,13 @@ body:json {
     "description": "My first project",
     "tags": [
       {
-        "id": 2
+        "id": 1
       },
       {
-        "id": 1
+        "label": "NEWTAG"
+      },
+      {
+        "label": "UX"
       }
     ]
   }
