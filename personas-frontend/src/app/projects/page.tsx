@@ -2,7 +2,11 @@ import ProjectList from "@/components/ProjectList";
 import TagList from "@/components/TagList";
 import { Suspense } from "react";
 
-export default async function Projects() {
+export default async function Projects({
+  searchParams,
+}: {
+  searchParams: { tag: number };
+}) {
   return (
     <main className="p-16 flex flex-col gap-16">
       <h1 className="text-5xl font-extrabold">My projects</h1>
@@ -12,7 +16,7 @@ export default async function Projects() {
           <TagList />
         </Suspense>
         <Suspense fallback="Projects loading...">
-          <ProjectList />
+          <ProjectList tagId={searchParams.tag} />
         </Suspense>
       </div>
     </main>

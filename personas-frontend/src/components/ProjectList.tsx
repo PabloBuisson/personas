@@ -2,8 +2,8 @@ import { ProjectDto } from "@/app/api";
 import ProjectCard from "./ProjectCard";
 import { getProjects } from "@/app/api/endpoints";
 
-export default async function ProjectList() {
-  let projects: ProjectDto[] = await getProjects();
+export default async function ProjectList({ tagId }: { tagId?: number }) {
+  let projects: ProjectDto[] = await getProjects(tagId);
 
   return (
     projects &&

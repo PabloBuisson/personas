@@ -20,8 +20,14 @@ export async function getProjectById(
   return response.json();
 }
 
-export async function getProjects(): Promise<ProjectDto[]> {
-  const response = await fetch(`${process.env.BACKEND_API_URL}/projects`, {
+export async function getProjects(tagId?: number): Promise<ProjectDto[]> {
+  let apiUrl = `${process.env.BACKEND_API_URL}/projects`;
+
+  if (tagId) {
+    apiUrl = `${apiUrl}?tagId=${tagId}`;
+  }
+
+  const response = await fetch(apiUrl, {
     cache: "no-store",
   });
 

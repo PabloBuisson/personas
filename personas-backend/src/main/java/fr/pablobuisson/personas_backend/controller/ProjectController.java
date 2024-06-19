@@ -26,7 +26,11 @@ public class ProjectController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get all projects")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<ProjectDto>> getAll() {
+    public ResponseEntity<List<ProjectDto>> getAll(@RequestParam(value = "tagId", required = false) String tagId) {
+        if (tagId != null) {
+            return new ResponseEntity<>(projectService.getByTagId(Long.valueOf(tagId)), HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(projectService.getAll(), HttpStatus.OK);
     }
 
