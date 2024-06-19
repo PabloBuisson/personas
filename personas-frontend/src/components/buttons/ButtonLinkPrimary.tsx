@@ -2,13 +2,11 @@ import Link, { LinkProps } from "next/link";
 
 interface ButtonLinkPrimaryProps {
   label: string;
-  url: string;
   additionalCSS?: string;
 }
 
 export default function ButtonLinkPrimary({
   label,
-  url,
   additionalCSS,
   ...props
 }: ButtonLinkPrimaryProps & LinkProps) {
@@ -17,7 +15,7 @@ export default function ButtonLinkPrimary({
   }`;
 
   return (
-    <Link {...props} className={finalCSS} href={url}>
+    <Link {...props} className={finalCSS} href={props.href}>
       {label}
     </Link>
   );
