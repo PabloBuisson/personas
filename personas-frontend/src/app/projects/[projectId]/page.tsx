@@ -24,7 +24,13 @@ export default async function Project({
 
   return (
     <main className="p-16 flex flex-col gap-8">
-      <div className="bg-gray-300 rounded-full w-28 h-28"></div>
+      <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
+        {project.icon && (
+          <span className="text-6xl" role="image">
+            {project.icon}
+          </span>
+        )}
+      </div>
       <h1 className="text-5xl font-extrabold">{project.name}</h1>
       <p className="text-xl font-medium">{project.description}</p>
       <section className="mt-8 flex flex-col gap-12">

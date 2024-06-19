@@ -6,6 +6,7 @@ import { createProject } from "../api/endpoints";
 
 export async function handleCreateProject(formData: FormData) {
   const rawFormData = {
+    icon: formData.get("icon"),
     title: formData.get("title"),
     description: formData.get("description"),
     tags: formData.get("tags"),
@@ -39,6 +40,7 @@ export async function handleCreateProject(formData: FormData) {
 
   // TODO validation
   const newProject: ProjectDto = {
+    icon: rawFormData.icon as string,
     name: rawFormData.title as string,
     description: rawFormData.description as string,
     tags: tagsDTO,
