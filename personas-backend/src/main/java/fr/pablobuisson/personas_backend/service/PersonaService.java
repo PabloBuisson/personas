@@ -1,6 +1,7 @@
 package fr.pablobuisson.personas_backend.service;
 
 import fr.pablobuisson.personas_backend.dto.PersonaDto;
+import fr.pablobuisson.personas_backend.exception.ResourceNotFoundException;
 import fr.pablobuisson.personas_backend.mapper.PersonaMapper;
 import fr.pablobuisson.personas_backend.model.Persona;
 import fr.pablobuisson.personas_backend.repository.PersonaRepository;
@@ -43,7 +44,7 @@ public class PersonaService {
             throw new Exception("The id of the persona is missing");
         }
 
-        Persona personaSaved = this.personaRepository.findById(id).orElseThrow(() -> new Exception("Not found Persona with id = " + id));;
+        Persona personaSaved = this.personaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Persona with id " + id + " not found"));
         return this.personaMapper.toDto(this.personaMapper.partialUpdate(personaDto, personaSaved));
     }
 

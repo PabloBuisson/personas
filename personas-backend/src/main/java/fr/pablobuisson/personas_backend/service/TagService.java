@@ -1,5 +1,6 @@
 package fr.pablobuisson.personas_backend.service;
 
+import fr.pablobuisson.personas_backend.exception.ResourceNotFoundException;
 import fr.pablobuisson.personas_backend.repository.TagRepository;
 import fr.pablobuisson.personas_backend.dto.TagDto;
 import fr.pablobuisson.personas_backend.mapper.TagMapper;
@@ -52,7 +53,7 @@ public class TagService {
             throw new Exception("The id of the tag is missing");
         }
 
-        Tag tagSaved = this.tagRepository.findById(id).orElseThrow(() -> new Exception("Not found Tag with id = " + id));;
+        Tag tagSaved = this.tagRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Tag with id " + id + " not found"));
         return this.tagMapper.toDto(this.tagMapper.partialUpdate(tagDto, tagSaved));
     }
 

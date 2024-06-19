@@ -1,12 +1,12 @@
 package fr.pablobuisson.personas_backend.service;
 
 import fr.pablobuisson.personas_backend.dto.TagDto;
+import fr.pablobuisson.personas_backend.exception.ResourceNotFoundException;
 import fr.pablobuisson.personas_backend.model.Tag;
 import fr.pablobuisson.personas_backend.repository.ProjectRepository;
 import fr.pablobuisson.personas_backend.dto.ProjectDto;
 import fr.pablobuisson.personas_backend.mapper.ProjectMapper;
 import fr.pablobuisson.personas_backend.model.Project;
-import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -53,7 +53,7 @@ public class ProjectService {
                             .stream()
                             .filter((tag) -> tag.id().equals(createdTag.getId()))
                             .findAny()
-                            .orElseThrow(() -> new Exception("Tag with id " + createdTag.getId() + " not found"));
+                            .orElseThrow(() -> new ResourceNotFoundException("Tag with id " + createdTag.getId() + " not found"));
 
                     updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
                     continue;
@@ -90,8 +90,7 @@ public class ProjectService {
             throw new Exception("The id of the project is missing");
         }
 
-        Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new Exception("Not found Persona with id = " + id));
-        ;
+        Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project with id " + id + " not found"));
         return this.projectMapper.toDto(this.projectMapper.partialUpdate(projectDto, projectSaved));
     }
 
