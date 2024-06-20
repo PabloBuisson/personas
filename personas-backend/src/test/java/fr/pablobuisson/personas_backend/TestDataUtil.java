@@ -53,7 +53,7 @@ public final class TestDataUtil {
         return Project.builder()
                 .id(1L)
                 .description("A very interesting project")
-                .name("Project number one")
+                .name("Project number one (detailed)")
                 .icon("rocket")
                 .personas(personas)
                 .tags(tags)
