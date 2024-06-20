@@ -85,6 +85,7 @@ public class ProjectService {
         this.projectRepository.deleteById(id);
     }
 
+    @Transactional
     public ProjectDto partialUpdate(ProjectDto projectDto, Long id) throws Exception {
         if (id == null) {
             throw new Exception("The id of the project is missing");

@@ -8,6 +8,7 @@ import fr.pablobuisson.personas_backend.model.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class TagService {
         this.tagRepository.deleteById(id);
     }
 
+    @Transactional
     public TagDto partialUpdate(TagDto tagDto, Long id) throws Exception {
         if (id == null) {
             throw new Exception("The id of the tag is missing");
