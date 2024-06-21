@@ -76,7 +76,7 @@ public class ProjectController {
     @DeleteMapping(path = "/{id}")
     @Operation(summary = "Delete a project")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
+    public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) throws Exception {
         projectService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

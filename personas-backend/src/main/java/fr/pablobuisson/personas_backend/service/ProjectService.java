@@ -81,7 +81,21 @@ public class ProjectService {
         return this.projectMapper.toDto(projectSaved);
     }
 
+    @Transactional
     public void delete(Long id) {
+        Project project = projectRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found with id " + id));
+
+        // Delete only orphan tags
+        for (Tag tag : project.getTags()) {
+            tag.getProjects().remove(project);
+
+            if (tag.getProjects().isEmpty()) {
+                tagService.delete(tag.getId());
+            }
+        }
+
         this.projectRepository.deleteById(id);
     }
 

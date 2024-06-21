@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.Set;
+import java.util.LinkedHashSet;
+
 @Entity(name = "TagEntity")
 @Table(name = "tag")
 @Getter
@@ -22,4 +25,8 @@ public class Tag {
     private String label;
 
     private String color;
+
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "tags")
+    private Set<Project> projects = new LinkedHashSet<>();
 }
