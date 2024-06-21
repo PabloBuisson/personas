@@ -3,33 +3,33 @@ import { getProjectById } from "@/app/api/endpoints";
 import CreatePersonaCard from "@/components/CreatePersonaCard";
 import PersonaCard from "@/components/PersonaCard";
 import Tag from "@/components/Tag";
-import CreateProjectForm from "@/components/forms/CreateProjectForm";
+import ButtonDeleteProject from "@/components/buttons/ButtonDeleteProject";
+import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 
 export default async function Project({
   params,
 }: {
-  params: { projectId: number | string };
+  params: { projectId: number };
 }) {
   const projectId = params.projectId;
-
-  if (projectId === "new") {
-    return (
-      <main className="p-16">
-        <CreateProjectForm />
-      </main>
-    );
-  }
 
   let project: ProjectDto = await getProjectById(projectId);
 
   return (
     <main className="p-16 flex flex-col gap-8">
-      <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
-        {project.icon && (
-          <span className="text-6xl" role="image">
-            {project.icon}
-          </span>
-        )}
+      <div className="flex justify-between items-start gap-16">
+        <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
+          {project.icon && (
+            <span className="text-6xl" role="image">
+              {project.icon}
+            </span>
+          )}
+        </div>
+
+        <div className="flex justify-end gap-8">
+          <ButtonLinkPrimary label="Edit Project" href={"edit"} />
+          <ButtonDeleteProject projectId={projectId} />
+        </div>
       </div>
       <h1 className="text-5xl font-extrabold">{project.name}</h1>
       <p className="text-xl font-medium">{project.description}</p>

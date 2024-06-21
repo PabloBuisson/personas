@@ -1,14 +1,14 @@
+"use client";
+
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 interface ButtonPrimaryProps {
   label: string;
-  callback?: () => {};
   additionalCSS?: string;
 }
 
 export default function ButtonPrimary({
   label,
-  callback,
   additionalCSS,
   ...props
 }: ButtonPrimaryProps &
@@ -21,7 +21,7 @@ export default function ButtonPrimary({
   }`;
 
   return (
-    <button {...props} className={finalCSS} onClick={callback}>
+    <button {...props} className={finalCSS}>
       {label}
     </button>
   );
