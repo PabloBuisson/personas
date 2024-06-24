@@ -1,0 +1,19 @@
+import { ProjectDto } from "@/app/api";
+import { getProjectById } from "@/app/api/endpoints";
+import EditProjectForm from "@/components/forms/EditProjectForm";
+
+export default async function EditProject({
+  params,
+}: {
+  params: { projectId: number };
+}) {
+  const projectId = params.projectId;
+
+  let project: ProjectDto = await getProjectById(projectId);
+
+  return (
+    <main className="p-16 flex flex-col gap-8">
+      <EditProjectForm project={project} />
+    </main>
+  );
+}

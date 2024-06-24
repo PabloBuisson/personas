@@ -1,9 +1,11 @@
 import { PersonaDto, ProjectDto, TagDto } from "./api";
 
 function getBackendApiUrl(): string | undefined {
-  if (typeof window === "undefined") { // server side
+  if (typeof window === "undefined") {
+    // server side
     return process.env.BACKEND_API_URL;
-  } else { // client side (browser) 
+  } else {
+    // client side (browser)
     return process.env.NEXT_PUBLIC_BACKEND_API_URL;
   }
 }
@@ -116,14 +118,33 @@ export async function createProject(
   return response.json();
 }
 
-export async function deleteProject(projectId: number): Promise<void> {
+export async function updateProject(
+  updatedProject: ProjectDto
+): Promise<ProjectDto> {
   const response = await fetch(
-    `${getBackendApiUrl()}/projects/${projectId}`,
+    `${getBackendApiUrl()}/projects/${updatedProject.id}`,
     {
-      method: "DELETE",
-      cache: "no-store",
+      method: "PUT",
+      body: JSON.stringify(updatedProject),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }
   );
+
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
+
+export async function deleteProject(projectId: number): Promise<void> {
+  const response = await fetch(`${getBackendApiUrl()}/projects/${projectId}`, {
+    method: "DELETE",
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary
