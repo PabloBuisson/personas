@@ -43,42 +43,46 @@ public class ProjectService {
         }
 
         if (projectToCreate.getTags() != null && !projectToCreate.getTags().isEmpty()) {
-            List<TagDto> savedTags = this.tagService.getAll();
-            Set<Tag> createdTags = projectToCreate.getTags();
-            Set<Tag> updatedTags = new HashSet<Tag>();
-
-            for (Tag createdTag : createdTags) {
-                if (createdTag.getId() != null) {
-                    TagDto savedTag = savedTags
-                            .stream()
-                            .filter((tag) -> tag.id().equals(createdTag.getId()))
-                            .findAny()
-                            .orElseThrow(() -> new ResourceNotFoundException("Tag with id " + createdTag.getId() + " not found"));
-
-                    updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
-                    continue;
-                }
-
-                TagDto savedTag = savedTags
-                        .stream()
-                        .filter((tag) -> tag.label().equals(createdTag.getLabel()))
-                        .findAny()
-                        .orElse(null);
-
-                if (savedTag != null) {
-                    updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
-                } else {
-                    TagDto newTag = tagService.create(tagService.tagEntityToTagDto(createdTag));
-                    updatedTags.add(tagService.tagDtoToTagEntity(newTag));
-                }
-            }
-
+            Set<Tag> updatedTags = updateTags(projectToCreate.getTags());
             projectToCreate.setTags(updatedTags);
         }
 
-
         Project projectSaved = this.projectRepository.save(projectToCreate);
         return this.projectMapper.toDto(projectSaved);
+    }
+
+    // Prevent duplicates and save new tag before attaching it to a project
+    Set<Tag> updateTags(Set<Tag> createdTags) {
+        Set<Tag> updatedTags = new HashSet<Tag>();
+        List<TagDto> savedTags = this.tagService.getAll();
+
+        for (Tag createdTag : createdTags) {
+            if (createdTag.getId() != null) {
+                TagDto savedTag = savedTags
+                        .stream()
+                        .filter((tag) -> tag.id().equals(createdTag.getId()))
+                        .findAny()
+                        .orElseThrow(() -> new ResourceNotFoundException("Tag with id " + createdTag.getId() + " not found"));
+
+                updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
+                continue;
+            }
+
+            TagDto savedTag = savedTags
+                    .stream()
+                    .filter((tag) -> tag.label().equals(createdTag.getLabel()))
+                    .findAny()
+                    .orElse(null);
+
+            if (savedTag != null) {
+                updatedTags.add(tagService.tagDtoToTagEntity(savedTag));
+            } else {
+                TagDto newTag = tagService.create(tagService.tagEntityToTagDto(createdTag));
+                updatedTags.add(tagService.tagDtoToTagEntity(newTag));
+            }
+        }
+
+        return updatedTags;
     }
 
     @Transactional
@@ -106,7 +110,13 @@ public class ProjectService {
         }
 
         Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project with id " + id + " not found"));
-        return this.projectMapper.toDto(this.projectMapper.partialUpdate(projectDto, projectSaved));
+
+        Project projectUpdated = projectMapper.toEntity(projectDto);
+        Set<Tag> updatedTags = updateTags(projectUpdated.getTags());
+        projectUpdated.setTags(updatedTags);
+        ProjectDto projectDtoUpdated = projectMapper.toDto(projectUpdated);
+
+        return this.projectMapper.toDto(this.projectMapper.partialUpdate(projectDtoUpdated, projectSaved));
     }
 
     public ProjectDto fullUpdate(ProjectDto projectDto, Long id) {
