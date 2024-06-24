@@ -28,8 +28,6 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
   }
 
   async function onSubmit(formData: FormData) {
-    console.log("Submitted", formData);
-
     const rawFormData = {
       icon: formData.get("icon"),
       name: formData.get("title"),
@@ -46,7 +44,8 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
 
     const data = await updateProject(updatedProject);
 
-    router.replace("../");
+    router.replace("/projects/" + data.id);
+    router.refresh();
   }
 
   return (

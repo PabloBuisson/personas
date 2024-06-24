@@ -10,13 +10,16 @@ function getBackendApiUrl(): string | undefined {
   }
 }
 
+// Disable request caching (default behavior in v13 & v14)
+const commonParams: Partial<RequestInit> = { cache: "no-store" };
+
 // ********** PERSONAS **********
 
 export async function getPersonaById(personaId: string): Promise<PersonaDto> {
   const response = await fetch(
     `${process.env.BACKEND_API_URL}/personas/${personaId}`,
     {
-      cache: "no-store",
+      ...commonParams,
     }
   );
 
@@ -30,7 +33,7 @@ export async function getPersonaById(personaId: string): Promise<PersonaDto> {
 
 export async function getPersonas(): Promise<PersonaDto[]> {
   const response = await fetch(`${process.env.BACKEND_API_URL}/personas`, {
-    cache: "no-store",
+    ...commonParams,
   });
 
   if (!response.ok) {
@@ -45,6 +48,7 @@ export async function createPersona(
   createdPersona: PersonaDto
 ): Promise<PersonaDto> {
   const response = await fetch(`${process.env.BACKEND_API_URL}/personas`, {
+    ...commonParams,
     method: "POST",
     body: JSON.stringify(createdPersona),
     headers: {
@@ -68,7 +72,7 @@ export async function getProjectById(
   const response = await fetch(
     `${process.env.BACKEND_API_URL}/projects/${projectId}`,
     {
-      cache: "no-store",
+      ...commonParams,
     }
   );
 
@@ -88,7 +92,7 @@ export async function getProjects(tagId?: number): Promise<ProjectDto[]> {
   }
 
   const response = await fetch(apiUrl, {
-    cache: "no-store",
+    ...commonParams,
   });
 
   if (!response.ok) {
@@ -103,6 +107,7 @@ export async function createProject(
   createdProject: ProjectDto
 ): Promise<ProjectDto> {
   const response = await fetch(`${process.env.BACKEND_API_URL}/projects`, {
+    ...commonParams,
     method: "POST",
     body: JSON.stringify(createdProject),
     headers: {
@@ -124,6 +129,7 @@ export async function updateProject(
   const response = await fetch(
     `${getBackendApiUrl()}/projects/${updatedProject.id}`,
     {
+      ...commonParams,
       method: "PUT",
       body: JSON.stringify(updatedProject),
       headers: {
@@ -142,8 +148,8 @@ export async function updateProject(
 
 export async function deleteProject(projectId: number): Promise<void> {
   const response = await fetch(`${getBackendApiUrl()}/projects/${projectId}`, {
+    ...commonParams,
     method: "DELETE",
-    cache: "no-store",
   });
 
   if (!response.ok) {
@@ -156,7 +162,7 @@ export async function deleteProject(projectId: number): Promise<void> {
 
 export async function getTags(): Promise<TagDto[]> {
   const response = await fetch(`${process.env.BACKEND_API_URL}/tags`, {
-    cache: "no-store",
+    ...commonParams,
   });
 
   if (!response.ok) {
