@@ -2,22 +2,27 @@ import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
 import CreatePersonaForm from "@/components/forms/CreatePersonaForm";
 
-export default async function Project({
+export default async function Persona({
   params,
+  searchParams,
 }: {
   params: { personaId: string };
+  searchParams: { project?: string };
 }) {
   const personaId = params.personaId;
+  const projectId = isNaN(Number(searchParams.project)) ? undefined : Number(searchParams.project);
 
   if (personaId === "new") {
     return (
       <main className="p-16">
-        <CreatePersonaForm />
+        <CreatePersonaForm projectId={projectId} />
       </main>
     );
   }
 
   let persona: PersonaDto = await getPersonaById(personaId);
+
+  console.log("Persona project id = ", persona.project?.id);
 
   return (
     <main className="p-16 flex flex-col gap-8">

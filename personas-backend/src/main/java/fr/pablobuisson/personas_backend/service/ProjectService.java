@@ -112,11 +112,12 @@ public class ProjectService {
         Project projectSaved = this.projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project with id " + id + " not found"));
 
         Project projectUpdated = projectMapper.toEntity(projectDto);
-        Set<Tag> updatedTags = updateTags(projectUpdated.getTags());
-        projectUpdated.setTags(updatedTags);
-        ProjectDto projectDtoUpdated = projectMapper.toDto(projectUpdated);
+        if (!projectUpdated.getTags().isEmpty()) {
+            Set<Tag> updatedTags = updateTags(projectUpdated.getTags());
+            projectUpdated.setTags(updatedTags);
+        }
 
-        return this.projectMapper.toDto(this.projectMapper.partialUpdate(projectDtoUpdated, projectSaved));
+        return projectMapper.toDto(projectMapper.partialUpdate(projectMapper.toDto(projectUpdated), projectSaved));
     }
 
     public ProjectDto fullUpdate(ProjectDto projectDto, Long id) {

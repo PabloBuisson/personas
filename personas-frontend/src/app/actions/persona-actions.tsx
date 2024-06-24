@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { PersonaDto } from "../api";
 import { createPersona } from "../api/endpoints";
 
-export async function handleCreatePersona(formData: FormData) {
+export async function handleCreatePersona(projectId: number | undefined, formData: FormData) {
   const rawFormData = {
     icon: formData.get("icon"),
     name: formData.get("name"),
@@ -38,7 +38,7 @@ export async function handleCreatePersona(formData: FormData) {
     age: rawFormData.age as string,
   };
 
-  const response: PersonaDto = await createPersona(newProject);
+  const response: PersonaDto = await createPersona(newProject, projectId);
 
   // TODO validation
   redirect("/personas/" + response.id);

@@ -44,8 +44,8 @@ public class PersonaController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create a persona")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PersonaDto> create(@RequestBody @Valid PersonaDto personaDto) {
-        return new ResponseEntity<>(personaService.create(personaDto), HttpStatus.CREATED);
+    public ResponseEntity<PersonaDto> create(@RequestBody @Valid PersonaDto personaDto, @RequestParam(value = "projectId", required = false) Long projectId) {
+        return new ResponseEntity<>(personaService.create(personaDto, projectId), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")

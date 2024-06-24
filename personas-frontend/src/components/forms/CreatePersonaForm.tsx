@@ -2,9 +2,15 @@ import InputWithLabel from "./InputWithLabel";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import { handleCreatePersona } from "@/app/actions/persona-actions";
 
-export default function CreatePersonaForm() {
+export default function CreatePersonaForm({
+  projectId,
+}: {
+  projectId?: number;
+}) {
+  const createPersona = handleCreatePersona.bind(null, projectId);
+
   return (
-    <form action={handleCreatePersona} className="flex flex-col gap-8">
+    <form action={createPersona} className="flex flex-col gap-8">
       <section className="bg-gray-300 relative flex justify-center items-center rounded-full w-28 h-28">
         <input
           name="icon"

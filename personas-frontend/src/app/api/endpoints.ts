@@ -45,9 +45,16 @@ export async function getPersonas(): Promise<PersonaDto[]> {
 }
 
 export async function createPersona(
-  createdPersona: PersonaDto
+  createdPersona: PersonaDto,
+  projectId?: number
 ): Promise<PersonaDto> {
-  const response = await fetch(`${process.env.BACKEND_API_URL}/personas`, {
+  let url = `${process.env.BACKEND_API_URL}/personas`;
+
+  if (typeof projectId === "number") {
+    url = `${url}?projectId=${projectId}`;
+  }
+
+  const response = await fetch(url, {
     ...commonParams,
     method: "POST",
     body: JSON.stringify(createdPersona),

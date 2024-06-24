@@ -4,7 +4,9 @@ import fr.pablobuisson.personas_backend.dto.PersonaDto;
 import fr.pablobuisson.personas_backend.exception.ResourceNotFoundException;
 import fr.pablobuisson.personas_backend.mapper.PersonaMapper;
 import fr.pablobuisson.personas_backend.model.Persona;
+import fr.pablobuisson.personas_backend.model.Project;
 import fr.pablobuisson.personas_backend.repository.PersonaRepository;
+import fr.pablobuisson.personas_backend.repository.ProjectRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.*;
 public class PersonaService {
 
     private final PersonaRepository personaRepository;
+    private final ProjectRepository projectRepository;
     private final PersonaMapper personaMapper;
 
     public List<PersonaDto> getAll() {
@@ -28,8 +31,16 @@ public class PersonaService {
         return this.personaMapper.toDto(this.personaRepository.findById(id).orElse(null));
     }
 
-    public PersonaDto create(PersonaDto personaDto) {
+    @Transactional
+    public PersonaDto create(PersonaDto personaDto, Long projectId) {
         Persona persona = this.personaMapper.toEntity(personaDto);
+
+        if (projectId != null) {
+            Project projectLinked = projectRepository.findById(projectId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Project with id " + projectId + " not found"));
+            persona.setProject(projectLinked);
+        }
+
         Persona savedPersona = this.personaRepository.save(persona);
         return this.personaMapper.toDto(savedPersona);
     }
