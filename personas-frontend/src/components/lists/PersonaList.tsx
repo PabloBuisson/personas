@@ -1,6 +1,6 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonas } from "@/app/api/endpoints";
-import PersonaCard from "../PersonaCard";
+import PersonaCard from "../cards/PersonaCard";
 
 export default async function PersonaList() {
   let personas: PersonaDto[] = await getPersonas();

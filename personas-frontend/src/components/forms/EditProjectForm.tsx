@@ -8,7 +8,7 @@ import ButtonPrimary from "../buttons/ButtonPrimary";
 import { useRef, useState } from "react";
 import { deletePersona, updateProject } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
-import PersonaCard from "../PersonaCard";
+import PersonaCard from "../cards/PersonaCard";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);

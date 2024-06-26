@@ -71,6 +71,29 @@ export async function createPersona(
   return response.json();
 }
 
+export async function updatePersona(
+  updatedPersona: PersonaDto
+): Promise<PersonaDto> {
+  const response = await fetch(
+    `${getBackendApiUrl()}/personas/${updatedPersona.id}`,
+    {
+      ...commonParams,
+      method: "PUT",
+      body: JSON.stringify(updatedPersona),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
+
 export async function deletePersona(personaId: string): Promise<void> {
   const response = await fetch(`${getBackendApiUrl()}/personas/${personaId}`, {
     ...commonParams,

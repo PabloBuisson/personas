@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PersonaDto } from "@/app/api";
-import ButtonPrimary from "./buttons/ButtonPrimary";
+import ButtonPrimary from "../buttons/ButtonPrimary";
 
 export default function PersonaCard({
   persona,
