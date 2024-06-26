@@ -1,6 +1,7 @@
 package fr.pablobuisson.personas_backend.service;
 
 import fr.pablobuisson.personas_backend.dto.PersonaDto;
+import fr.pablobuisson.personas_backend.dto.ProjectDto;
 import fr.pablobuisson.personas_backend.exception.ResourceNotFoundException;
 import fr.pablobuisson.personas_backend.mapper.PersonaMapper;
 import fr.pablobuisson.personas_backend.model.Persona;
@@ -23,12 +24,28 @@ public class PersonaService {
     private final ProjectRepository projectRepository;
     private final PersonaMapper personaMapper;
 
+    public Persona personaDtoToPersonaEntity(PersonaDto personaDto) {
+        return personaMapper.toEntity(personaDto);
+    }
+
+    public PersonaDto personaEntityToPersonaDto(Persona persona) {
+        return personaMapper.toDto(persona);
+    }
+
     public List<PersonaDto> getAll() {
         return this.personaRepository.findAll().stream().map(personaMapper::toDto).toList();
     }
 
     public PersonaDto getById(UUID id) {
         return this.personaMapper.toDto(this.personaRepository.findById(id).orElse(null));
+    }
+
+    public Persona getEntityById(UUID id) {
+        return personaRepository.findById(id).orElse(null);
+    }
+
+    public Set<Persona> getByProjectId(Long projectId) {
+        return this.personaRepository.findByProjectId(projectId);
     }
 
     @Transactional

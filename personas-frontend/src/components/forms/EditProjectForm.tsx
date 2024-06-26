@@ -6,11 +6,15 @@ import Tag from "../Tag";
 import InputWithHiddenLabel from "./InputWithHiddenLabel";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 import { useRef, useState } from "react";
-import { updateProject } from "@/app/api/endpoints";
+import { deletePersona, updateProject } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
+import PersonaCard from "../PersonaCard";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);
+  const [updatedPersonas, setUpdatedPersonas] = useState(
+    project.personas ?? []
+  );
   const inputTagRef = useRef<HTMLInputElement | null>(null);
   const router = useRouter();
 
@@ -27,6 +31,14 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
     }
   }
 
+  async function onDeletePersona(personaId: string | undefined) {
+    console.log("deletePersona", personaId);
+
+    setUpdatedPersonas(
+      updatedPersonas?.filter((persona) => persona.id != personaId)
+    );
+  }
+
   async function onSubmit(formData: FormData) {
     const rawFormData = {
       icon: formData.get("icon"),
@@ -40,11 +52,16 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
       name: rawFormData.name as string,
       description: rawFormData.description as string,
       tags: updatedTags,
+      personas: updatedPersonas,
     };
 
     const data = await updateProject(updatedProject);
 
-    router.replace("/projects/" + data.id);
+    goToPageDetails(data.id as number);
+  }
+
+  function goToPageDetails(projectId: number) {
+    router.replace("/projects/" + projectId);
     router.refresh();
   }
 
@@ -96,6 +113,19 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
           </ul>
         )}
       </section>
+      {updatedPersonas && (
+        <section>
+          <ul className="flex flex-wrap gap-16">
+            {updatedPersonas.map((persona) => (
+              <PersonaCard
+                key={persona.id}
+                persona={persona}
+                onDelete={() => onDeletePersona(persona.id)}
+              />
+            ))}
+          </ul>
+        </section>
+      )}
     </form>
   );
 }
