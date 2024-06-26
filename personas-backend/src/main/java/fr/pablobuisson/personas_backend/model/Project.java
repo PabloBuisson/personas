@@ -29,7 +29,7 @@ public class Project {
     private String icon;
 
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Persona> personas = new LinkedHashSet<>();
 
     @EqualsAndHashCode.Exclude

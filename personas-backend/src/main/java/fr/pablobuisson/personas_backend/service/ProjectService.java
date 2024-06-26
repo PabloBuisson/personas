@@ -148,6 +148,10 @@ public class ProjectService {
             }
         }
 
+        for (Persona persona : project.getPersonas()) {
+            persona.setProject(null);
+        }
+
         this.projectRepository.deleteById(id);
     }
 
@@ -169,8 +173,8 @@ public class ProjectService {
             projectSaved.setIcon(projectDto.icon());
         }
 
-        projectSaved.getPersonas().clear();
         Set<Persona> updatedPersonas = updatePersonas(projectDto, projectSaved);
+        projectSaved.getPersonas().clear();
         projectSaved.getPersonas().addAll(updatedPersonas);
 
         if (projectDto.tags() != null && !projectDto.tags().isEmpty()) {
