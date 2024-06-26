@@ -14,6 +14,7 @@ export default function ButtonDeleteProject({
     await deleteProject(projectId);
     
     router.replace("/projects");
+    router.refresh();
   }
 
   return (
