@@ -37,7 +37,7 @@ Online demo : *TODO*
 docker compose up -d
 
 # Create files for mapping
-.\mvnw clean install -DskipTest
+.\mvnw clean install -DskipTests
 ```
 4. Launch project
 5. Import Bruno files (bruno/) to test the project with Bruno (API client)
