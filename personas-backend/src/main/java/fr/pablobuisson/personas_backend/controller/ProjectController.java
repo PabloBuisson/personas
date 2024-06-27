@@ -23,6 +23,7 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
+    // TODO check if still idempotent
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get all projects")
     @ResponseStatus(HttpStatus.OK)
@@ -38,11 +39,7 @@ public class ProjectController {
     @Operation(summary = "Get a project by its id")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> getById(@PathVariable Long id) {
-        ProjectDto projectSavedDto = projectService.getById(id);
-
-        if (projectSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        return new ResponseEntity<>(projectSavedDto, HttpStatus.OK);
+        return new ResponseEntity<>(projectService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/tags/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
