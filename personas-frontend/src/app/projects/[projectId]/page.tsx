@@ -1,7 +1,7 @@
 import { ProjectDto } from "@/app/api";
 import { getProjectById } from "@/app/api/endpoints";
 import CreatePersonaCard from "@/components/CreatePersonaCard";
-import PersonaCard from "@/components/PersonaCard";
+import PersonaCard from "@/components/cards/PersonaCard";
 import Tag from "@/components/Tag";
 import ButtonDeleteProject from "@/components/buttons/ButtonDeleteProject";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
@@ -39,12 +39,10 @@ export default async function Project({
             {project.tags.map((tag) => (
               <Tag key={tag.id} id={tag.id} name={tag.label} size="text-sm" />
             ))}
-            <input id="new-tag" name="new-tag"></input>
-            <button>Add a tag</button>
           </ul>
         )}
         <ul className="flex flex-wrap gap-16">
-          <CreatePersonaCard id={"new-persona"} />
+          <CreatePersonaCard id={"new-persona"} projectId={project.id} />
           {project?.personas && (
             <>
               {project.personas.map((persona) => (

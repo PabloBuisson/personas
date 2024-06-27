@@ -7,22 +7,32 @@ import fr.pablobuisson.personas_backend.mapper.PersonaMapper;
 import fr.pablobuisson.personas_backend.model.Persona;
 import fr.pablobuisson.personas_backend.model.Project;
 import fr.pablobuisson.personas_backend.repository.PersonaRepository;
-import fr.pablobuisson.personas_backend.repository.ProjectRepository;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
-@AllArgsConstructor
-@Data
+@Getter
 @Service
 public class PersonaService {
 
     private final PersonaRepository personaRepository;
-    private final ProjectRepository projectRepository;
     private final PersonaMapper personaMapper;
+    private ProjectService projectService;
+
+    PersonaService(PersonaRepository personaRepository, PersonaMapper personaMapper) {
+        this.personaRepository = personaRepository;
+        this.personaMapper = personaMapper;
+    }
+
+    // Avoid circular dependency (PersonaService -> ProjectService -> PersonaService)
+    @Autowired
+    public void setProjectService(@Lazy ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     public Persona personaDtoToPersonaEntity(PersonaDto personaDto) {
         return personaMapper.toEntity(personaDto);
@@ -37,7 +47,19 @@ public class PersonaService {
     }
 
     public PersonaDto getById(UUID id) {
-        return this.personaMapper.toDto(this.personaRepository.findById(id).orElse(null));
+        Persona persona = this.personaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Persona with id " + id + " not found"));
+
+        try {
+            Project linkedProject = projectService.getByPersonaId(id);
+            persona.setProject(linkedProject);
+        } catch (Exception e) {
+            // Some personas may not belong to a project
+            persona.setProject(null);
+        }
+
+        return this.personaMapper.toDto(persona);
     }
 
     public Persona getEntityById(UUID id) {
@@ -48,13 +70,23 @@ public class PersonaService {
         return this.personaRepository.findByProjectId(projectId);
     }
 
+    Project getLinkedProject(Long projectId) throws RuntimeException {
+        try {
+            ProjectDto projectSaved = projectService.getById(projectId);
+            return projectService.projectDtoToProjectEntity(projectSaved);
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException("Project with id " + projectId + " not found");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Transactional
     public PersonaDto create(PersonaDto personaDto, Long projectId) {
         Persona persona = this.personaMapper.toEntity(personaDto);
 
         if (projectId != null) {
-            Project projectLinked = projectRepository.findById(projectId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Project with id " + projectId + " not found"));
+            Project projectLinked = getLinkedProject(projectId);
             persona.setProject(projectLinked);
         }
 
@@ -73,6 +105,10 @@ public class PersonaService {
         }
 
         Persona personaSaved = this.personaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Persona with id " + id + " not found"));
+
+        // TODO check if project is not null
+        // if project is null in dto, set project to null in entity
+
         return this.personaMapper.toDto(this.personaMapper.partialUpdate(personaDto, personaSaved));
     }
 

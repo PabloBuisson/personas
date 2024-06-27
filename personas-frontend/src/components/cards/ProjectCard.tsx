@@ -36,22 +36,25 @@ export default function ProjectCard({
   );
 
   return (
-    <li className="text-base font-medium" key={project.id}>
+    <li
+      className="text-base font-medium flex flex-col justify-center gap-4"
+      key={project.id}
+    >
       <article className="flex justify-center items-center h-full w-full bg-gray-300 border-[0.2em] border-gray-300 rounded-lg">
         {!onDelete && (
-          <Link className="relative p-1" href={`${project.id}`}>
+          <Link className="relative p-1" href={`/projects/${project.id}`}>
             {cardContent}
           </Link>
         )}
         {onDelete && <div className="relative p-1">{cardContent}</div>}
-        {onDelete && (
-          <ButtonPrimary
-            label="Unlink from persona"
-            onClick={() => onDelete(project.id)}
-            type="button"
-          />
-        )}
       </article>
+      {onDelete && (
+        <ButtonPrimary
+          label="Unlink persona from project"
+          onClick={() => onDelete(project.id)}
+          type="button"
+        />
+      )}
     </li>
   );
 }

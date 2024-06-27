@@ -9,6 +9,7 @@ export default async function EditProject({
 }) {
   const projectId = params.projectId;
 
+  // TODO get cached Project ?
   let project: ProjectDto = await getProjectById(projectId);
 
   return (

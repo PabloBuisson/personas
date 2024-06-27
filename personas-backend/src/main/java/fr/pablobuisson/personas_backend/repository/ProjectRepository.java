@@ -6,6 +6,7 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface ProjectRepository extends ListCrudRepository<Project, Long> {
@@ -13,4 +14,6 @@ public interface ProjectRepository extends ListCrudRepository<Project, Long> {
     List<Project> findByTagsIdCustomQuery(Long tagId);
 
     List<Project> findByTagsId(Long tagId);
+
+    Project findByPersonasId(UUID personaId);
 }
