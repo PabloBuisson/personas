@@ -46,8 +46,10 @@ public class ProjectService {
         return this.projectRepository.findByPersonasId(id);
     }
 
-    public ProjectDto getById(Long id) {
-        return this.projectMapper.toDto(this.projectRepository.findById(id).orElse(null));
+    public ProjectDto getById(Long id) throws ResourceNotFoundException {
+        return this.projectMapper.toDto(this.projectRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Project with id " + id + " not found")));
     }
 
     @Transactional

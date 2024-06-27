@@ -33,11 +33,7 @@ public class PersonaController {
     @Operation(summary = "Get persona by its id")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<PersonaDto> getById(@PathVariable UUID id) {
-        PersonaDto personaSavedDto = personaService.getById(id);
-
-        if (personaSavedDto == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-        return new ResponseEntity<>(personaSavedDto, HttpStatus.OK);
+        return new ResponseEntity<>(personaService.getById(id), HttpStatus.OK);
     }
 
 
