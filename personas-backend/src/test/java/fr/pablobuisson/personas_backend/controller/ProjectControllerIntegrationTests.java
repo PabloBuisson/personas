@@ -256,11 +256,11 @@ public class ProjectControllerIntegrationTests {
     // ***** [DELETE] TESTS ***** //
 
     @Test
-    public void testThatDeleteProjectReturnsStatus204ForNonExistingProject() throws Exception {
+    public void testThatDeleteProjectReturnsStatus404ForNonExistingProject() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                         .delete(ProjectController.API_URL + "/999999999999999999")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isNoContent());
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
