@@ -1,5 +1,6 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
+import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ProjectCard from "@/components/cards/ProjectCard";
 import CreatePersonaForm from "@/components/forms/CreatePersonaForm";
@@ -40,6 +41,9 @@ export default async function Persona({
         </div>
         <div className="flex justify-end gap-8">
           <ButtonLinkPrimary label="Edit Persona" href={"edit"} />
+          {persona.id && (
+            <ButtonDeleteItem item="persona" itemId={persona.id} />
+          )}
         </div>
       </div>
       <h1 className="text-5xl font-extrabold">{persona.name}</h1>
