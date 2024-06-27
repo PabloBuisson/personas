@@ -46,7 +46,8 @@ public class PersonaService {
         return this.personaRepository.findAll().stream().map(personaMapper::toDto).toList();
     }
 
-    public PersonaDto getById(UUID id) {
+    @Transactional
+    public PersonaDto getById(UUID id) throws ResourceNotFoundException {
         Persona persona = this.personaRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Persona with id " + id + " not found"));
@@ -104,10 +105,23 @@ public class PersonaService {
             throw new Exception("The id of the persona is missing");
         }
 
-        Persona personaSaved = this.personaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Persona with id " + id + " not found"));
+        Persona personaSaved = personaMapper.toEntity(getById(id));
 
-        // TODO check if project is not null
-        // if project is null in dto, set project to null in entity
+        if (personaSaved.getProject() != null && personaSaved.getProject().getId() != null) {
+            Project project = projectService.projectDtoToProjectEntity(projectService.getById(personaSaved.getProject().getId()));
+            // If the persona is not linked to a project anymore
+            if (personaDto.project() == null) {
+                project.getPersonas().remove(personaSaved);
+                projectService.partialUpdate(projectService.projectEntityToProjectDto(project), project.getId());
+                personaSaved.setProject(null);
+                // If the persona is now linked to a different project ↓
+            } else if (!Objects.equals(personaSaved.getProject().getId(), personaDto.project().id())) {
+                Project projectLinked = getLinkedProject(personaDto.project().id());
+                project.getPersonas().remove(personaSaved);
+                projectService.partialUpdate(projectService.projectEntityToProjectDto(project), project.getId());
+                personaSaved.setProject(projectLinked);
+            }
+        }
 
         return this.personaMapper.toDto(this.personaMapper.partialUpdate(personaDto, personaSaved));
     }

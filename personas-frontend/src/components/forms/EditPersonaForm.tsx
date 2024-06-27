@@ -10,11 +10,11 @@ import { useRouter } from "next/navigation";
 import ProjectCard from "../cards/ProjectCard";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
-  const [updatedProject, setUpdatedProject] = useState(persona.project ?? null);
+  const [updatedProject, setUpdatedProject] = useState(persona.project ?? undefined);
   const router = useRouter();
 
   async function onDeleteProject() {
-    setUpdatedProject(null);
+    setUpdatedProject(undefined);
   }
 
   async function onSubmit(formData: FormData) {
@@ -31,6 +31,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       age: rawFormData.age as string,
       name: rawFormData.name as string,
       story: rawFormData.story as string,
+      project: updatedProject,
     };
 
     const data = await updatePersona(updatedPersona);
