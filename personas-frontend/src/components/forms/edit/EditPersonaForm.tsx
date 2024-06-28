@@ -8,10 +8,55 @@ import { useState } from "react";
 import { updatePersona } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
 import ProjectCard from "../../cards/ProjectCard";
+import PersonalInformationsRow, {
+  PersonalInformationsCell,
+} from "../common/PersonalInformationsRow";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
-  const [updatedProject, setUpdatedProject] = useState(persona.project ?? undefined);
   const router = useRouter();
+  const [updatedProject, setUpdatedProject] = useState(
+    persona.project ?? undefined
+  );
+  const personalLifeInfos: PersonalInformationsCell[] = [
+    { order: 1, icon: "🎂", label: "Age", name: "age", value: persona.age },
+    {
+      order: 2,
+      icon: "📍",
+      label: "Location",
+      name: "location",
+      value: persona.location,
+    },
+    {
+      order: 3,
+      icon: "😎",
+      label: "Family",
+      name: "family",
+      value: persona.family,
+    },
+  ];
+  const jobInfos: PersonalInformationsCell[] = [
+    {
+      order: 1,
+      icon: "💵",
+      label: "Salary",
+      name: "salary",
+      value: persona.job?.salary,
+    },
+    {
+      order: 2,
+      icon: "🏢",
+      label: "Company",
+      name: "company",
+      value: persona.job?.company,
+    },
+    {
+      order: 3,
+      icon: "🏭",
+      label: "Industry",
+      name: "industry",
+      value: persona.job?.industry,
+    },
+  ];
 
   async function onDeleteProject() {
     setUpdatedProject(undefined);
@@ -23,6 +68,8 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       name: formData.get("title"),
       story: formData.get("story"),
       age: formData.get("age"),
+      location: formData.get("location"),
+      family: formData.get("family"),
     };
 
     const updatedPersona: PersonaDto = {
@@ -31,6 +78,14 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       age: rawFormData.age as string,
       name: rawFormData.name as string,
       story: rawFormData.story as string,
+      location: rawFormData.location,
+      family: rawFormData.family,
+      job: {
+        id: persona.job?.id,
+        salary: formData.get("salary") as string,
+        company: formData.get("company") as string,
+        industry: formData.get("industry") as string,
+      },
       project: updatedProject,
     };
 
@@ -72,12 +127,8 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
         inputId="story"
         defaultValue={persona.story}
       />
-      <InputWithHiddenLabel
-        className="text-xl font-medium bg-transparent"
-        label="Age"
-        inputId="age"
-        defaultValue={persona.age}
-      />
+      <PersonalInformationsRow cells={personalLifeInfos} />
+      <PersonalInformationsRow cells={jobInfos} />
       {updatedProject && (
         <section>
           <ul className="flex flex-wrap gap-16">
