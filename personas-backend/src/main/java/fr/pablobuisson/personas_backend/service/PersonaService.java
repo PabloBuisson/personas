@@ -46,8 +46,11 @@ public class PersonaService {
         return this.personaRepository.findAll().stream().map(personaMapper::toDto).toList();
     }
 
-    @Transactional
-    public PersonaDto getById(UUID id) throws ResourceNotFoundException {
+    public PersonaDto getById(UUID id) {
+        return personaMapper.toDto(getByIdWithProject(id));
+    }
+
+    public Persona getByIdWithProject(UUID id) throws ResourceNotFoundException {
         Persona persona = this.personaRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Persona with id " + id + " not found"));
@@ -60,7 +63,7 @@ public class PersonaService {
             persona.setProject(null);
         }
 
-        return this.personaMapper.toDto(persona);
+        return persona;
     }
 
     public Persona getEntityById(UUID id) {
@@ -105,7 +108,13 @@ public class PersonaService {
             throw new Exception("The id of the persona is missing");
         }
 
-        Persona personaSaved = personaMapper.toEntity(getById(id));
+        Persona personaSaved = getByIdWithProject(id);
+
+        // If the persona is now linked to a new project
+        if (personaSaved.getProject() == null && personaDto.project() != null && personaDto.project().id() != null) {
+            Project projectLinked = getLinkedProject(personaDto.project().id());
+            personaSaved.setProject(projectLinked);
+        }
 
         if (personaSaved.getProject() != null && personaSaved.getProject().getId() != null) {
             Project project = projectService.projectDtoToProjectEntity(projectService.getById(personaSaved.getProject().getId()));
