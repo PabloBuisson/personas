@@ -3,7 +3,7 @@ import { getPersonaById } from "@/app/api/endpoints";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ProjectCard from "@/components/cards/ProjectCard";
-import CreatePersonaForm from "@/components/forms/CreatePersonaForm";
+import CreatePersonaForm from "@/components/forms/create/CreatePersonaForm";
 
 export default async function Persona({
   params,

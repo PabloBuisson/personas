@@ -1,5 +1,5 @@
-import ProjectList from "@/components/ProjectList";
-import TagList from "@/components/TagList";
+import ProjectList from "@/components/lists/ProjectList";
+import TagList from "@/components/tags/TagList";
 import { Suspense } from "react";
 
 export default async function Projects({

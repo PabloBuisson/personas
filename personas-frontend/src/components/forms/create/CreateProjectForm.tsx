@@ -1,16 +1,11 @@
-import InputWithLabel from "./InputWithLabel";
-import ButtonPrimary from "../buttons/ButtonPrimary";
-import { handleCreatePersona } from "@/app/actions/persona-actions";
+import { handleCreateProject } from "@/app/actions/project-actions";
 
-export default function CreatePersonaForm({
-  projectId,
-}: {
-  projectId?: number;
-}) {
-  const createPersona = handleCreatePersona.bind(null, projectId);
+import InputWithLabel from "../common/InputWithLabel";
+import ButtonPrimary from "../../buttons/ButtonPrimary";
 
+export default function CreateProjectForm() {
   return (
-    <form action={createPersona} className="flex flex-col gap-8">
+    <form action={handleCreateProject} className="flex flex-col gap-8">
       <section className="bg-gray-300 relative flex justify-center items-center rounded-full w-28 h-28">
         <input
           name="icon"
@@ -25,19 +20,19 @@ export default function CreatePersonaForm({
         </button>
       </section>
       <section className="flex flex-col gap-8">
-        <InputWithLabel label="Name of the persona" inputId="name" />
+        <InputWithLabel label="Name of the project" inputId="title" />
         <InputWithLabel
-          label="What is the story of the persona ?"
-          inputId="story"
+          label="Describe the project"
+          inputId="description"
           withLongText={true}
         />
         <InputWithLabel
-          label="How old is the persona ?"
-          inputId="age"
-          informationMessage="💡 You can give a ballpark (i.e 15-25 years)"
+          label="Tags"
+          inputId="tags"
+          informationMessage="💡 Separate your tags with blank space, commas, or any special character (, ; . - _ / \ |)"
         />
       </section>
-      <ButtonPrimary type="submit" label="Create persona" />
+      <ButtonPrimary type="submit" label="Create project" />
     </form>
   );
 }

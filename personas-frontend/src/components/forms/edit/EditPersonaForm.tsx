@@ -1,13 +1,13 @@
 "use client";
 
 import { PersonaDto } from "@/app/api";
-import ButtonLinkSecondary from "../buttons/ButtonLinkSecondary";
-import InputWithHiddenLabel from "./InputWithHiddenLabel";
-import ButtonPrimary from "../buttons/ButtonPrimary";
+import ButtonLinkSecondary from "../../buttons/ButtonLinkSecondary";
+import InputWithHiddenLabel from "../common/InputWithHiddenLabel";
+import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { useState } from "react";
 import { updatePersona } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
-import ProjectCard from "../cards/ProjectCard";
+import ProjectCard from "../../cards/ProjectCard";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   const [updatedProject, setUpdatedProject] = useState(persona.project ?? undefined);

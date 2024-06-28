@@ -1,14 +1,15 @@
 "use client";
 
-import { ProjectDto } from "@/app/api";
-import ButtonLinkSecondary from "../buttons/ButtonLinkSecondary";
-import Tag from "../Tag";
-import InputWithHiddenLabel from "./InputWithHiddenLabel";
-import ButtonPrimary from "../buttons/ButtonPrimary";
 import { useRef, useState } from "react";
-import { deletePersona, updateProject } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
-import PersonaCard from "../cards/PersonaCard";
+
+import { ProjectDto } from "@/app/api";
+import { updateProject } from "@/app/api/endpoints";
+import ButtonLinkSecondary from "../../buttons/ButtonLinkSecondary";
+import Tag from "../../tags/Tag";
+import InputWithHiddenLabel from "./../common/InputWithHiddenLabel";
+import ButtonPrimary from "../../buttons/ButtonPrimary";
+import PersonaCard from "../../cards/PersonaCard";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);

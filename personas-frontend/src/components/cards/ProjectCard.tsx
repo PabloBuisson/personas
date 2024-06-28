@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProjectDto } from "@/app/api";
-import Tag from "../Tag";
+import Tag from "../tags/Tag";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 
 export default function ProjectCard({

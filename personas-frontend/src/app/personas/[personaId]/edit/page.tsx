@@ -1,6 +1,6 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
-import EditPersonaForm from "@/components/forms/EditPersonaForm";
+import EditPersonaForm from "@/components/forms/edit/EditPersonaForm";
 
 export default async function EditPersona({
   params,

@@ -1,4 +1,4 @@
-import HomeSummaryList from "@/components/HomeSummaryList";
+import HomeSummaryList from "@/components/lists/HomeSummaryList";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ButtonLinkSecondary from "@/components/buttons/ButtonLinkSecondary";
 

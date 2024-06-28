@@ -1,8 +1,8 @@
 import { ProjectDto } from "@/app/api";
 import { getProjectById } from "@/app/api/endpoints";
-import CreatePersonaCard from "@/components/CreatePersonaCard";
+import CreatePersonaCard from "@/components/cards/CreatePersonaCard";
 import PersonaCard from "@/components/cards/PersonaCard";
-import Tag from "@/components/Tag";
+import Tag from "@/components/tags/Tag";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 

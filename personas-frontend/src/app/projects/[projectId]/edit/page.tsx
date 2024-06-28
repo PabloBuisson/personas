@@ -1,6 +1,6 @@
 import { ProjectDto } from "@/app/api";
 import { getProjectById } from "@/app/api/endpoints";
-import EditProjectForm from "@/components/forms/EditProjectForm";
+import EditProjectForm from "@/components/forms/edit/EditProjectForm";
 
 export default async function EditProject({
   params,

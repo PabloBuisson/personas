@@ -1,4 +1,4 @@
-import CreateProjectForm from "@/components/forms/CreateProjectForm";
+import CreateProjectForm from "@/components/forms/create/CreateProjectForm";
 
 export default async function CreateProject() {
   return (
