@@ -1,5 +1,6 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
+import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ProjectCard from "@/components/cards/ProjectCard";
@@ -48,7 +49,7 @@ export default async function Persona({
       </div>
       <h1 className="text-5xl font-extrabold">{persona.name}</h1>
       <p className="text-xl font-medium">{persona.story}</p>
-      <p className="text-xl font-medium">Age : {persona.age}</p>
+      <PersonalInformationsBlockView persona={persona} />
       {persona.project && (
         <section>
           <ul className="flex flex-wrap gap-16">

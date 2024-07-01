@@ -8,55 +8,21 @@ import { useState } from "react";
 import { updatePersona } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
 import ProjectCard from "../../cards/ProjectCard";
-import PersonalInformationsRow, {
-  PersonalInformationsCell,
-} from "../common/PersonalInformationsRow";
+import PersonalInformationsRow from "../common/PersonalInformationsRow";
+import {
+  getJobInfos,
+  getPersonalLifeInfos,
+} from "../common/PersonalInformationsSettings";
+import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHeader";
+import PersonaSecondaryInfosBlock from "../common/PersonaSecondaryInfosBlock";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
   const [updatedProject, setUpdatedProject] = useState(
     persona.project ?? undefined
   );
-  const personalLifeInfos: PersonalInformationsCell[] = [
-    { order: 1, icon: "🎂", label: "Age", name: "age", value: persona.age },
-    {
-      order: 2,
-      icon: "📍",
-      label: "Location",
-      name: "location",
-      value: persona.location,
-    },
-    {
-      order: 3,
-      icon: "😎",
-      label: "Family",
-      name: "family",
-      value: persona.family,
-    },
-  ];
-  const jobInfos: PersonalInformationsCell[] = [
-    {
-      order: 1,
-      icon: "💵",
-      label: "Salary",
-      name: "salary",
-      value: persona.job?.salary,
-    },
-    {
-      order: 2,
-      icon: "🏢",
-      label: "Company",
-      name: "company",
-      value: persona.job?.company,
-    },
-    {
-      order: 3,
-      icon: "🏭",
-      label: "Industry",
-      name: "industry",
-      value: persona.job?.industry,
-    },
-  ];
+  const personalLifeInfos = getPersonalLifeInfos(persona);
+  const jobInfos = getJobInfos(persona);
 
   async function onDeleteProject() {
     setUpdatedProject(undefined);
@@ -80,8 +46,11 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       story: rawFormData.story as string,
       location: rawFormData.location,
       family: rawFormData.family,
+      education: formData.get("education"),
+      personalityTraits: formData.get("personality"),
       job: {
         id: persona.job?.id,
+        title: formData.get("job-title") as string,
         salary: formData.get("salary") as string,
         company: formData.get("company") as string,
         industry: formData.get("industry") as string,
@@ -127,8 +96,23 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
         inputId="story"
         defaultValue={persona.story}
       />
-      <PersonalInformationsRow cells={personalLifeInfos} />
-      <PersonalInformationsRow cells={jobInfos} />
+      <PersonalInformationsRow mode="edit" cells={personalLifeInfos} />
+      <PersonalInformationsJobHeader mode="edit" persona={persona} />
+      <PersonalInformationsRow mode="edit" cells={jobInfos} />
+      <PersonaSecondaryInfosBlock
+        mode="edit"
+        label="Education"
+        icon="🎓"
+        value={persona.education}
+        name="education"
+      />
+      <PersonaSecondaryInfosBlock
+        mode="edit"
+        label="Personality"
+        icon="🎓"
+        value={persona.personalityTraits}
+        name="personality"
+      />
       {updatedProject && (
         <section>
           <ul className="flex flex-wrap gap-16">
