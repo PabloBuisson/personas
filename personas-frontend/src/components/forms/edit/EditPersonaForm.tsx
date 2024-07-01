@@ -92,50 +92,87 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
 
   return (
     <form action={onSubmit} className="flex flex-col gap-8">
-      <div className="flex justify-between items-start gap-16">
-        <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
-          {persona.image && (
-            <span className="text-6xl" role="image">
-              {persona.image}
-            </span>
-          )}
+      <div className="flex justify-start items-start gap-16">
+        <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
+          <div className="bg-gray-300 rounded-full w-36 h-36 flex justify-center items-center">
+            {persona.image && (
+              <span className="text-6xl" role="image">
+                {persona.image}
+              </span>
+            )}
+          </div>
+          <div className="flex gap-4 justify-between mb-16">
+            <button
+              type="button"
+              className="text-3xl bg-white p-2 rounded"
+              aria-label="Change avatar"
+            >
+              😎
+            </button>
+            <button
+              type="button"
+              className="text-3xl bg-white p-2 rounded"
+              aria-label="Change theme color"
+            >
+              🎨
+            </button>
+          </div>
+          <div className="flex flex-col gap-20 w-full">
+            <PersonaSecondaryInfosBlock
+              key="education"
+              mode="edit"
+              label="Education"
+              icon="🎓"
+              value={persona.education}
+              name="education"
+              isStandalone={true}
+            />
+            <PersonaSecondaryInfosBlock
+              key="personality"
+              mode="edit"
+              label="Personality"
+              icon="🧠"
+              value={persona.personalityTraits}
+              name="personality"
+              isStandalone={true}
+            />
+          </div>
         </div>
 
-        <div className="flex justify-end gap-8">
-          <ButtonLinkSecondary label="Cancel" href={"../"} />
-          <ButtonPrimary type="submit" label="Save changes" />
+        <div className="basis-3/4 flex flex-col gap-8">
+          <div className="flex justify-between items-start gap-8 w-full">
+            <InputWithHiddenLabel
+              className="text-5xl font-extrabold bg-transparent"
+              label="Project name"
+              inputId="title"
+              defaultValue={persona.name}
+            />
+            <div className="flex justify-end gap-8">
+              <ButtonLinkSecondary label="Cancel" href={"../"} />
+              <ButtonPrimary type="submit" label="Save changes" />
+            </div>
+          </div>
+          <InputWithHiddenLabel
+            className="text-xl font-medium bg-white p-4 rounded"
+            label="Story"
+            inputId="story"
+            defaultValue={persona.story}
+          />
+          <PersonalInformationsRow mode="edit" cells={personalLifeInfos} />
+          <PersonalInformationsJobHeader mode="edit" persona={persona} />
+          <PersonalInformationsRow mode="edit" cells={jobInfos} />
         </div>
       </div>
-      <InputWithHiddenLabel
-        className="text-5xl font-extrabold bg-transparent"
-        label="Project name"
-        inputId="title"
-        defaultValue={persona.name}
-      />
-      <InputWithHiddenLabel
-        className="text-xl font-medium bg-transparent"
-        label="Story"
-        inputId="story"
-        defaultValue={persona.story}
-      />
-      <PersonalInformationsRow mode="edit" cells={personalLifeInfos} />
-      <PersonalInformationsJobHeader mode="edit" persona={persona} />
-      <PersonalInformationsRow mode="edit" cells={jobInfos} />
-      <PersonaSecondaryInfosBlock
-        key="education"
+
+      <PersonaSectionMultiInfos
         mode="edit"
-        label="Education"
-        icon="🎓"
-        value={persona.education}
-        name="education"
+        title="Culture"
+        entity={persona.culture}
       />
-      <PersonaSecondaryInfosBlock
-        key="personality"
+      <PersonaSectionMultiInfos
         mode="edit"
-        label="Personality"
-        icon="🧠"
-        value={persona.personalityTraits}
-        name="personality"
+        title="Emotions"
+        entity={persona.emotions}
       />
       <PersonaSecondaryInfosBlock
         key="idols"
@@ -152,12 +189,6 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
         icon="🏷️"
         value={persona.brands}
         name="brands"
-      />
-      <PersonaSectionMultiInfos mode="edit" title="Culture" entity={persona.culture} />
-      <PersonaSectionMultiInfos
-        mode="edit"
-        title="Emotions"
-        entity={persona.emotions}
       />
       {updatedProject && (
         <section>

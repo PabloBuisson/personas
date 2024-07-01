@@ -1,49 +1,64 @@
-export default function PersonaSecondaryInfosBlock({
-  key,
-  mode,
-  label,
-  name,
-  icon,
-  value,
-}: {
+type PersonaSecondaryInfosBlockProps = {
   key: string;
   mode: "edit" | "view";
   label: string;
   name: string | undefined;
   icon: string;
   value: string | undefined;
-}) {
-  if (mode === "edit") {
+  isStandalone?: boolean;
+};
+
+export default function PersonaSecondaryInfosBlock(
+  props: PersonaSecondaryInfosBlockProps
+) {
+  if (props.mode === "edit") {
     return (
-      <section key={key} className="flex flex-col gap-2 w-1/4">
+      <section
+        key={props.key}
+        className={`flex flex-col gap-2 ${
+          props.isStandalone ? "w-full" : "w-1/4"
+        }`}
+      >
         <header className="relative w-full bg-white p-4">
           <div className="absolute left-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
-            {icon}
+            {props.icon}
           </div>
-          <label htmlFor={name} className="text-2xl font-semibold">{label}</label>
+          <label htmlFor={props.name} className="text-2xl font-semibold">
+            {props.label}
+          </label>
           <div className="absolute right-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
-            <button type="button" aria-label="Cacher la section">
+            <button type="button" aria-label="Hide section">
               👁️‍🗨️
             </button>
           </div>
         </header>
         <div className="w-full bg-white p-4 rounded-b">
-          <textarea id={name} name={name} className="w-full h-32" defaultValue={value} />
+          <textarea
+            id={props.name}
+            name={props.name}
+            className="w-full h-32"
+            defaultValue={props.value}
+          />
         </div>
       </section>
     );
   }
 
   return (
-    <section key={key} className="flex flex-col gap-2 w-1/4">
+    <section
+      key={props.key}
+      className={`flex flex-col gap-2 ${
+        props.isStandalone ? "w-full" : "w-1/4"
+      }`}
+    >
       <header className="relative w-full bg-white p-4">
         <div className="absolute left-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
-          {icon}
+          {props.icon}
         </div>
-        <h1 className="text-2xl font-semibold">{label}</h1>
+        <h1 className="text-2xl font-semibold">{props.label}</h1>
       </header>
       <div className="w-full bg-white p-4 rounded-b">
-        <p>{value}</p>
+        <p>{props.value}</p>
       </div>
     </section>
   );

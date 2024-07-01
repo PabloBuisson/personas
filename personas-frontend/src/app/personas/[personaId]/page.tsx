@@ -5,6 +5,7 @@ import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsB
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ProjectCard from "@/components/cards/ProjectCard";
+import PersonaSecondaryInfosBlock from "@/components/forms/common/PersonaSecondaryInfosBlock";
 import CreatePersonaForm from "@/components/forms/create/CreatePersonaForm";
 
 export default async function Persona({
@@ -30,25 +31,73 @@ export default async function Persona({
   let persona: PersonaDto = await getPersonaById(personaId);
 
   return (
-    <main className="p-16 flex flex-col gap-8">
-      <div className="flex justify-between items-start gap-16">
-        <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
-          {persona.image && (
-            <span className="text-6xl" role="image">
-              {persona.image}
-            </span>
-          )}
+    <main className="p-16 flex flex-col gap-8 w-full">
+      <div className="flex justify-start items-start gap-16">
+        <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
+          <div className="bg-gray-300 rounded-full w-36 h-36 flex justify-center items-center">
+            {persona.image && (
+              <span className="text-6xl" role="image">
+                {persona.image}
+              </span>
+            )}
+          </div>
+          <div className="flex gap-4 justify-between mb-16">
+            <button
+              type="button"
+              className="text-3xl bg-white p-2 rounded"
+              aria-label="Change avatar"
+            >
+              😎
+            </button>
+            <button
+              type="button"
+              className="text-3xl bg-white p-2 rounded"
+              aria-label="Change theme color"
+            >
+              🎨
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-20 w-full">
+            <PersonaSecondaryInfosBlock
+              key="education"
+              mode="view"
+              label="Education"
+              icon="🎓"
+              value={persona.education}
+              name="education"
+              isStandalone={true}
+            />
+            <PersonaSecondaryInfosBlock
+              key="personality"
+              mode="view"
+              label="Personality"
+              icon="🧠"
+              value={persona.personalityTraits}
+              name="personality"
+              isStandalone={true}
+            />
+          </div>
         </div>
-        <div className="flex justify-end gap-8">
-          <ButtonLinkPrimary label="Edit Persona" href={"edit"} />
-          {persona.id && (
-            <ButtonDeleteItem item="persona" itemId={persona.id} />
-          )}
+
+        <div className="basis-3/4 flex flex-col gap-8">
+          <div className="flex justify-between gap-8 w-full">
+            <h1 className="text-5xl font-extrabold">{persona.name}</h1>
+            <div className="flex justify-end gap-8">
+              <ButtonLinkPrimary label="Edit Persona" href={"edit"} />
+              {persona.id && (
+                <ButtonDeleteItem item="persona" itemId={persona.id} />
+              )}
+            </div>
+          </div>
+          <p className="text-xl font-medium bg-white p-4 rounded">
+            {persona.story}
+          </p>
+
+          <PersonalInformationsBlockView persona={persona} />
         </div>
       </div>
-      <h1 className="text-5xl font-extrabold">{persona.name}</h1>
-      <p className="text-xl font-medium">{persona.story}</p>
-      <PersonalInformationsBlockView persona={persona} />
+
       <PersonaSectionMultiInfos
         mode="view"
         title="Culture"
@@ -59,6 +108,7 @@ export default async function Persona({
         title="Emotions"
         entity={persona.emotions}
       />
+
       {persona.project && (
         <section>
           <ul className="flex flex-wrap gap-16">
