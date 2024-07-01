@@ -15,6 +15,7 @@ import {
 } from "../common/PersonalInformationsSettings";
 import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHeader";
 import PersonaSecondaryInfosBlock from "../common/PersonaSecondaryInfosBlock";
+import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   }
 
   async function onSubmit(formData: FormData) {
+    console.log("onSubmit formData = ", formData);
     const rawFormData = {
       icon: formData.get("icon"),
       name: formData.get("title"),
@@ -48,12 +50,32 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       family: rawFormData.family,
       education: formData.get("education"),
       personalityTraits: formData.get("personality"),
+      idols: formData.get("idols"),
+      brands: formData.get("brands"),
       job: {
         id: persona.job?.id,
         title: formData.get("job-title") as string,
         salary: formData.get("salary") as string,
         company: formData.get("company") as string,
         industry: formData.get("industry") as string,
+      },
+      culture: {
+        id: persona.culture?.id,
+        movies: formData.get("movies") as string,
+        music: formData.get("music") as string,
+        books: formData.get("books") as string,
+        games: formData.get("games") as string,
+        comics: formData.get("comics") as string,
+        tv: formData.get("tv") as string,
+      },
+      emotions: {
+        id: persona.emotions?.id,
+        passions: formData.get("passions") as string,
+        fears: formData.get("fears") as string,
+        goals: formData.get("goals") as string,
+        joys: formData.get("joys") as string,
+        frustrations: formData.get("frustrations") as string,
+        habits: formData.get("habits") as string,
       },
       project: updatedProject,
     };
@@ -100,6 +122,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       <PersonalInformationsJobHeader mode="edit" persona={persona} />
       <PersonalInformationsRow mode="edit" cells={jobInfos} />
       <PersonaSecondaryInfosBlock
+        key="education"
         mode="edit"
         label="Education"
         icon="🎓"
@@ -107,11 +130,34 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
         name="education"
       />
       <PersonaSecondaryInfosBlock
+        key="personality"
         mode="edit"
         label="Personality"
-        icon="🎓"
+        icon="🧠"
         value={persona.personalityTraits}
         name="personality"
+      />
+      <PersonaSecondaryInfosBlock
+        key="idols"
+        mode="edit"
+        label="Idols"
+        icon="🎤"
+        value={persona.idols}
+        name="idols"
+      />
+      <PersonaSecondaryInfosBlock
+        key="brands"
+        mode="edit"
+        label="Brands"
+        icon="🏷️"
+        value={persona.brands}
+        name="brands"
+      />
+      <PersonaSectionMultiInfos mode="edit" title="Culture" entity={persona.culture} />
+      <PersonaSectionMultiInfos
+        mode="edit"
+        title="Emotions"
+        entity={persona.emotions}
       />
       {updatedProject && (
         <section>

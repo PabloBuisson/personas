@@ -1,24 +1,26 @@
 export default function PersonaSecondaryInfosBlock({
+  key,
   mode,
   label,
   name,
   icon,
   value,
 }: {
+  key: string;
   mode: "edit" | "view";
   label: string;
-  name: string;
+  name: string | undefined;
   icon: string;
   value: string | undefined;
 }) {
   if (mode === "edit") {
     return (
-      <section className="flex flex-col gap-2 w-1/4">
+      <section key={key} className="flex flex-col gap-2 w-1/4">
         <header className="relative w-full bg-white p-4">
           <div className="absolute left-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
             {icon}
           </div>
-          <label className="text-2xl font-semibold">{label}</label>
+          <label htmlFor={name} className="text-2xl font-semibold">{label}</label>
           <div className="absolute right-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
             <button type="button" aria-label="Cacher la section">
               👁️‍🗨️
@@ -26,16 +28,14 @@ export default function PersonaSecondaryInfosBlock({
           </div>
         </header>
         <div className="w-full bg-white p-4 rounded-b">
-          <textarea name={name} className="w-full h-32">
-            {value}
-          </textarea>
+          <textarea id={name} name={name} className="w-full h-32" defaultValue={value} />
         </div>
       </section>
     );
   }
 
   return (
-    <section className="flex flex-col gap-2 w-1/4">
+    <section key={key} className="flex flex-col gap-2 w-1/4">
       <header className="relative w-full bg-white p-4">
         <div className="absolute left-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
           {icon}

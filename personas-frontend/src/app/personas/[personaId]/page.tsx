@@ -1,5 +1,6 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
+import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
@@ -28,8 +29,6 @@ export default async function Persona({
 
   let persona: PersonaDto = await getPersonaById(personaId);
 
-  console.log("Persona project = ", persona.project);
-
   return (
     <main className="p-16 flex flex-col gap-8">
       <div className="flex justify-between items-start gap-16">
@@ -50,6 +49,16 @@ export default async function Persona({
       <h1 className="text-5xl font-extrabold">{persona.name}</h1>
       <p className="text-xl font-medium">{persona.story}</p>
       <PersonalInformationsBlockView persona={persona} />
+      <PersonaSectionMultiInfos
+        mode="view"
+        title="Culture"
+        entity={persona.culture}
+      />
+      <PersonaSectionMultiInfos
+        mode="view"
+        title="Emotions"
+        entity={persona.emotions}
+      />
       {persona.project && (
         <section>
           <ul className="flex flex-wrap gap-16">
