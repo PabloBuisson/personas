@@ -37,7 +37,11 @@ export default function CreatePersonaForm({
           informationMessage="💡 You can give a ballpark (i.e 15-25 years)"
         />
       </section>
-      <ButtonPrimary type="submit" label="Create persona" />
+      <ButtonPrimary
+        element="button"
+        elementProps={{ type: "submit" }}
+        label="Create persona"
+      />
     </form>
   );
 }

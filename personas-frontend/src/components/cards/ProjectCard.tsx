@@ -50,9 +50,9 @@ export default function ProjectCard({
       </article>
       {onDelete && (
         <ButtonPrimary
+          element="button"
           label="Unlink persona from project"
-          onClick={() => onDelete(project.id)}
-          type="button"
+          elementProps={{ type: "button", onClick: () => onDelete(project.id) }}
         />
       )}
     </li>

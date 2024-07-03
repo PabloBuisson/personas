@@ -32,7 +32,11 @@ export default function CreateProjectForm() {
           informationMessage="💡 Separate your tags with blank space, commas, or any special character (, ; . - _ / \ |)"
         />
       </section>
-      <ButtonPrimary type="submit" label="Create project" />
+      <ButtonPrimary
+        element="button"
+        elementProps={{ type: "submit" }}
+        label="Create project"
+      />
     </form>
   );
 }

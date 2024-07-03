@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 
 import { ProjectDto } from "@/app/api";
 import { updateProject } from "@/app/api/endpoints";
-import ButtonLinkSecondary from "../../buttons/ButtonLinkSecondary";
 import Tag from "../../tags/Tag";
 import InputWithHiddenLabel from "./../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import PersonaCard from "../../cards/PersonaCard";
+import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);
@@ -78,8 +78,16 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
         </div>
 
         <div className="flex justify-end gap-8">
-          <ButtonLinkSecondary label="Cancel" href={"../"} />
-          <ButtonPrimary type="submit" label="Save changes" />
+          <ButtonSecondary
+            element="link"
+            label="Cancel"
+            elementProps={{ href: "../" }}
+          />
+          <ButtonPrimary
+            element="button"
+            elementProps={{ type: "submit" }}
+            label="Save changes"
+          />
         </div>
       </div>
       <InputWithHiddenLabel

@@ -1,6 +1,6 @@
 import HomeSummaryList from "@/components/lists/HomeSummaryList";
-import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
-import ButtonLinkSecondary from "@/components/buttons/ButtonLinkSecondary";
+import ButtonPrimary from "@/components/buttons/ButtonPrimary";
+import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 
 export default function Home() {
   return (
@@ -21,14 +21,16 @@ export default function Home() {
       </div>
 
       <div className="flex items-start gap-8">
-        <ButtonLinkPrimary
+        <ButtonPrimary
+          element="link"
           label="Start a project"
-          href="projects/new"
+          elementProps={{ href: "projects/new" }}
           additionalCSS="text-xl font-medium"
         />
-        <ButtonLinkSecondary
+        <ButtonSecondary
+          element="link"
           label="Create a persona"
-          href="personas/new"
+          elementProps={{ href: "personas/new" }}
           additionalCSS="text-xl font-medium"
         />
       </div>

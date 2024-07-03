@@ -3,8 +3,8 @@ import { getProjectById } from "@/app/api/endpoints";
 import CreatePersonaCard from "@/components/cards/CreatePersonaCard";
 import PersonaCard from "@/components/cards/PersonaCard";
 import Tag from "@/components/tags/Tag";
-import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
+import ButtonPrimary from "@/components/buttons/ButtonPrimary";
 
 export default async function Project({
   params,
@@ -27,7 +27,11 @@ export default async function Project({
         </div>
 
         <div className="flex justify-end gap-8">
-          <ButtonLinkPrimary label="Edit Project" href={"edit"} />
+          <ButtonPrimary
+            element="link"
+            label="Edit Project"
+            elementProps={{ href: "edit" }}
+          />
           <ButtonDeleteItem item="project" itemId={projectId} />
         </div>
       </div>

@@ -3,7 +3,7 @@ import { getPersonaById } from "@/app/api/endpoints";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
-import ButtonLinkPrimary from "@/components/buttons/ButtonLinkPrimary";
+import ButtonPrimary from "@/components/buttons/ButtonPrimary";
 import ProjectCard from "@/components/cards/ProjectCard";
 import PersonaSecondaryInfosBlock from "@/components/forms/common/PersonaSecondaryInfosBlock";
 import CreatePersonaForm from "@/components/forms/create/CreatePersonaForm";
@@ -84,7 +84,11 @@ export default async function Persona({
           <div className="flex justify-between gap-8 w-full">
             <h1 className="text-5xl font-extrabold">{persona.name}</h1>
             <div className="flex justify-end gap-8">
-              <ButtonLinkPrimary label="Edit Persona" href={"edit"} />
+              <ButtonPrimary
+                element="link"
+                label="Edit Persona"
+                elementProps={{ href: "edit" }}
+              />
               {persona.id && (
                 <ButtonDeleteItem item="persona" itemId={persona.id} />
               )}

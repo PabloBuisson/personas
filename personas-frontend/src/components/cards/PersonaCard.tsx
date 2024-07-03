@@ -46,9 +46,9 @@ export default function PersonaCard({
       </article>
       {onDelete && (
         <ButtonPrimary
+          element="button"
           label="Delete from project"
-          onClick={() => onDelete(persona.id)}
-          type="button"
+          elementProps={{ type: "button", onClick: () => onDelete(persona.id) }}
         />
       )}
     </li>

@@ -1,27 +1,48 @@
+import Link, { LinkProps } from "next/link";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
-interface ButtonSecondaryProps {
+type ButtonSecondaryButtonProps = {
+  element: "button";
   label: string;
-  callback?: () => {};
   additionalCSS?: string;
-}
+  elementProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+};
+
+type ButtonSecondaryLinkProps = {
+  element: "link";
+  label: string;
+  additionalCSS?: string;
+  elementProps?: LinkProps;
+};
+
+type ButtonSecondaryProps =
+  | ButtonSecondaryButtonProps
+  | ButtonSecondaryLinkProps;
 
 export default function ButtonSecondary({
+  element,
   label,
-  callback,
   additionalCSS,
-  ...props
-}: ButtonSecondaryProps &
-  DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >) {
-  let finalCSS = `bg-gray-50 border-[0.2em] border-gray-300 px-[1.6em] py-[1.2em] rounded-lg ${
+  elementProps,
+}: ButtonSecondaryProps) {
+  let finalCSS = `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg ${
     additionalCSS ?? ""
   }`;
 
+  if (element === "link") {
+    return (
+      <Link
+        {...elementProps}
+        className={finalCSS}
+        href={elementProps?.href ?? ""}
+      >
+        {label}
+      </Link>
+    );
+  }
+
   return (
-    <button {...props} className={finalCSS} onClick={callback}>
+    <button {...elementProps} className={finalCSS}>
       {label}
     </button>
   );

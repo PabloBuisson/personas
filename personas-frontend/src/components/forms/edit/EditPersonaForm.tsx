@@ -1,7 +1,6 @@
 "use client";
 
 import { PersonaDto } from "@/app/api";
-import ButtonLinkSecondary from "../../buttons/ButtonLinkSecondary";
 import InputWithHiddenLabel from "../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { useState } from "react";
@@ -16,6 +15,7 @@ import {
 import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHeader";
 import PersonaSecondaryInfosBlock from "../common/PersonaSecondaryInfosBlock";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
+import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
@@ -148,8 +148,16 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
               defaultValue={persona.name}
             />
             <div className="flex justify-end gap-8">
-              <ButtonLinkSecondary label="Cancel" href={"../"} />
-              <ButtonPrimary type="submit" label="Save changes" />
+              <ButtonSecondary
+                element="link"
+                label="Cancel"
+                elementProps={{ href: "../" }}
+              />
+              <ButtonPrimary
+                element="button"
+                elementProps={{ type: "submit" }}
+                label="Save changes"
+              />
             </div>
           </div>
           <InputWithHiddenLabel
