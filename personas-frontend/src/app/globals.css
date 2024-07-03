@@ -3,27 +3,44 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --hue-orange: 35deg;
+  --hue-dark-orange: 18deg;
+  --hue-purple: 238deg;
+  --hue-pink: 360deg;
+  --foreground-hsl: 36deg, 95%, 20%;
+  --orange-50: var(--hue-orange) 100% 90%;
+  --orange-100: var(--hue-orange) 100% 76%;
+  --orange-900: var(--hue-orange) 95% 20%;
+  --dark-orange-500: var(--hue-dark-orange) 94% 62%;
+  --dark-orange-600: var(--hue-dark-orange) 75% 50%;
+  --pink-100: var(--hue-pink) 100% 95%;
+  --pink-200: var(--hue-pink) 90% 80%;
+  --pink-500: var(--hue-pink) 99% 69%;
+  --pink-900: var(--hue-pink) 95% 20%;
+  --purple-100: var(--hue-purple) 60% 90%;
+  --purple-200: var(--hue-purple) 60% 85%;
+  --purple-600: var(--hue-purple) 40% 50%;
+  --purple-800: var(--hue-purple) 30% 30%;
+  --purple-900: var(--hue-purple) 95% 20%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-hsl: 36deg, 95%, 20%;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: hsl(var(--foreground-hsl));
+  background: #ffcc85; /* Fallback background color */
+  background: radial-gradient(
+    50.47% 99.8% at 50.47% 50%,
+    #ffcc85 0%,
+    #ffc26c 54.64%,
+    #ffb54c 100%
+  );
+  background: url("../assets/gggrain.svg");
+  background-size: cover;
 }
 
 @layer utilities {
