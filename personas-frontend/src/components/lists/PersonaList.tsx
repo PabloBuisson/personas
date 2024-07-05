@@ -8,7 +8,7 @@ export default async function PersonaList() {
   return (
     personas &&
     personas.length > 0 && (
-      <ul className="flex flex-wrap gap-8">
+      <ul className="flex flex-wrap gap-16">
         {personas.map((project: any) => (
           <PersonaCard key={project.id} persona={project} />
         ))}

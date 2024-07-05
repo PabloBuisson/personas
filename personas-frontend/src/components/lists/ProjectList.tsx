@@ -8,7 +8,7 @@ export default async function ProjectList({ tagId }: { tagId?: number }) {
   return (
     projects &&
     projects.length > 0 && (
-      <ul className="flex flex-wrap gap-8">
+      <ul className="flex flex-wrap gap-16">
         {projects.map((project: any) => (
           <ProjectCard key={project.id} project={project} />
         ))}
