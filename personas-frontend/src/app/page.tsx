@@ -9,7 +9,8 @@ export default function Home() {
         <section>
           <div className="flex flex-col gap-8">
             <h1 className="text-5xl font-extrabold">
-              Create and manage personas at ease.
+              Create and manage
+              <span className="text-darkorange-600"> personas </span> at ease.
             </h1>
             <p className="text-2xl max-w-[60ch]">
               Start a new project (ex. “New DnD campaign”) to manage your
