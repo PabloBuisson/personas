@@ -6,7 +6,6 @@ import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { useState } from "react";
 import { updatePersona } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
-import ProjectCard from "../../cards/ProjectCard";
 import PersonalInformationsRow from "../common/PersonalInformationsRow";
 import {
   getJobInfos,
@@ -16,6 +15,7 @@ import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHead
 import PersonaSecondaryInfosBlock from "../common/PersonaSecondaryInfosBlock";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
+import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
@@ -91,7 +91,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   }
 
   return (
-    <form action={onSubmit} className="flex flex-col gap-8">
+    <form action={onSubmit} className="flex flex-col gap-8 text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
           <div className="bg-gray-300 rounded-full w-36 h-36 flex justify-center items-center">
@@ -104,14 +104,14 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
           <div className="flex gap-4 justify-between mb-16">
             <button
               type="button"
-              className="text-3xl bg-white p-2 rounded"
+              className="text-3xl bg-orange-25 p-2 rounded"
               aria-label="Change avatar"
             >
               😎
             </button>
             <button
               type="button"
-              className="text-3xl bg-white p-2 rounded"
+              className="text-3xl bg-purple-25 p-2 rounded"
               aria-label="Change theme color"
             >
               🎨
@@ -142,12 +142,12 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
         <div className="basis-3/4 flex flex-col gap-8">
           <div className="flex justify-between items-start gap-8 w-full">
             <InputWithHiddenLabel
-              className="text-5xl font-extrabold bg-transparent"
+              className="text-5xl font-extrabold text-orange-900 bg-transparent"
               label="Project name"
               inputId="title"
               defaultValue={persona.name}
             />
-            <div className="flex justify-end gap-8">
+            <div className="flex justify-end items-start gap-8">
               <ButtonSecondary
                 element="link"
                 label="Cancel"
@@ -198,17 +198,11 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
         value={persona.brands}
         name="brands"
       />
-      {updatedProject && (
-        <section>
-          <ul className="flex flex-wrap gap-16">
-            <ProjectCard
-              key={persona.id}
-              project={updatedProject}
-              onDelete={() => onDeleteProject()}
-            />
-          </ul>
-        </section>
-      )}
+      <PersonaSectionLinkedProject
+        onDelete={onDeleteProject}
+        mode="edit"
+        project={updatedProject}
+      />
     </form>
   );
 }

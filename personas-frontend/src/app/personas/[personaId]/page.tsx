@@ -1,10 +1,10 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
+import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
-import ProjectCard from "@/components/cards/ProjectCard";
 import PersonaSecondaryInfosBlock from "@/components/forms/common/PersonaSecondaryInfosBlock";
 import CreatePersonaForm from "@/components/forms/create/CreatePersonaForm";
 
@@ -31,7 +31,7 @@ export default async function Persona({
   let persona: PersonaDto = await getPersonaById(personaId);
 
   return (
-    <main className="p-16 flex flex-col gap-8 w-full">
+    <main className="p-16 flex flex-col gap-8 w-full text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
           <div className="bg-gray-300 rounded-full w-36 h-36 flex justify-center items-center">
@@ -82,7 +82,9 @@ export default async function Persona({
 
         <div className="basis-3/4 flex flex-col gap-8">
           <div className="flex justify-between gap-8 w-full">
-            <h1 className="text-5xl font-extrabold">{persona.name}</h1>
+            <h1 className="text-5xl font-extrabold text-orange-900">
+              {persona.name}
+            </h1>
             <div className="flex justify-end gap-8">
               <ButtonPrimary
                 element="link"
@@ -101,7 +103,6 @@ export default async function Persona({
           <PersonalInformationsBlockView persona={persona} />
         </div>
       </div>
-
       <PersonaSectionMultiInfos
         mode="view"
         title="Culture"
@@ -112,14 +113,7 @@ export default async function Persona({
         title="Emotions"
         entity={persona.emotions}
       />
-
-      {persona.project && (
-        <section>
-          <ul className="flex flex-wrap gap-16">
-            <ProjectCard key={persona.id} project={persona.project} />
-          </ul>
-        </section>
-      )}
+      <PersonaSectionLinkedProject mode="view" project={persona.project} />
     </main>
   );
 }
