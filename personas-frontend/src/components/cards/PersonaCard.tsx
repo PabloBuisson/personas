@@ -12,21 +12,33 @@ export default function PersonaCard({
 }) {
   const cardContent = (
     <>
-      <div className="absolute flex justify-center items-center top-0 translate-y-[-50%] left-1/2 translate-x-[-50%] bg-gray-50 w-16 h-16 rounded-full border-[0.1em] border-gray-300">
+      <div className="absolute flex justify-center items-center top-0 translate-y-[-25%] left-1/2 translate-x-[-50%] bg-pink-100 w-16 h-16 rounded-full border-[0.125em] border-pink-500">
         {persona.image && (
           <span className="text-4xl" role="image">
             {persona.image}
           </span>
         )}
       </div>
-      <div className="flex flex-col gap-4 px-4 py-3 border-[0.1em] border-white">
+      <div className="flex flex-col gap-4 pl-8 pr-10 pt-6 pb-10 border-[0.2em] border-pink-100 border-dotted outline outline-[0.125em] outline-pink-100 outline-offset-[-0.75rem]">
         <h2 className="text-xl font-bold mt-6">
           {persona.name ?? "Untitled project"}
         </h2>
-        <p>{persona.age ?? "Age unknown"}</p>
-        <p>{persona.job?.title ?? "Job unknown"}</p>
-        <p>{persona.location ?? "Location unknown"}</p>
-        <p>{persona.family ?? "Family situation unknown"}</p>
+        <p className="flex items-center gap-2">
+          <span className="text-pink-100">♦</span>
+          {persona.age ?? "Age unknown"}
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="text-pink-100">♦</span>
+          {persona.job?.title ?? "Job unknown"}
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="text-pink-100">♦</span>
+          {persona.location ?? "Location unknown"}
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="text-pink-100">♦</span>
+          {persona.family ?? "Family situation unknown"}
+        </p>
       </div>
     </>
   );
@@ -36,9 +48,9 @@ export default function PersonaCard({
       className="text-base font-medium flex flex-col justify-center gap-4"
       key={persona.id}
     >
-      <article className="flex justify-center items-center h-full w-full bg-gray-300 border-[0.2em] border-gray-300 rounded-lg">
+      <article className="flex justify-center items-center h-full w-full bg-pink-500 text-pink-900 noisy-background">
         {!onDelete && (
-          <Link className="relative p-1" href={`/personas/${persona.id}`}>
+          <Link className="relative p-2" href={`/personas/${persona.id}`}>
             {cardContent}
           </Link>
         )}
