@@ -17,8 +17,10 @@ const config: Config = {
       gray: colors.gray,
       red: colors.red,
       orange: {
+        25: "hsl(var(--orange-25))",
         50: "hsl(var(--orange-50))",
         100: "hsl(var(--orange-100))",
+        200: "hsl(var(--orange-200))",
         900: "hsl(var(--orange-900))",
       },
       darkorange: {
@@ -26,15 +28,17 @@ const config: Config = {
         600: "hsl(var(--dark-orange-600))",
       },
       pink: {
-        100: "hs(var(--pink-100))",
+        100: "hsl(var(--pink-100))",
         200: "hsl(var(--pink-200))",
         500: "hsl(var(--pink-500))",
         900: "hsl(var(--pink-900))",
       },
       purple: {
+        25: "hsl(var(--purple-25))",
+        50: "hsl(var(--purple-50))",
         100: "hsl(var(--purple-100))",
-        200: "hs(var(--purple-200))",
-        600: "hs(var(--purple-600))",
+        200: "hsl(var(--purple-200))",
+        600: "hsl(var(--purple-600))",
         800: "hsl(var(--purple-800))",
         900: "hsl(var(--purple-900))",
       },
