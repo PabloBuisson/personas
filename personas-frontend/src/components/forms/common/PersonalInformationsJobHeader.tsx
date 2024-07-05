@@ -10,7 +10,7 @@ export default function PersonalInformationsJobHeader({
   if (mode === "edit") {
     return (
       <div className="flex w-full">
-        <div className="flex gap-2 bg-gray-500 text-white p-2 pr-6">
+        <div className="flex gap-2 bg-purple-200 text-purple-800 p-2 pr-6">
           <span aria-hidden className="text-xl">
             💼
           </span>
@@ -19,7 +19,7 @@ export default function PersonalInformationsJobHeader({
           </label>
         </div>
         <input
-          className="text-xl px-4"
+          className="text-xl px-4 grow"
           type="text"
           id="job-title"
           name="job-title"
@@ -31,13 +31,13 @@ export default function PersonalInformationsJobHeader({
 
   return (
     <div className="flex w-full">
-      <div className="flex gap-2 bg-gray-500 text-white p-2 pr-6">
+      <div className="flex gap-2 bg-purple-200 text-purple-800 p-2 pr-6">
         <span aria-hidden className="text-xl">
           💼
         </span>
         <h4 className="text-xl font-medium">Job title</h4>
       </div>
-      <div className="bg-white flex justify-center items-center">
+      <div className="bg-white flex justify-start items-center grow">
         <p className="text-xl px-4">{persona.job?.title}</p>
       </div>
     </div>

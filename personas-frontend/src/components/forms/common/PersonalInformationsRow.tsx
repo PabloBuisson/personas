@@ -12,8 +12,8 @@ export type PersonalInformationsCell = {
 };
 
 const classesByOrder: Record<number, string> = {
-  1: "pr-8 basis-1/12 border-r-2 border-dotted",
-  2: "px-8 border-r-2 border-dotted",
+  1: "pr-8 basis-1/12 border-purple-100 border-r-2 border-dotted",
+  2: "px-8 border-r-2 border-purple-100 border-dotted",
   3: "px-8 basis-1/2",
 };
 

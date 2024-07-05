@@ -36,11 +36,13 @@ export default function PersonaSectionMultiInfos(
       <div className="flex items-center justify-start gap-4">
         <span
           aria-hidden
-          className="text-5xl font-semibold text-gray-400 flex items-center justify-center"
+          className="text-5xl font-semibold text-darkorange-500 flex items-center justify-center"
         >
           +
         </span>
-        <h2 className="text-3xl font-semibold">{infos.title}</h2>
+        <h2 className="text-3xl text-orange-900 font-semibold">
+          {infos.title}
+        </h2>
       </div>
       <div className="flex flex-wrap gap-x-8 gap-y-20">
         {infosData.map((info) =>
