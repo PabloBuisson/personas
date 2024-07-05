@@ -40,7 +40,7 @@ export default function InputWithHiddenLabel({
           name={inputId}
         />
       )}
-      <p>Error message</p>
+      {/* <p>Error message</p> */}
     </div>
   );
 }

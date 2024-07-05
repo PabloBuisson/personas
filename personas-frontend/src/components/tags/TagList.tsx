@@ -8,7 +8,7 @@ export default async function TagList() {
   return (
     tags &&
     tags.length > 0 && (
-      <ul className="flex flex-wrap gap-8">
+      <ul className="flex flex-wrap gap-4">
         {tags.map((tag) => (
           <Tag
             key={tag.id}

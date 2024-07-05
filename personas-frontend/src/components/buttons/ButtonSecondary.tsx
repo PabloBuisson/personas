@@ -1,5 +1,5 @@
 import Link, { LinkProps } from "next/link";
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { ButtonHTMLAttributes } from "react";
 
 type ButtonSecondaryButtonProps = {
   element: "button";
@@ -25,7 +25,7 @@ export default function ButtonSecondary({
   additionalCSS,
   elementProps,
 }: ButtonSecondaryProps) {
-  let finalCSS = `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg ${
+  let finalCSS = `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap ${
     additionalCSS ?? ""
   }`;
 

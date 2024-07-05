@@ -23,15 +23,19 @@ export default function ButtonPrimary({
   element,
   label,
   additionalCSS,
-  elementProps
+  elementProps,
 }: ButtonPrimaryProps) {
-  let finalCSS = `bg-darkorange-500 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg ${
+  let finalCSS = `bg-darkorange-500 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap ${
     additionalCSS ?? ""
   }`;
 
   if (element === "link") {
     return (
-      <Link {...elementProps} className={finalCSS} href={elementProps?.href ?? ""}>
+      <Link
+        {...elementProps}
+        className={finalCSS}
+        href={elementProps?.href ?? ""}
+      >
         {label}
       </Link>
     );
