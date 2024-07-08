@@ -5,6 +5,7 @@ import {
 } from "../forms/common/PersonalInformationsSettings";
 import { PersonalInformationsCell } from "../forms/common/PersonalInformationsRow";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
+import PersonaSectionMultiInfosTitle from "./PersonaSectionMultiInfosTitle";
 
 type PersonaSectionMultiInfosProps = {
   mode: "view" | "edit";
@@ -34,15 +35,7 @@ export default function PersonaSectionMultiInfos(
   return (
     <section className="flex flex-col gap-20">
       <div className="flex items-center justify-start gap-4">
-        <span
-          aria-hidden
-          className="text-5xl font-semibold text-darkorange-500 flex items-center justify-center"
-        >
-          +
-        </span>
-        <h2 className="text-3xl text-orange-900 font-semibold">
-          {infos.title}
-        </h2>
+        <PersonaSectionMultiInfosTitle title={infos.title} />
       </div>
       <div className="flex flex-wrap gap-x-8 gap-y-20">
         {infosData.map((info) =>

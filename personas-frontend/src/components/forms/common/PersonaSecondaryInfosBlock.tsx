@@ -16,7 +16,7 @@ export default function PersonaSecondaryInfosBlock(
       <section
         key={props.key}
         className={`flex flex-col gap-2 ${
-          props.isStandalone ? "w-full" : "w-1/4"
+          props.isStandalone ? "w-full" : "w-1/3"
         }`}
       >
         <header className="relative w-full bg-white p-4">
@@ -36,7 +36,7 @@ export default function PersonaSecondaryInfosBlock(
           <textarea
             id={props.name}
             name={props.name}
-            className="w-full h-32"
+            className="w-full h-[20ch]"
             defaultValue={props.value}
           />
         </div>
@@ -48,7 +48,7 @@ export default function PersonaSecondaryInfosBlock(
     <section
       key={props.key}
       className={`flex flex-col gap-2 ${
-        props.isStandalone ? "w-full" : "w-1/4"
+        props.isStandalone ? "w-full" : "w-1/3"
       }`}
     >
       <header className="relative w-full bg-white p-4">
@@ -57,7 +57,7 @@ export default function PersonaSecondaryInfosBlock(
         </div>
         <h1 className="text-2xl font-semibold">{props.label}</h1>
       </header>
-      <div className="w-full bg-white p-4 rounded-b">
+      <div className="w-full bg-white p-4 rounded-b h-[20ch]">
         <p>{props.value}</p>
       </div>
     </section>

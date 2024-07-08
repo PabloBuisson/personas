@@ -1,7 +1,9 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
+import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
+import PersonaSectionMultiInfosTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
@@ -34,49 +36,51 @@ export default async function Persona({
     <main className="p-16 flex flex-col gap-8 w-full text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
-          <div className="bg-gray-300 rounded-full w-36 h-36 flex justify-center items-center">
-            {persona.image && (
-              <span className="text-6xl" role="image">
-                {persona.image}
-              </span>
-            )}
-          </div>
-          <div className="flex gap-4 justify-between mb-16">
-            <button
-              type="button"
-              className="text-3xl bg-white p-2 rounded"
-              aria-label="Change avatar"
-            >
-              😎
-            </button>
-            <button
-              type="button"
-              className="text-3xl bg-white p-2 rounded"
-              aria-label="Change theme color"
-            >
-              🎨
-            </button>
-          </div>
-
-          <div className="flex flex-col gap-20 w-full">
-            <PersonaSecondaryInfosBlock
-              key="education"
+          <PersonaSectionAvatar image={persona.image} />
+          <div className="flex flex-col gap-[7.7rem] w-full">
+            <PersonaSectionLinkedProject
               mode="view"
-              label="Education"
-              icon="🎓"
-              value={persona.education}
-              name="education"
-              isStandalone={true}
+              project={persona.project}
             />
-            <PersonaSecondaryInfosBlock
-              key="personality"
-              mode="view"
-              label="Personality"
-              icon="🧠"
-              value={persona.personalityTraits}
-              name="personality"
-              isStandalone={true}
-            />
+            <div className="flex flex-col gap-20 w-full">
+              <PersonaSectionMultiInfosTitle title="Characteristics" />
+              <PersonaSecondaryInfosBlock
+                key="education"
+                mode="view"
+                label="Education"
+                icon="🎓"
+                value={persona.education}
+                name="education"
+                isStandalone={true}
+              />
+              <PersonaSecondaryInfosBlock
+                key="personality"
+                mode="view"
+                label="Personality"
+                icon="🧠"
+                value={persona.personalityTraits}
+                name="personality"
+                isStandalone={true}
+              />
+              <PersonaSecondaryInfosBlock
+                key="idols"
+                mode="view"
+                label="Idols"
+                icon="🎤"
+                value={persona.idols}
+                name="idols"
+                isStandalone={true}
+              />
+              <PersonaSecondaryInfosBlock
+                key="brands"
+                mode="view"
+                label="Brands"
+                icon="🏷️"
+                value={persona.brands}
+                name="brands"
+                isStandalone={true}
+              />
+            </div>
           </div>
         </div>
 
@@ -99,21 +103,19 @@ export default async function Persona({
           <p className="text-xl font-medium bg-white p-4 rounded">
             {persona.story}
           </p>
-
           <PersonalInformationsBlockView persona={persona} />
+          <PersonaSectionMultiInfos
+            mode="view"
+            title="Culture"
+            entity={persona.culture}
+          />
+          <PersonaSectionMultiInfos
+            mode="view"
+            title="Emotions"
+            entity={persona.emotions}
+          />
         </div>
       </div>
-      <PersonaSectionMultiInfos
-        mode="view"
-        title="Culture"
-        entity={persona.culture}
-      />
-      <PersonaSectionMultiInfos
-        mode="view"
-        title="Emotions"
-        entity={persona.emotions}
-      />
-      <PersonaSectionLinkedProject mode="view" project={persona.project} />
     </main>
   );
 }
