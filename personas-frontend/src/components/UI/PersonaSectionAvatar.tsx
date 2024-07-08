@@ -1,4 +1,10 @@
-export default function PersonaSectionAvatar({ image }: { image: string | undefined }) {
+import { Icon } from "@iconify-icon/react";
+
+export default function PersonaSectionAvatar({
+  image,
+}: {
+  image: string | undefined;
+}) {
   return (
     <>
       <div className="bg-white rounded-full w-36 h-36 flex justify-center items-center">
@@ -11,17 +17,17 @@ export default function PersonaSectionAvatar({ image }: { image: string | undefi
       <div className="flex gap-4 justify-between mb-8">
         <button
           type="button"
-          className="text-3xl bg-orange-25 p-2 rounded"
+          className="text-4xl bg-orange-25 py-2 px-3 rounded text-darkorange-600 flex justify-center"
           aria-label="Change avatar"
         >
-          😎
+          <Icon icon="mdi:face-man-outline" />
         </button>
         <button
           type="button"
-          className="text-3xl bg-purple-25 p-2 rounded"
+          className="text-4xl bg-purple-25 py-2 px-3 rounded text-purple-600 flex justify-center items-center"
           aria-label="Change theme color"
         >
-          🎨
+          <Icon icon="mdi:palette-outline" />
         </button>
       </div>
     </>

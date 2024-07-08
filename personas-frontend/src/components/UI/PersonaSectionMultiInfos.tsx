@@ -3,9 +3,9 @@ import {
   getCultureInfos,
   getEmotionsInfos,
 } from "../forms/common/PersonalInformationsSettings";
-import { PersonalInformationsCell } from "../forms/common/PersonalInformationsRow";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
 import PersonaSectionMultiInfosTitle from "./PersonaSectionMultiInfosTitle";
+import { PersonalInformationsCell } from "../forms/common/personal-informations-cell";
 
 type PersonaSectionMultiInfosProps = {
   mode: "view" | "edit";
@@ -38,16 +38,16 @@ export default function PersonaSectionMultiInfos(
         <PersonaSectionMultiInfosTitle title={infos.title} />
       </div>
       <div className="flex flex-wrap gap-x-8 gap-y-20">
-        {infosData.map((info) =>
-          PersonaSecondaryInfosBlock({
-            mode: infos.mode,
-            label: info.label,
-            name: info.name,
-            value: info.value,
-            icon: info.icon,
-            key: info.name,
-          })
-        )}
+        {infosData.map((info) => (
+          <PersonaSecondaryInfosBlock
+            mode={infos.mode}
+            label={info.label}
+            name={info.name}
+            value={info.value}
+            icon={info.icon}
+            key={info.name}
+          />
+        ))}
       </div>
     </section>
   );

@@ -18,6 +18,7 @@ import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 import PersonaSectionMultiInfosTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
+import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 
 export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
@@ -105,42 +106,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
             />
             <div className="flex flex-col gap-20 w-full">
               <PersonaSectionMultiInfosTitle title="Characteristics" />
-              <PersonaSecondaryInfosBlock
-                key="education"
-                mode="edit"
-                label="Education"
-                icon="🎓"
-                value={persona.education}
-                name="education"
-                isStandalone={true}
-              />
-              <PersonaSecondaryInfosBlock
-                key="personality"
-                mode="edit"
-                label="Personality"
-                icon="🧠"
-                value={persona.personalityTraits}
-                name="personality"
-                isStandalone={true}
-              />
-              <PersonaSecondaryInfosBlock
-                key="idols"
-                mode="edit"
-                label="Idols"
-                icon="🎤"
-                value={persona.idols}
-                name="idols"
-                isStandalone={true}
-              />
-              <PersonaSecondaryInfosBlock
-                key="brands"
-                mode="edit"
-                label="Brands"
-                icon="🏷️"
-                value={persona.brands}
-                name="brands"
-                isStandalone={true}
-              />
+              <PersonaSectionCharacteristics mode="edit" persona={persona} />
             </div>
           </div>
         </div>

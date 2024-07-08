@@ -1,14 +1,9 @@
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { PersonalInformationsCell } from "./personal-informations-cell";
+
 export type PersonalInformationsRowProps = {
   cells: PersonalInformationsCell[];
   mode: "edit" | "view";
-};
-
-export type PersonalInformationsCell = {
-  order: number;
-  icon: string;
-  label: string;
-  name: string;
-  value: string | number | undefined;
 };
 
 const classesByOrder: Record<number, string> = {
@@ -29,7 +24,7 @@ export default function PersonalInformationsRow(
               className={`flex flex-col gap-2 ${classesByOrder[cell.order]}`}
               key={cell.name}
             >
-              <div>{cell.icon}</div>
+              <Icon icon={cell.icon} className="text-2xl text-pink-500" />
               <label className="text-xl font-medium" htmlFor={cell.name}>
                 {cell.label}
               </label>
@@ -55,7 +50,7 @@ export default function PersonalInformationsRow(
             className={`flex flex-col gap-2 ${classesByOrder[cell.order]}`}
             key={cell.name}
           >
-            <div>{cell.icon}</div>
+            <Icon icon={cell.icon} className="text-2xl text-pink-500" />
             <h4 className="text-xl font-medium">{cell.label}</h4>
             <p className="text-xl">{cell.value}</p>
           </li>

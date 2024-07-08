@@ -1,6 +1,7 @@
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
+import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import PersonaSectionMultiInfosTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
@@ -44,42 +45,7 @@ export default async function Persona({
             />
             <div className="flex flex-col gap-20 w-full">
               <PersonaSectionMultiInfosTitle title="Characteristics" />
-              <PersonaSecondaryInfosBlock
-                key="education"
-                mode="view"
-                label="Education"
-                icon="🎓"
-                value={persona.education}
-                name="education"
-                isStandalone={true}
-              />
-              <PersonaSecondaryInfosBlock
-                key="personality"
-                mode="view"
-                label="Personality"
-                icon="🧠"
-                value={persona.personalityTraits}
-                name="personality"
-                isStandalone={true}
-              />
-              <PersonaSecondaryInfosBlock
-                key="idols"
-                mode="view"
-                label="Idols"
-                icon="🎤"
-                value={persona.idols}
-                name="idols"
-                isStandalone={true}
-              />
-              <PersonaSecondaryInfosBlock
-                key="brands"
-                mode="view"
-                label="Brands"
-                icon="🏷️"
-                value={persona.brands}
-                name="brands"
-                isStandalone={true}
-              />
+              <PersonaSectionCharacteristics mode="view" persona={persona} />
             </div>
           </div>
         </div>
