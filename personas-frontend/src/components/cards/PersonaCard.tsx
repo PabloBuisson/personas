@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { PersonaDto } from "@/app/api";
 import ButtonPrimary from "../buttons/ButtonPrimary";
+import AppIcon from "../UI/AppIcon";
 
 export default function PersonaCard({
   persona,
@@ -23,22 +24,31 @@ export default function PersonaCard({
         <h2 className="text-xl font-bold mt-6">
           {persona.name ?? "Untitled project"}
         </h2>
-        <p className="flex items-center gap-2">
-          <span className="text-pink-100">♦</span>
-          {persona.age ?? "Age unknown"}
-        </p>
-        <p className="flex items-center gap-2">
-          <span className="text-pink-100">♦</span>
-          {persona.job?.title ?? "Job unknown"}
-        </p>
-        <p className="flex items-center gap-2">
-          <span className="text-pink-100">♦</span>
-          {persona.location ?? "Location unknown"}
-        </p>
-        <p className="flex items-center gap-2">
-          <span className="text-pink-100">♦</span>
-          {persona.family ?? "Family situation unknown"}
-        </p>
+        <div className="flex items-start gap-3">
+          <AppIcon
+            icon="mdi:cake-variant-outline"
+            className="text-pink-100 text-xl"
+          />
+          <p>{persona.age ?? "Age unknown"}</p>
+        </div>
+        <div className="flex items-start gap-3">
+          <AppIcon icon="mdi:work-outline" className="text-pink-100 text-xl" />
+          <p>{persona.job?.title ?? "Job unknown"}</p>
+        </div>
+        <div className="flex items-start gap-3">
+          <AppIcon
+            icon="mdi:location-radius-outline"
+            className="text-pink-100 text-xl"
+          />
+          <p>{persona.location ?? "Location unknown"}</p>
+        </div>
+        <div className="flex items-start gap-3">
+          <AppIcon
+            icon="mdi:family-room-outline"
+            className="text-pink-100 text-xl"
+          />
+          <p>{persona.family ?? "Family situation unknown"}</p>
+        </div>
       </div>
     </>
   );

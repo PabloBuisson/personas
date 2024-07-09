@@ -41,7 +41,7 @@ export default function ProjectCard({
       className="text-base font-medium flex flex-col justify-center gap-4"
       key={project.id}
     >
-      <article className="flex justify-center items-center h-full w-full text-purple-900 border-[0.15em] border-white relative">
+      <article className="flex justify-center items-center h-full w-full text-purple-800 border-[0.15em] border-white relative">
         <div className="bg-transparent border-transparent border-r-white border-[0.15em] w-[calc(2rem+0.4em)] h-[calc(2rem+0.7em)] absolute top-[calc(-1rem-0.35em)] left-[calc(-1rem-0.2em)] rotate-45"></div>
         <div className="bg-transparent border-transparent border-l-white border-[0.15em] w-[calc(2rem+0.4em)] h-[calc(2rem+0.7em)] absolute top-[calc(-1rem-0.35em)] right-[calc(-1rem-0.2em)] rotate-[-45deg]"></div>
         <div className="bg-transparent border-transparent border-r-white border-[0.15em] w-[calc(2rem+0.4em)] h-[calc(2rem+0.7em)] absolute bottom-[calc(-1rem-0.35em)] left-[calc(-1rem-0.2em)] rotate-[-45deg]"></div>
@@ -52,7 +52,10 @@ export default function ProjectCard({
         <div className="bg-white w-[0.2em] h-[3.2rem] absolute bottom-[-0.6rem] left-[0.9rem] rotate-[-45deg]"></div> */}
         {/* <div className="-z-40 absolute top-[-0.2em] left-[-0.2em] w-[calc(100%+0.4em)] h-[calc(100%+0.4em)] bg-white [clip-path:polygon(2rem_0%,_calc(100%-2rem)_0%,_100%_2rem,_100%_calc(100%-2rem),_calc(100%-2rem)_100%,_2rem_100%,_0%_calc(100%-2rem),_0%_2rem)] before:block before:relative before:top-[0.1em] before:left-[0.1em] before:[clip-path:inherit] before:bg-purple-200 before:w-[calc(100%-0.2em)] before:h-[calc(100%-0.2em)]"></div> */}
         {!onDelete && (
-          <Link className="relative p-1 h-full" href={`/projects/${project.id}`}>
+          <Link
+            className="relative p-1 h-full"
+            href={`/projects/${project.id}`}
+          >
             {cardContent}
           </Link>
         )}
