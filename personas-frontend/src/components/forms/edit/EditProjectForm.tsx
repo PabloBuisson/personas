@@ -10,6 +10,7 @@ import InputWithHiddenLabel from "./../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import PersonaCard from "../../cards/PersonaCard";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
+import InputEmoji from "../common/InputEmoji";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);
@@ -69,12 +70,8 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
   return (
     <form action={onSubmit} className="flex flex-col gap-8">
       <div className="flex justify-between items-start gap-16">
-        <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
-          {project.icon && (
-            <span className="text-6xl" role="image">
-              {project.icon}
-            </span>
-          )}
+        <div className="bg-gray-300 relative rounded-full w-28 h-28 flex justify-center items-center">
+          <InputEmoji name="icon" value={project.icon} />
         </div>
 
         <div className="flex justify-end gap-8">

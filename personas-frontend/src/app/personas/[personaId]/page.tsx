@@ -37,7 +37,7 @@ export default async function Persona({
     <main className="p-16 flex flex-col gap-8 w-full text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
-          <PersonaSectionAvatar image={persona.image} />
+          <PersonaSectionAvatar mode="view" image={persona.image} />
           <div className="flex flex-col gap-[7.7rem] w-full">
             <PersonaSectionLinkedProject
               mode="view"

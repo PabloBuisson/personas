@@ -97,7 +97,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
     <form action={onSubmit} className="flex flex-col gap-8 text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
-          <PersonaSectionAvatar image={persona.image} />
+          <PersonaSectionAvatar mode="edit" image={persona.image} />
           <div className="flex flex-col gap-10 w-full">
             <PersonaSectionLinkedProject
               onDelete={onDeleteProject}

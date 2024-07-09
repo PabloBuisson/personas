@@ -1,6 +1,7 @@
 import InputWithLabel from "../common/InputWithLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { handleCreatePersona } from "@/app/actions/persona-actions";
+import InputEmoji from "../common/InputEmoji";
 
 export default function CreatePersonaForm({
   projectId,
@@ -12,17 +13,7 @@ export default function CreatePersonaForm({
   return (
     <form action={createPersona} className="flex flex-col gap-8">
       <section className="bg-gray-300 relative flex justify-center items-center rounded-full w-28 h-28">
-        <input
-          name="icon"
-          className="min-w-0 text-6xl bg-transparent p-0 text-center cursor-default focus-visible:outline-none"
-          size={1}
-          type="text"
-          value="💡"
-          readOnly
-        />
-        <button type="button" aria-label="Change emoticon">
-          <div className="bg-gray-50 absolute bottom-0 right-0 translate-x-[50%] rounded-full w-12 h-12"></div>
-        </button>
+        <InputEmoji name="icon" value="😎" />
       </section>
       <section className="flex flex-col gap-8">
         <InputWithLabel label="Name of the persona" inputId="name" />
