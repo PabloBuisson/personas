@@ -1,11 +1,11 @@
-import { Icon, IconifyIcon } from "@iconify-icon/react/dist/iconify.mjs";
+import AppIcon, { AppIconNameProps } from "@/components/UI/AppIcon";
 
 type PersonaSecondaryInfosBlockProps = {
   key: string;
   mode: "edit" | "view";
   label: string;
   name: string | undefined;
-  icon: string | IconifyIcon;
+  icon: AppIconNameProps;
   value: string | undefined;
   isStandalone?: boolean;
 };
@@ -23,7 +23,7 @@ export default function PersonaSecondaryInfosBlock(
       >
         <header className="relative w-full bg-white p-4">
           <div className="absolute flex justify-center items-center left-0 top-0 text-3xl text-purple-200 bg-white translate-y-[-100%] py-2 px-3 rounded-t">
-            <Icon icon={props.icon} />
+            <AppIcon icon={props.icon} />
           </div>
           <label htmlFor={props.name} className="text-2xl font-semibold">
             {props.label}
@@ -55,7 +55,7 @@ export default function PersonaSecondaryInfosBlock(
     >
       <header className="relative w-full bg-white p-4">
         <div className="absolute flex justify-center items-center left-0 top-0 text-3xl text-purple-200 bg-white translate-y-[-100%] py-2 px-3 rounded-t">
-          <Icon icon={props.icon} />
+          <AppIcon icon={props.icon} />
         </div>
         <h1 className="text-2xl font-semibold">{props.label}</h1>
       </header>

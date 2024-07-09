@@ -1,4 +1,4 @@
-import { Icon } from "@iconify-icon/react";
+import AppIcon from "./AppIcon";
 
 export default function PersonaSectionAvatar({
   image,
@@ -20,14 +20,14 @@ export default function PersonaSectionAvatar({
           className="text-4xl bg-orange-25 py-2 px-3 rounded text-darkorange-600 flex justify-center"
           aria-label="Change avatar"
         >
-          <Icon icon="mdi:face-man-outline" />
+          <AppIcon icon="mdi:face-man-outline" />
         </button>
         <button
           type="button"
           className="text-4xl bg-purple-25 py-2 px-3 rounded text-purple-600 flex justify-center items-center"
           aria-label="Change theme color"
         >
-          <Icon icon="mdi:palette-outline" />
+          <AppIcon icon="mdi:palette-outline" />
         </button>
       </div>
     </>

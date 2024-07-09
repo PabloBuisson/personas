@@ -1,5 +1,5 @@
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { PersonalInformationsCell } from "./personal-informations-cell";
+import AppIcon from "@/components/UI/AppIcon";
 
 export type PersonalInformationsRowProps = {
   cells: PersonalInformationsCell[];
@@ -24,7 +24,7 @@ export default function PersonalInformationsRow(
               className={`flex flex-col gap-2 ${classesByOrder[cell.order]}`}
               key={cell.name}
             >
-              <Icon icon={cell.icon} className="text-2xl text-pink-500" />
+              <AppIcon icon={cell.icon} className="text-2xl text-pink-500" />
               <label className="text-xl font-medium" htmlFor={cell.name}>
                 {cell.label}
               </label>
@@ -50,7 +50,7 @@ export default function PersonalInformationsRow(
             className={`flex flex-col gap-2 ${classesByOrder[cell.order]}`}
             key={cell.name}
           >
-            <Icon icon={cell.icon} className="text-2xl text-pink-500" />
+            <AppIcon icon={cell.icon} className="text-2xl text-pink-500" />
             <h4 className="text-xl font-medium">{cell.label}</h4>
             <p className="text-xl">{cell.value}</p>
           </li>

@@ -1,4 +1,5 @@
 import { PersonaDto } from "@/app/api";
+import AppIcon from "@/components/UI/AppIcon";
 
 export default function PersonalInformationsJobHeader({
   persona,
@@ -10,10 +11,8 @@ export default function PersonalInformationsJobHeader({
   if (mode === "edit") {
     return (
       <div className="flex w-full">
-        <div className="flex gap-2 bg-purple-200 text-purple-800 p-2 pr-6">
-          <span aria-hidden className="text-xl">
-            💼
-          </span>
+        <div className="flex gap-4 bg-purple-200 text-purple-800 py-2 pl-4 pr-6 items-center">
+          <AppIcon icon="mdi:work" className="text-2xl text-purple-50" />
           <label className="text-xl font-medium" htmlFor="job-title">
             Job title
           </label>
@@ -31,10 +30,8 @@ export default function PersonalInformationsJobHeader({
 
   return (
     <div className="flex w-full">
-      <div className="flex gap-2 bg-purple-200 text-purple-800 p-2 pr-6">
-        <span aria-hidden className="text-xl">
-          💼
-        </span>
+      <div className="flex gap-4 bg-purple-200 text-purple-800 py-2 pl-4 pr-6 items-center">
+        <AppIcon icon="mdi:work" className="text-2xl text-purple-50" />
         <h4 className="text-xl font-medium">Job title</h4>
       </div>
       <div className="bg-white flex justify-start items-center grow">

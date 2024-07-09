@@ -62,6 +62,13 @@ body {
   background-size: cover;
 }
 
+/* To avoid layout shift */
+iconify-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
