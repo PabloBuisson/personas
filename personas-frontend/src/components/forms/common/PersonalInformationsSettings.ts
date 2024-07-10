@@ -195,3 +195,36 @@ export function getEmotionsInfos(
     },
   ];
 }
+
+// find the length of files in the directory withe the File API
+// export function getAvatarsLength(): number {
+//   const fs = require("fs");
+//   const path = "../../../assets/avatars";
+
+//   return fs.readdirSync(path).length ?? 0;
+// }
+
+type AvatarInfos = {
+  key: number;
+  name: string;
+  description: string;
+  path: string;
+};
+
+export function getAvatarsInfos(): AvatarInfos[] {
+  const avatarsCount = 56;
+  const avatarsInfos: AvatarInfos[] = [];
+
+  // if (avatarsCount === 0) return avatarsInfos;
+
+  for (let i = 0; i < avatarsCount; i++) {
+    avatarsInfos.push({
+      key: i,
+      name: `avatar-${i}`,
+      description: `avatar-${i}`, // TODO add a description of each avatar
+      path: `/avatars/avatar-${i}.svg`,
+    });
+  }
+
+  return avatarsInfos;
+}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { PersonaDto } from "@/app/api";
 import ButtonPrimary from "../buttons/ButtonPrimary";
@@ -13,11 +14,14 @@ export default function PersonaCard({
 }) {
   const cardContent = (
     <>
-      <div className="absolute flex justify-center items-center top-0 translate-y-[-25%] left-1/2 translate-x-[-50%] bg-pink-100 w-16 h-16 rounded-full border-[0.125em] border-pink-500">
+      <div className="absolute flex justify-center items-center top-0 translate-y-[-25%] left-1/2 translate-x-[-50%] bg-pink-100 w-16 h-16 rounded-full border-[0.125em] border-pink-500 overflow-hidden">
         {persona.image && (
-          <span className="text-4xl" role="image">
-            {persona.image}
-          </span>
+          <Image
+            src={`/avatars/${persona.image}.svg`}
+            priority={true}
+            fill={true}
+            alt="Picture of the avatar"
+          />
         )}
       </div>
       <div className="flex flex-col gap-4 pl-8 pr-10 pt-6 pb-10 border-[0.2em] border-pink-100 border-dotted outline outline-[0.125em] outline-pink-100 outline-offset-[-0.75rem]">

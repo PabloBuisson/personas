@@ -1,22 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AppIcon from "../UI/AppIcon";
+import { getAvatarsInfos } from "../forms/common/PersonalInformationsSettings";
+import Image from "next/image";
 
 type AvatarSelectorProps = {
   onAvatarClick: (avatar: string) => void;
 };
 
 export default function AvatarSelector(props: AvatarSelectorProps) {
-  const avatars = ["😀", "😃", "😄", "😁", "😆", "😅", "😂", "🤣", "😊"];
+  const avatars = getAvatarsInfos();
 
-  const [selectedEmoji, setSelectedEmoji] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleClick(emoji: string) {
-    console.log("handleClick", emoji);
-    setSelectedEmoji(emoji);
-    props.onAvatarClick(emoji);
+  useEffect(() => {
+    function handleClickOutside(event: any) {
+      const avatarPickerContainer = document.getElementById(
+        "avatar-picker-container"
+      );
+
+      if (!avatarPickerContainer?.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchend", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchend", handleClickOutside);
+    };
+  }, []);
+
+  function handleClick(avatar: string) {
+    props.onAvatarClick(avatar);
     setIsOpen(false);
   }
 
@@ -32,13 +49,19 @@ export default function AvatarSelector(props: AvatarSelectorProps) {
       </button>
       <dialog
         open={isOpen}
-        className="absolute top-14 right-0 text-3xl w-[20ch] p-4 rounded-lg border border-orange-200"
+        id="avatar-picker-container"
+        className="absolute top-14 right-0 text-3xl w-[38rem] h-[19rem] p-4 rounded-lg border border-orange-200 overflow-auto"
       >
         <ul className="flex flex-wrap gap-4">
-          {avatars.map((emoji) => (
-            <li className="" key={emoji}>
-              <button type="button" onClick={() => handleClick(emoji)}>
-                {emoji}
+          {avatars.map(({ key, path, description, name }) => (
+            <li className="" key={key}>
+              <button
+                type="button"
+                className="h-32 w-32 relative"
+                onClick={() => handleClick(name)}
+              >
+                <Image src={path} fill={true} alt={description} />
+                {/* TODO add a description of each avatar */}
               </button>
             </li>
           ))}
