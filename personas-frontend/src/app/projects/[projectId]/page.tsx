@@ -18,7 +18,7 @@ export default async function Project({
   return (
     <main className="p-16 flex flex-col gap-8">
       <div className="flex justify-between items-start gap-16">
-        <div className="bg-gray-300 rounded-full w-28 h-28 flex justify-center items-center">
+        <div className="bg-white rounded-full w-28 h-28 flex justify-center items-center">
           {project.icon && (
             <span className="text-6xl" role="image">
               {project.icon}

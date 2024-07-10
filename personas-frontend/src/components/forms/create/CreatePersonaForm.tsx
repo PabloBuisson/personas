@@ -1,7 +1,7 @@
 import InputWithLabel from "../common/InputWithLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { handleCreatePersona } from "@/app/actions/persona-actions";
-import InputEmoji from "../common/InputEmoji";
+import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 
 export default function CreatePersonaForm({
   projectId,
@@ -12,8 +12,8 @@ export default function CreatePersonaForm({
 
   return (
     <form action={createPersona} className="flex flex-col gap-8">
-      <section className="bg-gray-300 relative flex justify-center items-center rounded-full w-28 h-28">
-        <InputEmoji name="icon" value="😎" />
+      <section className="flex flex-col items-start gap-4">
+        <PersonaSectionAvatar image={undefined} mode="edit" />
       </section>
       <section className="flex flex-col gap-8">
         <InputWithLabel label="Name of the persona" inputId="name" />

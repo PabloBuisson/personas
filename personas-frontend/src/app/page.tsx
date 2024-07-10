@@ -1,11 +1,12 @@
 import HomeSummaryList from "@/components/lists/HomeSummaryList";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <main className="p-16 flex flex-col gap-16">
-      <div className="flex items-center flex-wrap">
+      <div className="flex items-center flex-wrap gap-4">
         <section>
           <div className="flex flex-col gap-8">
             <h1 className="text-5xl font-extrabold">
@@ -18,7 +19,13 @@ export default function Home() {
             </p>
           </div>
         </section>
-        <div className="bg-gray-300 rounded-full w-56 h-56"></div>
+        <div className="bg-white rounded-full w-56 h-56 relative overflow-hidden">
+          <Image
+            src={`/avatars/avatar-0.svg`}
+            fill={true}
+            alt="Picture of the avatar"
+          />
+        </div>
       </div>
 
       <div className="flex items-start gap-8">

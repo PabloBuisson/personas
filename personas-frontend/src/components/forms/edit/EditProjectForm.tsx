@@ -70,7 +70,7 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
   return (
     <form action={onSubmit} className="flex flex-col gap-8">
       <div className="flex justify-between items-start gap-16">
-        <div className="bg-gray-300 relative rounded-full w-28 h-28 flex justify-center items-center">
+        <div className="bg-white relative rounded-full w-28 h-28 flex justify-center items-center">
           <InputEmoji name="icon" value={project.icon} />
         </div>
 
