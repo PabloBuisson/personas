@@ -1,5 +1,6 @@
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
+import AppIcon from "../UI/AppIcon";
 
 export default function Tag({
   id,
@@ -32,17 +33,20 @@ export default function Tag({
   if (!!onDelete && typeof index === "number") {
     return (
       <li
-        className={`bg-gray-50 border-[0.1em] border-gray-300 px-[1em] py-[0.3em] rounded-lg font-medium ${size}`}
+        className={`bg-orange-25 border-[0.15em] border-orange-200 pl-[1em] pr-[0.5em] py-[0.3em] rounded-lg font-medium ${size}`}
         key={id}
       >
         <button
           type="button"
-          className="flex justify-between gap-4"
+          className="flex justify-between items-center gap-4"
           onClick={() => onDelete(index)}
         >
           {name}
           <span className="sr-only">Delete tag named {name}</span>
-          <span aria-hidden>X</span>
+          <AppIcon
+            icon="mdi:close"
+            className="text-xl font-semibold text-darkorange-500"
+          />
         </button>
       </li>
     );
@@ -50,7 +54,7 @@ export default function Tag({
 
   return (
     <li
-      className={`bg-gray-50 border-[0.1em] border-gray-300 px-[1em] py-[0.3em] rounded-lg font-medium ${size}`}
+      className={`bg-orange-25 border-[0.15em] border-orange-200 px-[1em] py-[0.3em] rounded-lg font-medium ${size}`}
       key={id}
     >
       {name}

@@ -99,7 +99,7 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
         inputId="description"
         defaultValue={project.description}
       />
-      <section className="mt-8 flex flex-col gap-12">
+      <section className="mt-8 flex flex-col gap-4">
         {updatedTags && (
           <ul className="flex flex-wrap gap-2">
             {updatedTags.map((tag, index) => (
@@ -112,15 +112,29 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
                 size="text-sm"
               />
             ))}
-            <input id="new-tag" ref={inputTagRef} name="new-tag"></input>
-            <button type="button" onClick={addTag}>
-              Add a tag
-            </button>
           </ul>
         )}
+        <div className="flex gap-4 items-stretch">
+          <input
+            className="px-2 py-1 text-sm font-normal rounded-md"
+            id="new-tag"
+            ref={inputTagRef}
+            name="new-tag"
+          ></input>
+          <ButtonPrimary
+            additionalCSS="text-sm"
+            element="button"
+            label="Add a tag"
+            elementProps={{
+              type: "button",
+              onClick: addTag,
+              style: { padding: "0.25em 1em" },
+            }}
+          />
+        </div>
       </section>
       {updatedPersonas && (
-        <section>
+        <section className="mt-16">
           <ul className="flex flex-wrap gap-16">
             {updatedPersonas.map((persona) => (
               <PersonaCard

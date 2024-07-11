@@ -24,7 +24,7 @@ export default function PersonaCard({
           />
         )}
       </div>
-      <div className="flex flex-col gap-4 pl-8 pr-10 pt-6 pb-10 border-[0.2em] border-pink-100 border-dotted outline outline-[0.125em] outline-pink-100 outline-offset-[-0.75rem]">
+      <div className="flex flex-col gap-4 h-full pl-8 pr-10 pt-6 pb-10 border-[0.2em] border-pink-100 border-dotted outline outline-[0.125em] outline-pink-100 outline-offset-[-0.75rem]">
         <h2 className="text-xl font-bold mt-6">
           {persona.name ?? "Untitled project"}
         </h2>
@@ -64,11 +64,18 @@ export default function PersonaCard({
     >
       <article className="flex justify-center items-center h-full w-full bg-pink-500 text-pink-900 noisy-background">
         {!onDelete && (
-          <Link className="relative p-2" href={`/personas/${persona.id}`}>
+          <Link
+            className="relative p-2 h-full w-full min-h-[30ch] min-w-[30ch]"
+            href={`/personas/${persona.id}`}
+          >
             {cardContent}
           </Link>
         )}
-        {onDelete && <div className="relative p-1">{cardContent}</div>}
+        {onDelete && (
+          <div className="relative p-2 min-h-[30ch] min-w-[30ch]">
+            {cardContent}
+          </div>
+        )}
       </article>
       {onDelete && (
         <ButtonPrimary
