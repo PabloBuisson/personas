@@ -1,10 +1,6 @@
 import AppIcon from "./AppIcon";
 
-export default function PersonaSectionMultiInfosTitle({
-  title,
-}: {
-  title: string;
-}) {
+export default function SecondaryTitle({ title }: { title: string }) {
   return (
     <div className="flex items-center justify-start gap-4">
       <AppIcon

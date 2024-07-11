@@ -2,7 +2,7 @@ import { PersonaDto, ProjectDto } from "@/app/api";
 import Link from "next/link";
 import PersonaCard from "../cards/PersonaCard";
 import ProjectCard from "../cards/ProjectCard";
-import PersonaSectionMultiInfosTitle from "../UI/PersonaSectionMultiInfosTitle";
+import SecondaryTitle from "../UI/SecondaryTitle";
 
 type HomeSummaryProjectListProps = {
   targetName: "projects";
@@ -29,11 +29,9 @@ export default function HomeSummaryList({
       }`}
     >
       <div className="flex items-center gap-8">
-        <PersonaSectionMultiInfosTitle
-          title={`Last created ${targetName ?? "projects"}`}
-        />
+        <SecondaryTitle title={`Last created ${targetName ?? "projects"}`} />
         <Link
-          className="text-lg font-bold underline underline-offset-4 decoration-2 decoration-darkorange-500"
+          className="text-lg font-bold underline underline-offset-4 decoration-[0.2rem] decoration-dotted decoration-darkorange-500"
           href={`${"/" + targetName ?? "projects"}`}
         >
           See all

@@ -1,6 +1,6 @@
 import { ProjectDto } from "@/app/api";
 import ProjectCard from "../cards/ProjectCard";
-import PersonaSectionMultiInfosTitle from "./PersonaSectionMultiInfosTitle";
+import SecondaryTitle from "./SecondaryTitle";
 
 type PersonaSectionLinkedProjectProps =
   | PersonaEditSectionLinkedProject
@@ -22,7 +22,7 @@ export default function PersonaSectionLinkedProject(
 ) {
   return (
     <section className="flex flex-col justify-start items-start gap-12">
-      <PersonaSectionMultiInfosTitle title="Linked project" />
+      <SecondaryTitle title="Linked project" />
       {props.mode === "view" && props.project && (
         <ProjectCard project={props.project} />
       )}

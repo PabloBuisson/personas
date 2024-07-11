@@ -4,7 +4,7 @@ import {
   getEmotionsInfos,
 } from "../forms/common/PersonalInformationsSettings";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
-import PersonaSectionMultiInfosTitle from "./PersonaSectionMultiInfosTitle";
+import SecondaryTitle from "./SecondaryTitle";
 import { PersonalInformationsCell } from "../forms/common/personal-informations-cell";
 
 type PersonaSectionMultiInfosProps = {
@@ -35,7 +35,7 @@ export default function PersonaSectionMultiInfos(
   return (
     <section className="flex flex-col gap-20">
       <div className="flex items-center justify-start gap-4">
-        <PersonaSectionMultiInfosTitle title={infos.title} />
+        <SecondaryTitle title={infos.title} />
       </div>
       <div className="flex flex-wrap gap-x-8 gap-y-20">
         {infosData.map((info) => (

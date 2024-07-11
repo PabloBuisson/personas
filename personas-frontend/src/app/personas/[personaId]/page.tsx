@@ -4,7 +4,7 @@ import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
-import PersonaSectionMultiInfosTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
+import SecondaryTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
@@ -44,7 +44,7 @@ export default async function Persona({
               project={persona.project}
             />
             <div className="flex flex-col gap-20 w-full">
-              <PersonaSectionMultiInfosTitle title="Characteristics" />
+              <SecondaryTitle title="Characteristics" />
               <PersonaSectionCharacteristics mode="view" persona={persona} />
             </div>
           </div>

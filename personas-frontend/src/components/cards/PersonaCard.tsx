@@ -25,7 +25,7 @@ export default function PersonaCard({
         )}
       </div>
       <div className="flex flex-col gap-4 h-full pl-8 pr-10 pt-6 pb-10 border-[0.2em] border-pink-100 border-dotted outline outline-[0.125em] outline-pink-100 outline-offset-[-0.75rem]">
-        <h2 className="text-xl font-bold mt-6">
+        <h2 className="text-xl font-bold mt-6 overflow-hidden whitespace-nowrap text-ellipsis">
           {persona.name ?? "Untitled project"}
         </h2>
         <div className="flex items-start gap-3">
@@ -33,25 +33,33 @@ export default function PersonaCard({
             icon="mdi:cake-variant-outline"
             className="text-pink-100 text-xl"
           />
-          <p>{persona.age ?? "Age unknown"}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+            {persona.age ?? "Age unknown"}
+          </p>
         </div>
         <div className="flex items-start gap-3">
           <AppIcon icon="mdi:work-outline" className="text-pink-100 text-xl" />
-          <p>{persona.job?.title ?? "Job unknown"}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+            {persona.job?.title ?? "Job unknown"}
+          </p>
         </div>
         <div className="flex items-start gap-3">
           <AppIcon
             icon="mdi:location-radius-outline"
             className="text-pink-100 text-xl"
           />
-          <p>{persona.location ?? "Location unknown"}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+            {persona.location ?? "Location unknown"}
+          </p>
         </div>
         <div className="flex items-start gap-3">
           <AppIcon
             icon="mdi:family-room-outline"
             className="text-pink-100 text-xl"
           />
-          <p>{persona.family ?? "Family situation unknown"}</p>
+          <p className="overflow-hidden whitespace-nowrap text-ellipsis">
+            {persona.family ?? "Family situation unknown"}
+          </p>
         </div>
       </div>
     </>
@@ -65,16 +73,14 @@ export default function PersonaCard({
       <article className="flex justify-center items-center h-full w-full bg-pink-500 text-pink-900 noisy-background">
         {!onDelete && (
           <Link
-            className="relative p-2 h-full w-full min-h-[30ch] min-w-[30ch]"
+            className="relative p-2 h-[30ch] w-[30ch]"
             href={`/personas/${persona.id}`}
           >
             {cardContent}
           </Link>
         )}
         {onDelete && (
-          <div className="relative p-2 min-h-[30ch] min-w-[30ch]">
-            {cardContent}
-          </div>
+          <div className="relative p-2 h-[30ch] w-[30ch]">{cardContent}</div>
         )}
       </article>
       {onDelete && (

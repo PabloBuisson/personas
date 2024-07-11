@@ -12,11 +12,10 @@ import {
   getPersonalLifeInfos,
 } from "../common/PersonalInformationsSettings";
 import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHeader";
-import PersonaSecondaryInfosBlock from "../common/PersonaSecondaryInfosBlock";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
-import PersonaSectionMultiInfosTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
+import SecondaryTitle from "@/components/UI/SecondaryTitle";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 
@@ -105,7 +104,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
               project={updatedProject}
             />
             <div className="flex flex-col gap-20 w-full">
-              <PersonaSectionMultiInfosTitle title="Characteristics" />
+              <SecondaryTitle title="Characteristics" />
               <PersonaSectionCharacteristics mode="edit" persona={persona} />
             </div>
           </div>
