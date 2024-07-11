@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class ProjectController {
 
     // TODO check if still idempotent
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get all projects")
+    @Operation(summary = "Get all projects", operationId = "getProjects")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ProjectDto>> getAll(@RequestParam(value = "tagId", required = false) String tagId) {
         if (tagId != null) {
@@ -36,28 +35,28 @@ public class ProjectController {
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get a project by its id")
+    @Operation(summary = "Get a project by its id", operationId = "getProject")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(projectService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping(path = "/tags/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get projects by the id of one of their tags")
+    @Operation(summary = "Get projects by the id of one of their tags", operationId = "getProjectsByTagId")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<ProjectDto>> getByTagId(@PathVariable Long id) {
         return new ResponseEntity<>(projectService.getByTagId(id), HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Create a project")
+    @Operation(summary = "Create a project", operationId = "createProject")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ProjectDto> create(@RequestBody @Valid ProjectDto project) throws Exception {
         return new ResponseEntity<>(projectService.create(project), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
-    @Operation(summary = "Update partially a project")
+    @Operation(summary = "Update partially a project", operationId = "updateProject")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProjectDto> fullUpdate(
             @PathVariable("id") Long id,
@@ -71,7 +70,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @Operation(summary = "Delete a project")
+    @Operation(summary = "Delete a project", operationId = "deleteProject")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) throws Exception {
         projectService.delete(id);

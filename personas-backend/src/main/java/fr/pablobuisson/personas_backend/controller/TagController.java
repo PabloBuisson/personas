@@ -22,14 +22,14 @@ public class TagController {
     private final TagService tagService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get all tags")
+    @Operation(summary = "Get all tags", operationId = "getTags")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<TagDto>> getAll() {
         return new ResponseEntity<>(tagService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get a tag by its id")
+    @Operation(summary = "Get a tag by its id", operationId = "getTag")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TagDto> getById(@PathVariable Long id) {
         TagDto tagSavedDto = tagService.getById(id);
@@ -40,21 +40,21 @@ public class TagController {
     }
 
     @GetMapping(path = "/projects/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Get tags by the id of one of their projects")
+    @Operation(summary = "Get tags by the id of one of their projects", operationId = "getTagsByProjectId")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<TagDto>> getByProjectId(@PathVariable Long id) {
         return new ResponseEntity<>(tagService.getByProjectId(id), HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Create a tag")
+    @Operation(summary = "Create a tag", operationId = "createTag")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<TagDto> create(@RequestBody @Valid TagDto tagDto) {
         return new ResponseEntity<>(tagService.create(tagDto), HttpStatus.CREATED);
     }
 
     @PutMapping(path = "/{id}")
-    @Operation(summary = "Update partially a tag")
+    @Operation(summary = "Update partially a tag", operationId = "updateTag")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<TagDto> fullUpdate(
             @PathVariable("id") Long id,
@@ -68,7 +68,7 @@ public class TagController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @Operation(summary = "Delete a tag")
+    @Operation(summary = "Delete a tag", operationId = "deleteTag")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<HttpStatus> deleteById(@PathVariable Long id) {
         tagService.delete(id);
