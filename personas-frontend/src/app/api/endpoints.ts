@@ -1,4 +1,4 @@
-import { PersonaDto, ProjectDto, TagDto } from "./api";
+import { PersonaDto, ProjectDto, SummaryDto, TagDto } from "./api";
 
 function getBackendApiUrl(): string | undefined {
   if (typeof window === "undefined") {
@@ -12,6 +12,21 @@ function getBackendApiUrl(): string | undefined {
 
 // Disable request caching (default behavior in v13 & v14)
 const commonParams: Partial<RequestInit> = { cache: "no-store" };
+
+// ********** USER **********
+
+export async function getSummary(): Promise<SummaryDto> {
+  const response = await fetch(`${process.env.BACKEND_API_URL}/user/summary`, {
+    ...commonParams,
+  });
+
+  if (!response.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return response.json();
+}
 
 // ********** PERSONAS **********
 

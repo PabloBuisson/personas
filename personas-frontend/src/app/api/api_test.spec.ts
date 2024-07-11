@@ -21,25 +21,26 @@ describe("PersonaControllerApi", () => {
     instance = new api.PersonaControllerApi(config)
   });
 
-  test("create2", () => {
+  test("createPersona", () => {
     const body: api.PersonaDto = undefined
-    return expect(instance.create2(body, {})).resolves.toBe(null)
+    const projectId: number = 789
+    return expect(instance.createPersona(body, projectId, {})).resolves.toBe(null)
   })
-  test("deleteById2", () => {
+  test("deletePersona", () => {
     const id: string = "38400000-8cf0-11bd-b23e-10b96e4ef00d"
-    return expect(instance.deleteById2(id, {})).resolves.toBe(null)
+    return expect(instance.deletePersona(id, {})).resolves.toBe(null)
   })
-  test("fullUpdate2", () => {
+  test("getPersona", () => {
+    const id: string = "38400000-8cf0-11bd-b23e-10b96e4ef00d"
+    return expect(instance.getPersona(id, {})).resolves.toBe(null)
+  })
+  test("getPersonas", () => {
+    return expect(instance.getPersonas({})).resolves.toBe(null)
+  })
+  test("updatePersona", () => {
     const body: api.PersonaDto = undefined
     const id: string = "38400000-8cf0-11bd-b23e-10b96e4ef00d"
-    return expect(instance.fullUpdate2(body, id, {})).resolves.toBe(null)
-  })
-  test("getAll2", () => {
-    return expect(instance.getAll2({})).resolves.toBe(null)
-  })
-  test("getById2", () => {
-    const id: string = "38400000-8cf0-11bd-b23e-10b96e4ef00d"
-    return expect(instance.getById2(id, {})).resolves.toBe(null)
+    return expect(instance.updatePersona(body, id, {})).resolves.toBe(null)
   })
 })
 
@@ -49,29 +50,30 @@ describe("ProjectControllerApi", () => {
     instance = new api.ProjectControllerApi(config)
   });
 
-  test("create1", () => {
+  test("createProject", () => {
     const body: api.ProjectDto = undefined
-    return expect(instance.create1(body, {})).resolves.toBe(null)
+    return expect(instance.createProject(body, {})).resolves.toBe(null)
   })
-  test("deleteById1", () => {
+  test("deleteProject", () => {
     const id: number = 789
-    return expect(instance.deleteById1(id, {})).resolves.toBe(null)
+    return expect(instance.deleteProject(id, {})).resolves.toBe(null)
   })
-  test("fullUpdate1", () => {
+  test("getProject", () => {
+    const id: number = 789
+    return expect(instance.getProject(id, {})).resolves.toBe(null)
+  })
+  test("getProjects", () => {
+    const tagId: string = "tagId_example"
+    return expect(instance.getProjects(tagId, {})).resolves.toBe(null)
+  })
+  test("getProjectsByTagId", () => {
+    const id: number = 789
+    return expect(instance.getProjectsByTagId(id, {})).resolves.toBe(null)
+  })
+  test("updateProject", () => {
     const body: api.ProjectDto = undefined
     const id: number = 789
-    return expect(instance.fullUpdate1(body, id, {})).resolves.toBe(null)
-  })
-  test("getAll1", () => {
-    return expect(instance.getAll1({})).resolves.toBe(null)
-  })
-  test("getById1", () => {
-    const id: number = 789
-    return expect(instance.getById1(id, {})).resolves.toBe(null)
-  })
-  test("getByTagId", () => {
-    const id: number = 789
-    return expect(instance.getByTagId(id, {})).resolves.toBe(null)
+    return expect(instance.updateProject(body, id, {})).resolves.toBe(null)
   })
 })
 
@@ -81,29 +83,40 @@ describe("TagControllerApi", () => {
     instance = new api.TagControllerApi(config)
   });
 
-  test("create", () => {
+  test("createTag", () => {
     const body: api.TagDto = undefined
-    return expect(instance.create(body, {})).resolves.toBe(null)
+    return expect(instance.createTag(body, {})).resolves.toBe(null)
   })
-  test("deleteById", () => {
+  test("deleteTag", () => {
     const id: number = 789
-    return expect(instance.deleteById(id, {})).resolves.toBe(null)
+    return expect(instance.deleteTag(id, {})).resolves.toBe(null)
   })
-  test("fullUpdate", () => {
+  test("getTag", () => {
+    const id: number = 789
+    return expect(instance.getTag(id, {})).resolves.toBe(null)
+  })
+  test("getTags", () => {
+    return expect(instance.getTags({})).resolves.toBe(null)
+  })
+  test("getTagsByProjectId", () => {
+    const id: number = 789
+    return expect(instance.getTagsByProjectId(id, {})).resolves.toBe(null)
+  })
+  test("updateTag", () => {
     const body: api.TagDto = undefined
     const id: number = 789
-    return expect(instance.fullUpdate(body, id, {})).resolves.toBe(null)
+    return expect(instance.updateTag(body, id, {})).resolves.toBe(null)
   })
-  test("getAll", () => {
-    return expect(instance.getAll({})).resolves.toBe(null)
-  })
-  test("getById", () => {
-    const id: number = 789
-    return expect(instance.getById(id, {})).resolves.toBe(null)
-  })
-  test("getByProjectId", () => {
-    const id: number = 789
-    return expect(instance.getByProjectId(id, {})).resolves.toBe(null)
+})
+
+describe("UserControllerApi", () => {
+  let instance: api.UserControllerApi
+  beforeEach(function() {
+    instance = new api.UserControllerApi(config)
+  });
+
+  test("getSummary", () => {
+    return expect(instance.getSummary({})).resolves.toBe(null)
   })
 })
 

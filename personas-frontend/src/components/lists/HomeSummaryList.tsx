@@ -1,18 +1,39 @@
+import { PersonaDto, ProjectDto } from "@/app/api";
 import Link from "next/link";
+import PersonaCard from "../cards/PersonaCard";
+import ProjectCard from "../cards/ProjectCard";
+import PersonaSectionMultiInfosTitle from "../UI/PersonaSectionMultiInfosTitle";
+
+type HomeSummaryProjectListProps = {
+  targetName: "projects";
+  data: ProjectDto[] | undefined;
+};
+
+type HomeSummaryPersonaListProps = {
+  targetName: "personas";
+  data: PersonaDto[] | undefined;
+};
+
+type HomeSummaryListProps =
+  | HomeSummaryProjectListProps
+  | HomeSummaryPersonaListProps;
 
 export default function HomeSummaryList({
   targetName,
-}: {
-  targetName: "projects" | "personas";
-}) {
+  data,
+}: HomeSummaryListProps) {
   return (
-    <section className="flex flex-col gap-4">
+    <section
+      className={`flex flex-col ${
+        targetName === "projects" ? "gap-10" : "gap-8"
+      }`}
+    >
       <div className="flex items-center gap-8">
-        <h2 className="text-3xl font-semibold">
-          Last created {targetName ?? "projects"}
-        </h2>
+        <PersonaSectionMultiInfosTitle
+          title={`Last created ${targetName ?? "projects"}`}
+        />
         <Link
-          className="text-lg font-bold underline underline-offset-4 decoration-2"
+          className="text-lg font-bold underline underline-offset-4 decoration-2 decoration-darkorange-500"
           href={`${"/" + targetName ?? "projects"}`}
         >
           See all
@@ -20,15 +41,16 @@ export default function HomeSummaryList({
       </div>
       <div>
         <ul className="flex flex-wrap gap-8">
-          {[1, 2, 3, 4].map((element) => {
-            return (
-              <li className="w-56 h-56 bg-gray-300" key={element}>
-                <Link className="block w-full h-full" href={`/${targetName ?? "projects"}/${element}`}>
-                  {"Project " + element}
-                </Link>
-              </li>
-            );
-          })}
+          {targetName === "projects" &&
+            data &&
+            data.map((project) => {
+              return <ProjectCard key={project.id} project={project} />;
+            })}
+          {targetName === "personas" &&
+            data &&
+            data.map((persona) => {
+              return <PersonaCard key={persona.id} persona={persona} />;
+            })}
         </ul>
       </div>
     </section>

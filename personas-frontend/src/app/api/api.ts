@@ -178,6 +178,37 @@ export interface EmotionalMotivationsDto {
 /**
  * 
  * @export
+ * @interface ErrorMessage
+ */
+export interface ErrorMessage {
+    /**
+     * 
+     * @type {number}
+     * @memberof ErrorMessage
+     */
+    statusCode?: number;
+    /**
+     * 
+     * @type {Date}
+     * @memberof ErrorMessage
+     */
+    timestamp?: Date;
+    /**
+     * 
+     * @type {string}
+     * @memberof ErrorMessage
+     */
+    message?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ErrorMessage
+     */
+    description?: string;
+}
+/**
+ * 
+ * @export
  * @interface JobDetailsDto
  */
 export interface JobDetailsDto {
@@ -361,6 +392,25 @@ export interface ProjectDto {
 /**
  * 
  * @export
+ * @interface SummaryDto
+ */
+export interface SummaryDto {
+    /**
+     * 
+     * @type {Array<ProjectDto>}
+     * @memberof SummaryDto
+     */
+    projects?: Array<ProjectDto>;
+    /**
+     * 
+     * @type {Array<PersonaDto>}
+     * @memberof SummaryDto
+     */
+    personas?: Array<PersonaDto>;
+}
+/**
+ * 
+ * @export
  * @interface TagDto
  */
 export interface TagDto {
@@ -393,19 +443,24 @@ export const PersonaControllerApiFetchParamCreator = function (configuration?: C
          * 
          * @summary Create a persona
          * @param {PersonaDto} body 
+         * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create2(body: PersonaDto, options: any = {}): FetchArgs {
+        createPersona(body: PersonaDto, projectId?: number, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling create2.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling createPersona.');
             }
             const localVarPath = `/api/personas`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -428,15 +483,67 @@ export const PersonaControllerApiFetchParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById2(id: string, options: any = {}): FetchArgs {
+        deletePersona(id: string, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteById2.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deletePersona.');
             }
             const localVarPath = `/api/personas/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get persona by its id
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersona(id: string, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getPersona.');
+            }
+            const localVarPath = `/api/personas/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all personas
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersonas(options: any = {}): FetchArgs {
+            const localVarPath = `/api/personas`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -458,14 +565,14 @@ export const PersonaControllerApiFetchParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate2(body: PersonaDto, id: string, options: any = {}): FetchArgs {
+        updatePersona(body: PersonaDto, id: string, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling fullUpdate2.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updatePersona.');
             }
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling fullUpdate2.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updatePersona.');
             }
             const localVarPath = `/api/personas/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -488,58 +595,6 @@ export const PersonaControllerApiFetchParamCreator = function (configuration?: C
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary Get all personas
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll2(options: any = {}): FetchArgs {
-            const localVarPath = `/api/personas`;
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get persona by its id
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById2(id: string, options: any = {}): FetchArgs {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getById2.');
-            }
-            const localVarPath = `/api/personas/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -553,11 +608,12 @@ export const PersonaControllerApiFp = function(configuration?: Configuration) {
          * 
          * @summary Create a persona
          * @param {PersonaDto} body 
+         * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create2(body: PersonaDto, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PersonaDto> {
-            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).create2(body, options);
+        createPersona(body: PersonaDto, projectId?: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PersonaDto> {
+            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).createPersona(body, projectId, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -575,8 +631,45 @@ export const PersonaControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById2(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<string> {
-            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).deleteById2(id, options);
+        deletePersona(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<string> {
+            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).deletePersona(id, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get persona by its id
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersona(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PersonaDto> {
+            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).getPersona(id, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get all personas
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersonas(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<PersonaDto>> {
+            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).getPersonas(options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -595,45 +688,8 @@ export const PersonaControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate2(body: PersonaDto, id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PersonaDto> {
-            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).fullUpdate2(body, id, options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get all personas
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll2(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<PersonaDto>> {
-            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).getAll2(options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get persona by its id
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById2(id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PersonaDto> {
-            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).getById2(id, options);
+        updatePersona(body: PersonaDto, id: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<PersonaDto> {
+            const localVarFetchArgs = PersonaControllerApiFetchParamCreator(configuration).updatePersona(body, id, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -657,11 +713,12 @@ export const PersonaControllerApiFactory = function (configuration?: Configurati
          * 
          * @summary Create a persona
          * @param {PersonaDto} body 
+         * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create2(body: PersonaDto, options?: any) {
-            return PersonaControllerApiFp(configuration).create2(body, options)(fetch, basePath);
+        createPersona(body: PersonaDto, projectId?: number, options?: any) {
+            return PersonaControllerApiFp(configuration).createPersona(body, projectId, options)(fetch, basePath);
         },
         /**
          * 
@@ -670,8 +727,27 @@ export const PersonaControllerApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById2(id: string, options?: any) {
-            return PersonaControllerApiFp(configuration).deleteById2(id, options)(fetch, basePath);
+        deletePersona(id: string, options?: any) {
+            return PersonaControllerApiFp(configuration).deletePersona(id, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get persona by its id
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersona(id: string, options?: any) {
+            return PersonaControllerApiFp(configuration).getPersona(id, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get all personas
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersonas(options?: any) {
+            return PersonaControllerApiFp(configuration).getPersonas(options)(fetch, basePath);
         },
         /**
          * 
@@ -681,27 +757,8 @@ export const PersonaControllerApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate2(body: PersonaDto, id: string, options?: any) {
-            return PersonaControllerApiFp(configuration).fullUpdate2(body, id, options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get all personas
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll2(options?: any) {
-            return PersonaControllerApiFp(configuration).getAll2(options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get persona by its id
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById2(id: string, options?: any) {
-            return PersonaControllerApiFp(configuration).getById2(id, options)(fetch, basePath);
+        updatePersona(body: PersonaDto, id: string, options?: any) {
+            return PersonaControllerApiFp(configuration).updatePersona(body, id, options)(fetch, basePath);
         },
     };
 };
@@ -717,12 +774,13 @@ export class PersonaControllerApi extends BaseAPI {
      * 
      * @summary Create a persona
      * @param {PersonaDto} body 
+     * @param {number} [projectId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PersonaControllerApi
      */
-    public create2(body: PersonaDto, options?: any) {
-        return PersonaControllerApiFp(this.configuration).create2(body, options)(this.fetch, this.basePath);
+    public createPersona(body: PersonaDto, projectId?: number, options?: any) {
+        return PersonaControllerApiFp(this.configuration).createPersona(body, projectId, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -733,8 +791,31 @@ export class PersonaControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PersonaControllerApi
      */
-    public deleteById2(id: string, options?: any) {
-        return PersonaControllerApiFp(this.configuration).deleteById2(id, options)(this.fetch, this.basePath);
+    public deletePersona(id: string, options?: any) {
+        return PersonaControllerApiFp(this.configuration).deletePersona(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get persona by its id
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PersonaControllerApi
+     */
+    public getPersona(id: string, options?: any) {
+        return PersonaControllerApiFp(this.configuration).getPersona(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get all personas
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PersonaControllerApi
+     */
+    public getPersonas(options?: any) {
+        return PersonaControllerApiFp(this.configuration).getPersonas(options)(this.fetch, this.basePath);
     }
 
     /**
@@ -746,31 +827,8 @@ export class PersonaControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof PersonaControllerApi
      */
-    public fullUpdate2(body: PersonaDto, id: string, options?: any) {
-        return PersonaControllerApiFp(this.configuration).fullUpdate2(body, id, options)(this.fetch, this.basePath);
-    }
-
-    /**
-     * 
-     * @summary Get all personas
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PersonaControllerApi
-     */
-    public getAll2(options?: any) {
-        return PersonaControllerApiFp(this.configuration).getAll2(options)(this.fetch, this.basePath);
-    }
-
-    /**
-     * 
-     * @summary Get persona by its id
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PersonaControllerApi
-     */
-    public getById2(id: string, options?: any) {
-        return PersonaControllerApiFp(this.configuration).getById2(id, options)(this.fetch, this.basePath);
+    public updatePersona(body: PersonaDto, id: string, options?: any) {
+        return PersonaControllerApiFp(this.configuration).updatePersona(body, id, options)(this.fetch, this.basePath);
     }
 
 }
@@ -787,10 +845,10 @@ export const ProjectControllerApiFetchParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create1(body: ProjectDto, options: any = {}): FetchArgs {
+        createProject(body: ProjectDto, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling create1.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling createProject.');
             }
             const localVarPath = `/api/projects`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -819,15 +877,101 @@ export const ProjectControllerApiFetchParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById1(id: number, options: any = {}): FetchArgs {
+        deleteProject(id: number, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteById1.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteProject.');
             }
             const localVarPath = `/api/projects/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get a project by its id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProject(id: number, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getProject.');
+            }
+            const localVarPath = `/api/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all projects
+         * @param {string} [tagId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjects(tagId?: string, options: any = {}): FetchArgs {
+            const localVarPath = `/api/projects`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (tagId !== undefined) {
+                localVarQueryParameter['tagId'] = tagId;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get projects by the id of one of their tags
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectsByTagId(id: number, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getProjectsByTagId.');
+            }
+            const localVarPath = `/api/projects/tags/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -849,14 +993,14 @@ export const ProjectControllerApiFetchParamCreator = function (configuration?: C
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate1(body: ProjectDto, id: number, options: any = {}): FetchArgs {
+        updateProject(body: ProjectDto, id: number, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling fullUpdate1.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updateProject.');
             }
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling fullUpdate1.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateProject.');
             }
             const localVarPath = `/api/projects/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -879,87 +1023,6 @@ export const ProjectControllerApiFetchParamCreator = function (configuration?: C
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary Get all projects
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll1(options: any = {}): FetchArgs {
-            const localVarPath = `/api/projects`;
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get a project by its id
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById1(id: number, options: any = {}): FetchArgs {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getById1.');
-            }
-            const localVarPath = `/api/projects/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get projects by the id of one of their tags
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByTagId(id: number, options: any = {}): FetchArgs {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getByTagId.');
-            }
-            const localVarPath = `/api/projects/tags/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -976,8 +1039,8 @@ export const ProjectControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create1(body: ProjectDto, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ProjectDto> {
-            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).create1(body, options);
+        createProject(body: ProjectDto, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ProjectDto> {
+            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).createProject(body, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -995,8 +1058,65 @@ export const ProjectControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById1(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<string> {
-            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).deleteById1(id, options);
+        deleteProject(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<string> {
+            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).deleteProject(id, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get a project by its id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProject(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ProjectDto> {
+            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).getProject(id, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get all projects
+         * @param {string} [tagId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjects(tagId?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<ProjectDto>> {
+            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).getProjects(tagId, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get projects by the id of one of their tags
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectsByTagId(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<ProjectDto>> {
+            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).getProjectsByTagId(id, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1015,64 +1135,8 @@ export const ProjectControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate1(body: ProjectDto, id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ProjectDto> {
-            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).fullUpdate1(body, id, options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get all projects
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll1(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<ProjectDto>> {
-            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).getAll1(options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get a project by its id
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById1(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ProjectDto> {
-            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).getById1(id, options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get projects by the id of one of their tags
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByTagId(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<ProjectDto>> {
-            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).getByTagId(id, options);
+        updateProject(body: ProjectDto, id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<ProjectDto> {
+            const localVarFetchArgs = ProjectControllerApiFetchParamCreator(configuration).updateProject(body, id, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1099,8 +1163,8 @@ export const ProjectControllerApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create1(body: ProjectDto, options?: any) {
-            return ProjectControllerApiFp(configuration).create1(body, options)(fetch, basePath);
+        createProject(body: ProjectDto, options?: any) {
+            return ProjectControllerApiFp(configuration).createProject(body, options)(fetch, basePath);
         },
         /**
          * 
@@ -1109,8 +1173,38 @@ export const ProjectControllerApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById1(id: number, options?: any) {
-            return ProjectControllerApiFp(configuration).deleteById1(id, options)(fetch, basePath);
+        deleteProject(id: number, options?: any) {
+            return ProjectControllerApiFp(configuration).deleteProject(id, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get a project by its id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProject(id: number, options?: any) {
+            return ProjectControllerApiFp(configuration).getProject(id, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get all projects
+         * @param {string} [tagId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjects(tagId?: string, options?: any) {
+            return ProjectControllerApiFp(configuration).getProjects(tagId, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get projects by the id of one of their tags
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getProjectsByTagId(id: number, options?: any) {
+            return ProjectControllerApiFp(configuration).getProjectsByTagId(id, options)(fetch, basePath);
         },
         /**
          * 
@@ -1120,37 +1214,8 @@ export const ProjectControllerApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate1(body: ProjectDto, id: number, options?: any) {
-            return ProjectControllerApiFp(configuration).fullUpdate1(body, id, options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get all projects
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll1(options?: any) {
-            return ProjectControllerApiFp(configuration).getAll1(options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get a project by its id
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById1(id: number, options?: any) {
-            return ProjectControllerApiFp(configuration).getById1(id, options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get projects by the id of one of their tags
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByTagId(id: number, options?: any) {
-            return ProjectControllerApiFp(configuration).getByTagId(id, options)(fetch, basePath);
+        updateProject(body: ProjectDto, id: number, options?: any) {
+            return ProjectControllerApiFp(configuration).updateProject(body, id, options)(fetch, basePath);
         },
     };
 };
@@ -1170,8 +1235,8 @@ export class ProjectControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProjectControllerApi
      */
-    public create1(body: ProjectDto, options?: any) {
-        return ProjectControllerApiFp(this.configuration).create1(body, options)(this.fetch, this.basePath);
+    public createProject(body: ProjectDto, options?: any) {
+        return ProjectControllerApiFp(this.configuration).createProject(body, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1182,8 +1247,44 @@ export class ProjectControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProjectControllerApi
      */
-    public deleteById1(id: number, options?: any) {
-        return ProjectControllerApiFp(this.configuration).deleteById1(id, options)(this.fetch, this.basePath);
+    public deleteProject(id: number, options?: any) {
+        return ProjectControllerApiFp(this.configuration).deleteProject(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get a project by its id
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectControllerApi
+     */
+    public getProject(id: number, options?: any) {
+        return ProjectControllerApiFp(this.configuration).getProject(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get all projects
+     * @param {string} [tagId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectControllerApi
+     */
+    public getProjects(tagId?: string, options?: any) {
+        return ProjectControllerApiFp(this.configuration).getProjects(tagId, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get projects by the id of one of their tags
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectControllerApi
+     */
+    public getProjectsByTagId(id: number, options?: any) {
+        return ProjectControllerApiFp(this.configuration).getProjectsByTagId(id, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1195,43 +1296,8 @@ export class ProjectControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ProjectControllerApi
      */
-    public fullUpdate1(body: ProjectDto, id: number, options?: any) {
-        return ProjectControllerApiFp(this.configuration).fullUpdate1(body, id, options)(this.fetch, this.basePath);
-    }
-
-    /**
-     * 
-     * @summary Get all projects
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectControllerApi
-     */
-    public getAll1(options?: any) {
-        return ProjectControllerApiFp(this.configuration).getAll1(options)(this.fetch, this.basePath);
-    }
-
-    /**
-     * 
-     * @summary Get a project by its id
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectControllerApi
-     */
-    public getById1(id: number, options?: any) {
-        return ProjectControllerApiFp(this.configuration).getById1(id, options)(this.fetch, this.basePath);
-    }
-
-    /**
-     * 
-     * @summary Get projects by the id of one of their tags
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectControllerApi
-     */
-    public getByTagId(id: number, options?: any) {
-        return ProjectControllerApiFp(this.configuration).getByTagId(id, options)(this.fetch, this.basePath);
+    public updateProject(body: ProjectDto, id: number, options?: any) {
+        return ProjectControllerApiFp(this.configuration).updateProject(body, id, options)(this.fetch, this.basePath);
     }
 
 }
@@ -1248,10 +1314,10 @@ export const TagControllerApiFetchParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(body: TagDto, options: any = {}): FetchArgs {
+        createTag(body: TagDto, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling create.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling createTag.');
             }
             const localVarPath = `/api/tags`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -1280,15 +1346,96 @@ export const TagControllerApiFetchParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById(id: number, options: any = {}): FetchArgs {
+        deleteTag(id: number, options: any = {}): FetchArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteById.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteTag.');
             }
             const localVarPath = `/api/tags/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get a tag by its id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTag(id: number, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getTag.');
+            }
+            const localVarPath = `/api/tags/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get all tags
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTags(options: any = {}): FetchArgs {
+            const localVarPath = `/api/tags`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get tags by the id of one of their projects
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTagsByProjectId(id: number, options: any = {}): FetchArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getTagsByProjectId.');
+            }
+            const localVarPath = `/api/tags/projects/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -1310,14 +1457,14 @@ export const TagControllerApiFetchParamCreator = function (configuration?: Confi
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate(body: TagDto, id: number, options: any = {}): FetchArgs {
+        updateTag(body: TagDto, id: number, options: any = {}): FetchArgs {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
-                throw new RequiredError('body','Required parameter body was null or undefined when calling fullUpdate.');
+                throw new RequiredError('body','Required parameter body was null or undefined when calling updateTag.');
             }
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling fullUpdate.');
+                throw new RequiredError('id','Required parameter id was null or undefined when calling updateTag.');
             }
             const localVarPath = `/api/tags/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -1340,87 +1487,6 @@ export const TagControllerApiFetchParamCreator = function (configuration?: Confi
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @summary Get all tags
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll(options: any = {}): FetchArgs {
-            const localVarPath = `/api/tags`;
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get a tag by its id
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById(id: number, options: any = {}): FetchArgs {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getById.');
-            }
-            const localVarPath = `/api/tags/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Get tags by the id of one of their projects
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByProjectId(id: number, options: any = {}): FetchArgs {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getByProjectId.');
-            }
-            const localVarPath = `/api/tags/projects/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            const localVarUrlObj = url.parse(localVarPath, true);
-            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
-            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
-            localVarUrlObj.search = null;
-            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-
-            return {
-                url: url.format(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -1437,8 +1503,8 @@ export const TagControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(body: TagDto, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<TagDto> {
-            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).create(body, options);
+        createTag(body: TagDto, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<TagDto> {
+            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).createTag(body, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1456,8 +1522,64 @@ export const TagControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<string> {
-            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).deleteById(id, options);
+        deleteTag(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<string> {
+            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).deleteTag(id, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get a tag by its id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTag(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<TagDto> {
+            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).getTag(id, options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get all tags
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTags(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<TagDto>> {
+            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).getTags(options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+        /**
+         * 
+         * @summary Get tags by the id of one of their projects
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTagsByProjectId(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<TagDto>> {
+            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).getTagsByProjectId(id, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1476,64 +1598,8 @@ export const TagControllerApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate(body: TagDto, id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<TagDto> {
-            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).fullUpdate(body, id, options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get all tags
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<TagDto>> {
-            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).getAll(options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get a tag by its id
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<TagDto> {
-            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).getById(id, options);
-            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
-                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
-                    if (response.status >= 200 && response.status < 300) {
-                        return response.json();
-                    } else {
-                        throw response;
-                    }
-                });
-            };
-        },
-        /**
-         * 
-         * @summary Get tags by the id of one of their projects
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByProjectId(id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Array<TagDto>> {
-            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).getByProjectId(id, options);
+        updateTag(body: TagDto, id: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<TagDto> {
+            const localVarFetchArgs = TagControllerApiFetchParamCreator(configuration).updateTag(body, id, options);
             return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
                 return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
                     if (response.status >= 200 && response.status < 300) {
@@ -1560,8 +1626,8 @@ export const TagControllerApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        create(body: TagDto, options?: any) {
-            return TagControllerApiFp(configuration).create(body, options)(fetch, basePath);
+        createTag(body: TagDto, options?: any) {
+            return TagControllerApiFp(configuration).createTag(body, options)(fetch, basePath);
         },
         /**
          * 
@@ -1570,8 +1636,37 @@ export const TagControllerApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteById(id: number, options?: any) {
-            return TagControllerApiFp(configuration).deleteById(id, options)(fetch, basePath);
+        deleteTag(id: number, options?: any) {
+            return TagControllerApiFp(configuration).deleteTag(id, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get a tag by its id
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTag(id: number, options?: any) {
+            return TagControllerApiFp(configuration).getTag(id, options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get all tags
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTags(options?: any) {
+            return TagControllerApiFp(configuration).getTags(options)(fetch, basePath);
+        },
+        /**
+         * 
+         * @summary Get tags by the id of one of their projects
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTagsByProjectId(id: number, options?: any) {
+            return TagControllerApiFp(configuration).getTagsByProjectId(id, options)(fetch, basePath);
         },
         /**
          * 
@@ -1581,37 +1676,8 @@ export const TagControllerApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        fullUpdate(body: TagDto, id: number, options?: any) {
-            return TagControllerApiFp(configuration).fullUpdate(body, id, options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get all tags
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getAll(options?: any) {
-            return TagControllerApiFp(configuration).getAll(options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get a tag by its id
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getById(id: number, options?: any) {
-            return TagControllerApiFp(configuration).getById(id, options)(fetch, basePath);
-        },
-        /**
-         * 
-         * @summary Get tags by the id of one of their projects
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByProjectId(id: number, options?: any) {
-            return TagControllerApiFp(configuration).getByProjectId(id, options)(fetch, basePath);
+        updateTag(body: TagDto, id: number, options?: any) {
+            return TagControllerApiFp(configuration).updateTag(body, id, options)(fetch, basePath);
         },
     };
 };
@@ -1631,8 +1697,8 @@ export class TagControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TagControllerApi
      */
-    public create(body: TagDto, options?: any) {
-        return TagControllerApiFp(this.configuration).create(body, options)(this.fetch, this.basePath);
+    public createTag(body: TagDto, options?: any) {
+        return TagControllerApiFp(this.configuration).createTag(body, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1643,8 +1709,43 @@ export class TagControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TagControllerApi
      */
-    public deleteById(id: number, options?: any) {
-        return TagControllerApiFp(this.configuration).deleteById(id, options)(this.fetch, this.basePath);
+    public deleteTag(id: number, options?: any) {
+        return TagControllerApiFp(this.configuration).deleteTag(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get a tag by its id
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TagControllerApi
+     */
+    public getTag(id: number, options?: any) {
+        return TagControllerApiFp(this.configuration).getTag(id, options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get all tags
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TagControllerApi
+     */
+    public getTags(options?: any) {
+        return TagControllerApiFp(this.configuration).getTags(options)(this.fetch, this.basePath);
+    }
+
+    /**
+     * 
+     * @summary Get tags by the id of one of their projects
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TagControllerApi
+     */
+    public getTagsByProjectId(id: number, options?: any) {
+        return TagControllerApiFp(this.configuration).getTagsByProjectId(id, options)(this.fetch, this.basePath);
     }
 
     /**
@@ -1656,43 +1757,104 @@ export class TagControllerApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof TagControllerApi
      */
-    public fullUpdate(body: TagDto, id: number, options?: any) {
-        return TagControllerApiFp(this.configuration).fullUpdate(body, id, options)(this.fetch, this.basePath);
+    public updateTag(body: TagDto, id: number, options?: any) {
+        return TagControllerApiFp(this.configuration).updateTag(body, id, options)(this.fetch, this.basePath);
     }
 
-    /**
-     * 
-     * @summary Get all tags
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TagControllerApi
-     */
-    public getAll(options?: any) {
-        return TagControllerApiFp(this.configuration).getAll(options)(this.fetch, this.basePath);
-    }
+}
+/**
+ * UserControllerApi - fetch parameter creator
+ * @export
+ */
+export const UserControllerApiFetchParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get summary of projects and personas
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSummary(options: any = {}): FetchArgs {
+            const localVarPath = `/api/projects/summary`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
-    /**
-     * 
-     * @summary Get a tag by its id
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TagControllerApi
-     */
-    public getById(id: number, options?: any) {
-        return TagControllerApiFp(this.configuration).getById(id, options)(this.fetch, this.basePath);
-    }
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            localVarUrlObj.search = null;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
 
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * UserControllerApi - functional programming interface
+ * @export
+ */
+export const UserControllerApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Get summary of projects and personas
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSummary(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<SummaryDto> {
+            const localVarFetchArgs = UserControllerApiFetchParamCreator(configuration).getSummary(options);
+            return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+                return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+                    if (response.status >= 200 && response.status < 300) {
+                        return response.json();
+                    } else {
+                        throw response;
+                    }
+                });
+            };
+        },
+    }
+};
+
+/**
+ * UserControllerApi - factory interface
+ * @export
+ */
+export const UserControllerApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+    return {
+        /**
+         * 
+         * @summary Get summary of projects and personas
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSummary(options?: any) {
+            return UserControllerApiFp(configuration).getSummary(options)(fetch, basePath);
+        },
+    };
+};
+
+/**
+ * UserControllerApi - object-oriented interface
+ * @export
+ * @class UserControllerApi
+ * @extends {BaseAPI}
+ */
+export class UserControllerApi extends BaseAPI {
     /**
      * 
-     * @summary Get tags by the id of one of their projects
-     * @param {number} id 
+     * @summary Get summary of projects and personas
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof TagControllerApi
+     * @memberof UserControllerApi
      */
-    public getByProjectId(id: number, options?: any) {
-        return TagControllerApiFp(this.configuration).getByProjectId(id, options)(this.fetch, this.basePath);
+    public getSummary(options?: any) {
+        return UserControllerApiFp(this.configuration).getSummary(options)(this.fetch, this.basePath);
     }
 
 }
