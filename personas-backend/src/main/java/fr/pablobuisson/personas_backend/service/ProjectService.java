@@ -38,6 +38,10 @@ public class ProjectService {
         return this.projectRepository.findAll().stream().map(this.projectMapper::toDto).toList();
     }
 
+    public List<ProjectDto> getLastProjects() {
+        return this.projectRepository.findTop5ByOrderByIdDesc().stream().map(this.projectMapper::toDto).toList();
+    }
+
     public List<ProjectDto> getByTagId(Long id) {
         return this.projectRepository.findByTagsId(id).stream().map(this.projectMapper::toDto).toList();
     }

@@ -46,6 +46,10 @@ public class PersonaService {
         return this.personaRepository.findAll().stream().map(personaMapper::toDto).toList();
     }
 
+    public List<PersonaDto> getLastPersonas() {
+        return this.personaRepository.findTop5ByOrderByIdDesc().stream().map(this.personaMapper::toDto).toList();
+    }
+
     public PersonaDto getById(UUID id) {
         return personaMapper.toDto(getByIdWithProject(id));
     }
