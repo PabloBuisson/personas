@@ -46,6 +46,7 @@ export default function PersonaSectionMultiInfos(
             value={info.value}
             icon={info.icon}
             key={info.name}
+            id={info.name}
           />
         ))}
       </div>

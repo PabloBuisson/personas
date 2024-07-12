@@ -26,11 +26,13 @@ export default function PersonaSectionAvatar({
             type="text"
             value={avatar}
           />
-          <Image
-            src={`/avatars/${avatar}.svg`}
-            fill={true}
-            alt="Picture of the avatar"
-          />
+          {avatar && (
+            <Image
+              src={`/avatars/${avatar}.svg`}
+              fill={true}
+              alt="Picture of the avatar"
+            />
+          )}
         </div>
         <div className="flex gap-4 justify-between items-start mb-8 z-10">
           <AvatarSelector onAvatarClick={(avatar) => setAvatar(avatar)} />

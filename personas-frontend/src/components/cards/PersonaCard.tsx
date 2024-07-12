@@ -14,8 +14,8 @@ export default function PersonaCard({
 }) {
   const cardContent = (
     <>
-      <div className="absolute flex justify-center items-center top-0 translate-y-[-25%] left-1/2 translate-x-[-50%] bg-pink-100 w-16 h-16 rounded-full border-[0.125em] border-pink-500 overflow-hidden">
-        {persona.image && (
+      <div className="absolute flex justify-center items-center top-0 translate-y-[-25%] left-1/2 translate-x-[-50%] bg-pink-50 w-16 h-16 rounded-full border-[0.125em] border-pink-500 overflow-hidden">
+        {persona.image && persona.image.startsWith("avatar-") && (
           <Image
             src={`/avatars/${persona.image}.svg`}
             priority={true}

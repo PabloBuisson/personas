@@ -23,7 +23,7 @@ export default function PersonaSectionCharacteristics(
           name={info.name}
           value={info.value}
           icon={info.icon}
-          key={info.name}
+          id={info.name}
           isStandalone={true}
         />
       ))}

@@ -12,7 +12,7 @@ export default function ProjectCard({
 }) {
   const cardContent = (
     <>
-      <div className="absolute flex justify-center items-center top-0 translate-y-[-50%] left-1/2 translate-x-[-50%] bg-gray-50 w-16 h-16 rounded-full border-[0.1em] border-gray-300">
+      <div className="absolute flex justify-center items-center top-0 translate-y-[-50%] left-1/2 translate-x-[-50%] bg-purple-25 w-16 h-16 rounded-full border-[0.125em] border-purple-200">
         {project.icon && (
           <span className="text-4xl" role="image">
             {project.icon}

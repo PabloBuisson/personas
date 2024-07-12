@@ -1,12 +1,12 @@
 import AppIcon, { AppIconNameProps } from "@/components/UI/AppIcon";
 
 type PersonaSecondaryInfosBlockProps = {
-  key: string;
+  id: string;
   mode: "edit" | "view";
   label: string;
   name: string | undefined;
   icon: AppIconNameProps;
-  value: string | undefined;
+  value: string | number | undefined;
   isStandalone?: boolean;
 };
 
@@ -16,7 +16,7 @@ export default function PersonaSecondaryInfosBlock(
   if (props.mode === "edit") {
     return (
       <section
-        key={props.key}
+        key={props.id}
         className={`flex flex-col gap-2 ${
           props.isStandalone ? "w-full" : "w-1/3"
         }`}
@@ -48,7 +48,7 @@ export default function PersonaSecondaryInfosBlock(
 
   return (
     <section
-      key={props.key}
+      key={props.id}
       className={`flex flex-col gap-2 ${
         props.isStandalone ? "w-full" : "w-1/3"
       }`}

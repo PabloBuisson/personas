@@ -97,50 +97,48 @@ export function getJobInfos(persona: PersonaDto): PersonalInformationsCell[] {
 export function getCultureInfos(
   data?: CultureFavoritesDto
 ): PersonalInformationsCell[] {
-  if (!data) return [];
-
   return [
     {
       order: 1,
       icon: "mdi:movie-open",
       label: "Movies",
       name: "movies",
-      value: data.movies,
+      value: data?.movies,
     },
     {
       order: 2,
       icon: "mdi:bookshelf",
       label: "Books",
       name: "books",
-      value: data.books,
+      value: data?.books,
     },
     {
       order: 3,
       icon: "mdi:comic-bubble",
       label: "Comics",
       name: "comics",
-      value: data.comics,
+      value: data?.comics,
     },
     {
       order: 4,
       icon: "mdi:tv-classic",
       label: "Tv",
       name: "tv",
-      value: data.tv,
+      value: data?.tv,
     },
     {
       order: 4,
       icon: "mdi:music",
       label: "Music",
       name: "music",
-      value: data.music,
+      value: data?.music,
     },
     {
       order: 4,
       icon: "mdi:google-gamepad",
       label: "Games",
       name: "games",
-      value: data.games,
+      value: data?.games,
     },
   ];
 }
@@ -148,50 +146,48 @@ export function getCultureInfos(
 export function getEmotionsInfos(
   data?: EmotionalMotivationsDto
 ): PersonalInformationsCell[] {
-  if (!data) return [];
-
   return [
     {
       order: 1,
       icon: "mdi:heart",
       label: "Passions",
       name: "passions",
-      value: data.passions,
+      value: data?.passions,
     },
     {
       order: 2,
       icon: "mdi:target-arrow",
       label: "Goals",
       name: "goals",
-      value: data.goals,
+      value: data?.goals,
     },
     {
       order: 3,
       icon: "mdi:smiley",
       label: "Joys",
       name: "joys",
-      value: data.joys,
+      value: data?.joys,
     },
     {
       order: 4,
       icon: "mdi:emoticon-frown",
       label: "Fears",
       name: "fears",
-      value: data.fears,
+      value: data?.fears,
     },
     {
       order: 5,
       icon: "mdi:emoticon-angry",
       label: "Frustrations",
       name: "frustrations",
-      value: data.frustrations,
+      value: data?.frustrations,
     },
     {
       order: 6,
       icon: "mdi:clock-time-three-outline",
       label: "Habits",
       name: "habits",
-      value: data.habits,
+      value: data?.habits,
     },
   ];
 }
