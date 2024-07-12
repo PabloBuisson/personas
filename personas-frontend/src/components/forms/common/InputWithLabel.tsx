@@ -19,7 +19,7 @@ export default function InputWithLabel({
     <div className="flex flex-col gap-4">
       <LabelForm label={label} inputId={inputId} />
       {informationMessage && (
-        <div className="flex items-center gap-2 p-4 bg-purple-200 text-purple-800 rounded-sm text-sm">
+        <div className="flex items-center gap-2 px-3 py-3 bg-purple-200 text-purple-800 rounded-sm text-sm">
           <AppIcon
             icon="mdi:lightbulb-outline"
             className="text-xl text-purple-25"

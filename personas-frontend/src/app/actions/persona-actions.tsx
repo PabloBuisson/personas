@@ -4,17 +4,17 @@ import { redirect } from "next/navigation";
 import { PersonaDto } from "../api";
 import { createPersona } from "../api/endpoints";
 
-type FormState = {
-  errors: ErrorMessage;
+type FormStateCreatePersona = {
+  errors: ErrorMessageCreatePersona;
 } | null;
 
-type ErrorMessage = {
+type ErrorMessageCreatePersona = {
   [K in keyof PersonaDto]?: string;
 };
 
 export async function handleCreatePersona(
   projectId: number | undefined,
-  currentState: FormState,
+  currentState: FormStateCreatePersona,
   formData: FormData
 ) {
   const rawFormData = {
@@ -24,7 +24,7 @@ export async function handleCreatePersona(
     age: formData.get("age"),
   };
 
-  const errors: ErrorMessage = {};
+  const errors: ErrorMessageCreatePersona = {};
 
   if (!rawFormData.name || rawFormData.name.toString().trim().length === 0) {
     errors.name = "Name is required";

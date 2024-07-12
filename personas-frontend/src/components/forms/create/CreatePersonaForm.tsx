@@ -5,6 +5,7 @@ import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { handleCreatePersona } from "@/app/actions/persona-actions";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import { useFormState } from "react-dom";
+import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 
 export default function CreatePersonaForm({
   projectId,
@@ -38,11 +39,18 @@ export default function CreatePersonaForm({
           informationMessage="You can give a ballpark (i.e 15-25 years)"
         />
       </section>
-      <ButtonPrimary
-        element="button"
-        elementProps={{ type: "submit" }}
-        label="Create persona"
-      />
+      <section className="flex items-center gap-8 mt-8">
+        <ButtonSecondary
+          element="link"
+          elementProps={{ href: "../" }}
+          label="Cancel"
+        />
+        <ButtonPrimary
+          element="button"
+          elementProps={{ type: "submit" }}
+          label="Create persona"
+        />
+      </section>
     </form>
   );
 }

@@ -4,7 +4,18 @@ import { redirect } from "next/navigation";
 import { ProjectDto, TagDto } from "../api";
 import { createProject } from "../api/endpoints";
 
-export async function handleCreateProject(formData: FormData) {
+type FormStateCreateProject = {
+  errors: ErrorMessageCreateProject;
+} | null;
+
+type ErrorMessageCreateProject = {
+  [K in keyof ProjectDto]?: string;
+};
+
+export async function handleCreateProject(
+  currentState: FormStateCreateProject,
+  formData: FormData
+) {
   const rawFormData = {
     icon: formData.get("icon"),
     title: formData.get("title"),
@@ -12,20 +23,20 @@ export async function handleCreateProject(formData: FormData) {
     tags: formData.get("tags"),
   };
 
-  let errors = [];
+  const errors: ErrorMessageCreateProject = {};
 
   if (!rawFormData.title || rawFormData.title.toString().trim().length === 0) {
-    errors.push("Title is required.");
+    errors.name = "Name is required";
   }
 
   if (
     !rawFormData.description ||
     rawFormData.description.toString().trim().length === 0
   ) {
-    errors.push("Description is required.");
+    errors.description = "Description is required";
   }
 
-  if (errors.length > 0) {
+  if (Object.keys(errors).length > 0) {
     return { errors };
   }
 
