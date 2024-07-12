@@ -2,6 +2,7 @@
 
 import Link, { LinkProps } from "next/link";
 import { ButtonHTMLAttributes } from "react";
+import { useFormStatus } from "react-dom";
 
 type ButtonPrimaryButtonProps = {
   element: "button";
@@ -25,6 +26,7 @@ export default function ButtonPrimary({
   additionalCSS,
   elementProps,
 }: ButtonPrimaryProps) {
+  const { pending } = useFormStatus();
   let finalCSS = `bg-darkorange-500 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap ${
     additionalCSS ?? ""
   }`;
@@ -42,7 +44,7 @@ export default function ButtonPrimary({
   }
 
   return (
-    <button {...elementProps} className={finalCSS}>
+    <button {...elementProps} disabled={pending} className={finalCSS}>
       {label}
     </button>
   );

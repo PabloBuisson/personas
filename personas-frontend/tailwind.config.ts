@@ -28,6 +28,7 @@ const config: Config = {
         600: "hsl(var(--dark-orange-600))",
       },
       pink: {
+        50: "hsl(var(--pink-50))",
         100: "hsl(var(--pink-100))",
         200: "hsl(var(--pink-200))",
         500: "hsl(var(--pink-500))",

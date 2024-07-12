@@ -4,7 +4,19 @@ import { redirect } from "next/navigation";
 import { PersonaDto } from "../api";
 import { createPersona } from "../api/endpoints";
 
-export async function handleCreatePersona(projectId: number | undefined, formData: FormData) {
+type FormState = {
+  errors: ErrorMessage;
+} | null;
+
+type ErrorMessage = {
+  [K in keyof PersonaDto]?: string;
+};
+
+export async function handleCreatePersona(
+  projectId: number | undefined,
+  currentState: FormState,
+  formData: FormData
+) {
   const rawFormData = {
     icon: formData.get("icon"),
     name: formData.get("name"),
@@ -12,21 +24,21 @@ export async function handleCreatePersona(projectId: number | undefined, formDat
     age: formData.get("age"),
   };
 
-  let errors = [];
+  const errors: ErrorMessage = {};
 
   if (!rawFormData.name || rawFormData.name.toString().trim().length === 0) {
-    errors.push("Name is required.");
+    errors.name = "Name is required";
   }
 
   if (!rawFormData.story || rawFormData.story.toString().trim().length === 0) {
-    errors.push("Story is required.");
+    errors.story = "Story is required";
   }
 
   if (!rawFormData.age || rawFormData.age.toString().trim().length === 0) {
-    errors.push("Age is required.");
+    errors.age = "Age is required";
   }
 
-  if (errors.length > 0) {
+  if (Object.keys(errors).length > 0) {
     return { errors };
   }
 

@@ -4,11 +4,10 @@ import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedProject";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
-import SecondaryTitle from "@/components/UI/PersonaSectionMultiInfosTitle";
+import SecondaryTitle from "@/components/UI/SecondaryTitle";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
-import PersonaSecondaryInfosBlock from "@/components/forms/common/PersonaSecondaryInfosBlock";
 import CreatePersonaForm from "@/components/forms/create/CreatePersonaForm";
 
 export default async function Persona({

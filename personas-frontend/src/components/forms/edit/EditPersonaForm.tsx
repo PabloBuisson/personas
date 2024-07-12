@@ -32,7 +32,6 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   }
 
   async function onSubmit(formData: FormData) {
-    console.log("onSubmit formData = ", formData);
     const rawFormData = {
       icon: formData.get("icon"),
       name: formData.get("title"),
