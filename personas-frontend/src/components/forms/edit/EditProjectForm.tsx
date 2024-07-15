@@ -11,8 +11,14 @@ import ButtonPrimary from "../../buttons/ButtonPrimary";
 import PersonaCard from "../../cards/PersonaCard";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import InputEmoji from "../common/InputEmoji";
+import { useFormState } from "react-dom";
+import {
+  ErrorMessageCreateUpdate,
+  FormStateCreateUpdateProject,
+} from "../settings/form-actions-settings";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
+  const [state, formAction] = useFormState(onSubmit, null);
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);
   const [updatedPersonas, setUpdatedPersonas] = useState(
     project.personas ?? []
@@ -41,17 +47,40 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
     );
   }
 
-  async function onSubmit(formData: FormData) {
+  async function onSubmit(
+    currentState: FormStateCreateUpdateProject | undefined,
+    formData: FormData
+  ) {
     const rawFormData = {
       icon: formData.get("icon"),
-      name: formData.get("title"),
+      title: formData.get("title"),
       description: formData.get("description"),
     };
+
+    const errors: ErrorMessageCreateUpdate<ProjectDto> = {};
+
+    if (
+      !rawFormData.title ||
+      rawFormData.title.toString().trim().length === 0
+    ) {
+      errors.name = "Name is required";
+    }
+
+    if (
+      !rawFormData.description ||
+      rawFormData.description.toString().trim().length === 0
+    ) {
+      errors.description = "Description is required";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return { errors };
+    }
 
     const updatedProject: ProjectDto = {
       id: project.id,
       icon: rawFormData.icon as string,
-      name: rawFormData.name as string,
+      name: rawFormData.title as string,
       description: rawFormData.description as string,
       tags: updatedTags,
       personas: updatedPersonas,
@@ -68,7 +97,7 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
   }
 
   return (
-    <form action={onSubmit} className="flex flex-col gap-8">
+    <form action={formAction} className="flex flex-col gap-8">
       <div className="flex justify-between items-start gap-16">
         <div className="bg-white relative rounded-full w-28 h-28 flex justify-center items-center">
           <InputEmoji name="icon" value={project.icon} />
@@ -92,12 +121,14 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
         label="Project name"
         inputId="title"
         defaultValue={project.name}
+        errorMessage={state?.errors.name}
       />
       <InputWithHiddenLabel
         className="text-xl font-medium bg-transparent"
         label="Description"
         inputId="description"
         defaultValue={project.description}
+        errorMessage={state?.errors.description}
       />
       <section className="mt-8 flex flex-col gap-4">
         {updatedTags && (
