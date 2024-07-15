@@ -92,8 +92,9 @@ npm run dev
 ## TODOS
 
 - [x] Update form client validation 🔥
-- [ ] Handle error requests 🔥
+- [ ] Handle error requests (add a toaster whith shadcdn ui ?) 🔥
 - [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
+- [ ] Add 404 page
 - [ ] Add an existing persona to a project
 - [ ] Hide block info
 - [ ] Delete error message on input focus
