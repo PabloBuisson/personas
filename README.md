@@ -91,12 +91,13 @@ npm run dev
 
 ## TODOS
 
-- [ ] Update form client validation 🔥
+- [x] Update form client validation 🔥
+- [ ] Handle error requests 🔥
+- [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
 - [ ] Add an existing persona to a project
-- [ ] Add `createdAt` on Project and Persona for filtering last items
 - [ ] Hide block info
-- [ ] Handle error requests
 - [ ] Delete error message on input focus
+- [ ] Border on error input (with the help of tailwind-merge ?)
 - [ ] Metadata
 - [ ] Responsive
 - [ ] Handle empty data (homepage, etc.)
