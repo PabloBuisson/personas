@@ -2,10 +2,10 @@ import { CultureFavoritesDto, EmotionalMotivationsDto } from "@/app/api";
 import {
   getCultureInfos,
   getEmotionsInfos,
-} from "../forms/common/personal-informations-settings";
+} from "../forms/settings/personal-informations-settings";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
 import SecondaryTitle from "./SecondaryTitle";
-import { PersonalInformationsCell } from "../forms/common/personal-informations-cell";
+import { PersonalInformationsCell } from "../forms/settings/personal-informations-cell";
 
 type PersonaSectionMultiInfosProps = {
   mode: "view" | "edit";

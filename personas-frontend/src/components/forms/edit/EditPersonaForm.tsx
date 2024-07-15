@@ -10,7 +10,7 @@ import PersonalInformationsRow from "../common/PersonalInformationsRow";
 import {
   getJobInfos,
   getPersonalLifeInfos,
-} from "../common/personal-informations-settings";
+} from "../settings/personal-informations-settings";
 import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHeader";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
@@ -22,7 +22,7 @@ import { useFormState } from "react-dom";
 import {
   ErrorMessageCreateUpdate,
   FormStateCreateUpdatePersona,
-} from "../common/form-actions-settings";
+} from "../settings/form-actions-settings";
 
 export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();

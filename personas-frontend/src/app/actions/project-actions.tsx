@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { ProjectDto, TagDto } from "../api";
 import { createProject } from "../api/endpoints";
-import { ErrorMessageCreateUpdate, FormStateCreateUpdateProject } from "@/components/forms/common/form-actions-settings";
+import { ErrorMessageCreateUpdate, FormStateCreateUpdateProject } from "@/components/forms/settings/form-actions-settings";
 
 export async function handleCreateProject(
   currentState: FormStateCreateUpdateProject,

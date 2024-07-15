@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AppIcon from "../UI/AppIcon";
-import { getAvatarsInfos } from "../forms/common/personal-informations-settings";
+import { getAvatarsInfos } from "../forms/settings/personal-informations-settings";
 import Image from "next/image";
 
 type AvatarSelectorProps = {
