@@ -6,4 +6,5 @@ export type PersonalInformationsCell = {
   label: string;
   name: string;
   value: string | number | undefined;
+  errorMessage?: string;
 };

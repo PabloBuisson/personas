@@ -7,9 +7,9 @@ export type PersonalInformationsRowProps = {
 };
 
 const classesByOrder: Record<number, string> = {
-  1: "pr-8 basis-1/12 border-purple-100 border-r-2 border-dotted",
-  2: "px-8 border-r-2 border-purple-100 border-dotted",
-  3: "px-8 basis-1/2",
+  1: "basis-1/12 border-purple-100 border-r-2 border-dotted",
+  2: "border-r-2 border-purple-100 border-dotted",
+  3: "basis-1/2",
 };
 
 export default function PersonalInformationsRow(
@@ -17,13 +17,24 @@ export default function PersonalInformationsRow(
 ) {
   if (informations.mode === "edit") {
     return (
-      <section className="w-full bg-white p-8">
+      <section className="w-full bg-white">
         <ul className="flex">
           {informations.cells.map((cell) => (
             <li
-              className={`flex flex-col gap-2 ${classesByOrder[cell.order]}`}
+              className={`flex flex-col gap-2 py-8 px-8 relative ${
+                classesByOrder[cell.order]
+              }`}
               key={cell.name}
             >
+              {cell.errorMessage && (
+                <div className="flex items-center gap-2 bg-red-800 py-2 pl-2 pr-4 absolute top-0 translate-y-[-50%] left-3 rounded-sm">
+                  <AppIcon
+                    icon="mdi:alert-circle-outline"
+                    className="text-lg text-red-300"
+                  />
+                  <p className=" text-red-50 text-sm">{cell.errorMessage}</p>
+                </div>
+              )}
               <AppIcon icon={cell.icon} className="text-2xl text-pink-500" />
               <label className="text-xl font-medium" htmlFor={cell.name}>
                 {cell.label}

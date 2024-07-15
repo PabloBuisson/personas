@@ -2,7 +2,7 @@ import { CultureFavoritesDto, EmotionalMotivationsDto } from "@/app/api";
 import {
   getCultureInfos,
   getEmotionsInfos,
-} from "../forms/common/PersonalInformationsSettings";
+} from "../forms/common/personal-informations-settings";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
 import SecondaryTitle from "./SecondaryTitle";
 import { PersonalInformationsCell } from "../forms/common/personal-informations-cell";

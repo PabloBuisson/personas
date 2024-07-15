@@ -3,17 +3,10 @@
 import { redirect } from "next/navigation";
 import { ProjectDto, TagDto } from "../api";
 import { createProject } from "../api/endpoints";
-
-type FormStateCreateProject = {
-  errors: ErrorMessageCreateProject;
-} | null;
-
-type ErrorMessageCreateProject = {
-  [K in keyof ProjectDto]?: string;
-};
+import { ErrorMessageCreateUpdate, FormStateCreateUpdateProject } from "@/components/forms/common/form-actions-settings";
 
 export async function handleCreateProject(
-  currentState: FormStateCreateProject,
+  currentState: FormStateCreateUpdateProject,
   formData: FormData
 ) {
   const rawFormData = {
@@ -23,7 +16,7 @@ export async function handleCreateProject(
     tags: formData.get("tags"),
   };
 
-  const errors: ErrorMessageCreateProject = {};
+  const errors: ErrorMessageCreateUpdate<ProjectDto> = {};
 
   if (!rawFormData.title || rawFormData.title.toString().trim().length === 0) {
     errors.name = "Name is required";

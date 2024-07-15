@@ -91,7 +91,7 @@ npm run dev
 
 ## TODOS
 
-- [ ] Udpate form client validation 🔥
+- [ ] Update form client validation 🔥
 - [ ] Add an existing persona to a project
 - [ ] Add `createdAt` on Project and Persona for filtering last items
 - [ ] Hide block info

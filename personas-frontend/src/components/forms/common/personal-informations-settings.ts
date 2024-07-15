@@ -4,6 +4,7 @@ import {
   PersonaDto,
 } from "@/app/api";
 import { PersonalInformationsCell } from "./personal-informations-cell";
+import { FormStateCreateUpdatePersona } from "./form-actions-settings";
 
 export function getCharacteristicsInfos(
   persona: PersonaDto
@@ -41,7 +42,8 @@ export function getCharacteristicsInfos(
 }
 
 export function getPersonalLifeInfos(
-  persona: PersonaDto
+  persona: PersonaDto,
+  currentState: FormStateCreateUpdatePersona | undefined
 ): PersonalInformationsCell[] {
   return [
     {
@@ -50,6 +52,7 @@ export function getPersonalLifeInfos(
       label: "Age",
       name: "age",
       value: persona.age,
+      errorMessage: currentState?.errors.age,
     },
     {
       order: 2,
@@ -68,7 +71,10 @@ export function getPersonalLifeInfos(
   ];
 }
 
-export function getJobInfos(persona: PersonaDto): PersonalInformationsCell[] {
+export function getJobInfos(
+  persona: PersonaDto,
+  currentState: FormStateCreateUpdatePersona | undefined
+): PersonalInformationsCell[] {
   return [
     {
       order: 1,

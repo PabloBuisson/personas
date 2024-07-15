@@ -10,7 +10,7 @@ import PersonalInformationsRow from "../common/PersonalInformationsRow";
 import {
   getJobInfos,
   getPersonalLifeInfos,
-} from "../common/PersonalInformationsSettings";
+} from "../common/personal-informations-settings";
 import PersonalInformationsJobHeader from "../common/PersonalInformationsJobHeader";
 import PersonaSectionMultiInfos from "@/components/UI/PersonaSectionMultiInfos";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
@@ -18,14 +18,21 @@ import PersonaSectionLinkedProject from "@/components/UI/PersonaSectionLinkedPro
 import SecondaryTitle from "@/components/UI/SecondaryTitle";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
+import { useFormState } from "react-dom";
+import {
+  ErrorMessageCreateUpdate,
+  FormStateCreateUpdatePersona,
+} from "../common/form-actions-settings";
 
-export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
+export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
   const [updatedProject, setUpdatedProject] = useState(
     persona.project ?? undefined
   );
-  const personalLifeInfos = getPersonalLifeInfos(persona);
-  const jobInfos = getJobInfos(persona);
+  const [state, formAction] = useFormState(onSubmit, null);
+
+  const personalLifeInfos = getPersonalLifeInfos(persona, state);
+  const jobInfos = getJobInfos(persona, state);
 
   async function onDeleteProject() {
     setUpdatedProject(undefined);
@@ -35,7 +42,10 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
     setUpdatedProject(project);
   }
 
-  async function onSubmit(formData: FormData) {
+  async function onSubmit(
+    currentState: FormStateCreateUpdatePersona | undefined,
+    formData: FormData
+  ) {
     const rawFormData = {
       icon: formData.get("icon"),
       name: formData.get("title"),
@@ -44,6 +54,27 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
       location: formData.get("location"),
       family: formData.get("family"),
     };
+
+    const errors: ErrorMessageCreateUpdate<PersonaDto> = {};
+
+    if (!rawFormData.name || rawFormData.name.toString().trim().length === 0) {
+      errors.name = "Name is required";
+    }
+
+    if (
+      !rawFormData.story ||
+      rawFormData.story.toString().trim().length === 0
+    ) {
+      errors.story = "Story is required";
+    }
+
+    if (!rawFormData.age || rawFormData.age.toString().trim().length === 0) {
+      errors.age = "Age is required";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return { errors };
+    }
 
     const updatedPersona: PersonaDto = {
       id: persona.id,
@@ -96,7 +127,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
   }
 
   return (
-    <form action={onSubmit} className="flex flex-col gap-8 text-purple-800">
+    <form action={formAction} className="flex flex-col gap-8 text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
           <PersonaSectionAvatar mode="edit" image={persona.image} />
@@ -120,6 +151,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
               className="text-5xl font-extrabold text-orange-900 bg-transparent"
               label="Project name"
               inputId="title"
+              errorMessage={state?.errors.name}
               defaultValue={persona.name}
             />
             <div className="flex justify-end items-start gap-8">
@@ -139,6 +171,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
             className="text-xl font-medium bg-white p-4 rounded"
             label="Story"
             inputId="story"
+            errorMessage={state?.errors.story}
             defaultValue={persona.story}
           />
           <PersonalInformationsRow mode="edit" cells={personalLifeInfos} />

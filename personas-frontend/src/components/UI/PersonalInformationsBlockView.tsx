@@ -3,7 +3,7 @@ import PersonalInformationsRow from "../forms/common/PersonalInformationsRow";
 import {
   getJobInfos,
   getPersonalLifeInfos,
-} from "../forms/common/PersonalInformationsSettings";
+} from "../forms/common/personal-informations-settings";
 import PersonalInformationsJobHeader from "../forms/common/PersonalInformationsJobHeader";
 
 export default function PersonalInformationsBlockView({
