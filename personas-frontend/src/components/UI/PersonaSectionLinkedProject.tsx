@@ -30,7 +30,7 @@ export default function PersonaSectionLinkedProject(
 
   const missingProject = (
     <div className="flex flex-col items-center gap-4 w-full">
-      <p className="py-4 px-5 bg-orange-25 text-orange-900 w-full">
+      <p className="py-4 px-5 bg-orange-25 text-orange-900 w-full rounded-sm">
         {`No linked project (yet) !`}
       </p>
       {props.mode === "edit" && (

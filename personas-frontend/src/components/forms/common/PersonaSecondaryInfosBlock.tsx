@@ -28,9 +28,13 @@ export default function PersonaSecondaryInfosBlock(
           <label htmlFor={props.name} className="text-2xl font-semibold">
             {props.label}
           </label>
-          <div className="absolute right-0 top-0 text-2xl bg-white translate-y-[-100%] p-2 rounded-t">
-            <button type="button" aria-label="Hide section">
-              👁️‍🗨️
+          <div className="absolute right-0 top-0 text-3xl bg-white translate-y-[-100%] py-2 px-3 rounded-t text-darkorange-500">
+            <button
+              type="button"
+              aria-label="Hide section"
+              className="flex justify-center items-center "
+            >
+              <AppIcon icon="mdi:eye-off-outline" />
             </button>
           </div>
         </header>
