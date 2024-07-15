@@ -24,7 +24,7 @@ export default function PersonaSectionAvatar({
             className="hidden"
             size={1}
             type="text"
-            value={avatar}
+            defaultValue={avatar}
           />
           {avatar && (
             <Image

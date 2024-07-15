@@ -1,6 +1,6 @@
 import { PersonaDto } from "@/app/api";
-import { PersonalInformationsCell } from "../forms/common/personal-informations-cell";
-import { getCharacteristicsInfos } from "../forms/common/PersonalInformationsSettings";
+import { PersonalInformationsCell } from "../forms/settings/personal-informations-cell";
+import { getCharacteristicsInfos } from "../forms/settings/personal-informations-settings";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
 
 export type PersonaSectionCharacteristics = {
@@ -18,6 +18,7 @@ export default function PersonaSectionCharacteristics(
     <>
       {infos.map((info) => (
         <PersonaSecondaryInfosBlock
+          key={info.name}
           mode={props.mode}
           label={info.label}
           name={info.name}
