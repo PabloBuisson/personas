@@ -3,51 +3,42 @@
 import { redirect } from "next/navigation";
 import { PersonaDto } from "../api";
 import { createPersona } from "../api/endpoints";
-
-type FormStateCreatePersona = {
-  errors: ErrorMessageCreatePersona;
-} | null;
-
-type ErrorMessageCreatePersona = {
-  [K in keyof PersonaDto]?: string;
-};
+import {
+  ErrorMessageCreateUpdate,
+  FormDataForEntity,
+  FormStateCreateUpdatePersona,
+} from "@/components/forms/settings/form-actions-settings";
+import { getPersonaFormErrors } from "@/components/forms/validation/persona-validation";
 
 export async function handleCreatePersona(
   projectId: number | undefined,
-  currentState: FormStateCreatePersona,
+  currentState: FormStateCreateUpdatePersona,
   formData: FormData
 ) {
-  const rawFormData = {
-    icon: formData.get("icon"),
+  const rawFormData: FormDataForEntity<PersonaDto> = {
+    image: formData.get("icon"),
     name: formData.get("name"),
     story: formData.get("story"),
     age: formData.get("age"),
   };
 
-  const errors: ErrorMessageCreatePersona = {};
+  const errors = getPersonaFormErrors(currentState, rawFormData);
 
-  if (!rawFormData.name || rawFormData.name.toString().trim().length === 0) {
-    errors.name = "Name is required";
-  }
-
-  if (!rawFormData.story || rawFormData.story.toString().trim().length === 0) {
-    errors.story = "Story is required";
-  }
-
-  if (!rawFormData.age || rawFormData.age.toString().trim().length === 0) {
-    errors.age = "Age is required";
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return { errors };
+  if (errors) {
+    return errors;
   }
 
   // TODO validation
   const newProject: PersonaDto = {
-    image: rawFormData.icon as string,
+    image: rawFormData.image as string,
     name: rawFormData.name as string,
     story: rawFormData.story as string,
     age: rawFormData.age as string,
+    location: undefined,
+    family: undefined,
+    education: undefined,
+    idols: undefined,
+    brands: undefined,
   };
 
   const response: PersonaDto = await createPersona(newProject, projectId);
