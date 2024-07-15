@@ -142,7 +142,7 @@ export async function getProjectById(
 }
 
 export async function getProjects(tagId?: number): Promise<ProjectDto[]> {
-  let apiUrl = `${process.env.BACKEND_API_URL}/projects`;
+  let apiUrl = `${getBackendApiUrl()}/projects`;
 
   if (tagId) {
     apiUrl = `${apiUrl}?tagId=${tagId}`;

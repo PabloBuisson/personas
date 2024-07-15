@@ -1,6 +1,6 @@
 "use client";
 
-import { PersonaDto } from "@/app/api";
+import { PersonaDto, ProjectDto } from "@/app/api";
 import InputWithHiddenLabel from "../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { useState } from "react";
@@ -29,6 +29,10 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
 
   async function onDeleteProject() {
     setUpdatedProject(undefined);
+  }
+
+  async function onAddProject(project: ProjectDto) {
+    setUpdatedProject(project);
   }
 
   async function onSubmit(formData: FormData) {
@@ -98,6 +102,7 @@ export default function EditProjectForm({ persona }: { persona: PersonaDto }) {
           <PersonaSectionAvatar mode="edit" image={persona.image} />
           <div className="flex flex-col gap-12 w-full">
             <PersonaSectionLinkedProject
+              onAdd={onAddProject}
               onDelete={onDeleteProject}
               mode="edit"
               project={updatedProject}
