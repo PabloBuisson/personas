@@ -20,9 +20,10 @@ import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 import { useFormState } from "react-dom";
 import {
-  ErrorMessageCreateUpdate,
+  FormDataForEntity,
   FormStateCreateUpdatePersona,
 } from "../settings/form-actions-settings";
+import { getPersonaFormErrors } from "../validation/persona-validation";
 
 export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
@@ -46,8 +47,8 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
     currentState: FormStateCreateUpdatePersona | undefined,
     formData: FormData
   ) {
-    const rawFormData = {
-      icon: formData.get("icon"),
+    const rawFormData: FormDataForEntity<PersonaDto> = {
+      image: formData.get("icon"),
       name: formData.get("title"),
       story: formData.get("story"),
       age: formData.get("age"),
@@ -55,30 +56,15 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
       family: formData.get("family"),
     };
 
-    const errors: ErrorMessageCreateUpdate<PersonaDto> = {};
+    const errors = getPersonaFormErrors(currentState, rawFormData);
 
-    if (!rawFormData.name || rawFormData.name.toString().trim().length === 0) {
-      errors.name = "Name is required";
-    }
-
-    if (
-      !rawFormData.story ||
-      rawFormData.story.toString().trim().length === 0
-    ) {
-      errors.story = "Story is required";
-    }
-
-    if (!rawFormData.age || rawFormData.age.toString().trim().length === 0) {
-      errors.age = "Age is required";
-    }
-
-    if (Object.keys(errors).length > 0) {
-      return { errors };
+    if (errors) {
+      return errors;
     }
 
     const updatedPersona: PersonaDto = {
       id: persona.id,
-      image: rawFormData.icon as string,
+      image: rawFormData.image as string,
       age: rawFormData.age as string,
       name: rawFormData.name as string,
       story: rawFormData.story as string,

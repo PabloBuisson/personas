@@ -14,8 +14,10 @@ import InputEmoji from "../common/InputEmoji";
 import { useFormState } from "react-dom";
 import {
   ErrorMessageCreateUpdate,
+  FormDataForEntity,
   FormStateCreateUpdateProject,
 } from "../settings/form-actions-settings";
+import { getProjectFormErrors } from "../validation/project-validation";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [state, formAction] = useFormState(onSubmit, null);
@@ -51,36 +53,22 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
     currentState: FormStateCreateUpdateProject | undefined,
     formData: FormData
   ) {
-    const rawFormData = {
+    const rawFormData: FormDataForEntity<ProjectDto> = {
       icon: formData.get("icon"),
-      title: formData.get("title"),
+      name: formData.get("title"),
       description: formData.get("description"),
     };
 
-    const errors: ErrorMessageCreateUpdate<ProjectDto> = {};
+    const errors = getProjectFormErrors(currentState, rawFormData);
 
-    if (
-      !rawFormData.title ||
-      rawFormData.title.toString().trim().length === 0
-    ) {
-      errors.name = "Name is required";
-    }
-
-    if (
-      !rawFormData.description ||
-      rawFormData.description.toString().trim().length === 0
-    ) {
-      errors.description = "Description is required";
-    }
-
-    if (Object.keys(errors).length > 0) {
-      return { errors };
+    if (errors) {
+      return errors;
     }
 
     const updatedProject: ProjectDto = {
       id: project.id,
       icon: rawFormData.icon as string,
-      name: rawFormData.title as string,
+      name: rawFormData.name as string,
       description: rawFormData.description as string,
       tags: updatedTags,
       personas: updatedPersonas,

@@ -11,3 +11,7 @@ export type FormStateCreateUpdateProject = {
 export type ErrorMessageCreateUpdate<T> = {
   [K in keyof T]?: string;
 };
+
+export type FormDataForEntity<T> = {
+  [K in keyof T]?: FormDataEntryValue | null;
+};
