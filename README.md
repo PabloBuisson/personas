@@ -63,7 +63,8 @@ npm run dev
 ### Packages FRONTEND
 
 * **TailwindCSS** for styling
-* *TODO*
+* **emoji-picker-react** for handling emojis in form
+* **Iconify** for easy to use icons
 
 ### Packages BACKEND
 
@@ -86,3 +87,17 @@ npm run dev
 * Docker Desktop 4.27.2 (137060)
 * Postgresql
 * Bruno v1.8.0
+
+
+## TODOS
+
+- [ ] Udpate form client validation 🔥
+- [ ] Add an existing persona to a project
+- [ ] Add `createdAt` on Project and Persona for filtering last items
+- [ ] Hide block info
+- [ ] Handle error requests
+- [ ] Delete error message on input focus
+- [ ] Metadata
+- [ ] Responsive
+- [ ] Handle empty data (homepage, etc.)
+- [ ] Authentication ?
