@@ -9,8 +9,9 @@ Online demo : *TODO*
 ## Goals FRONTEND
 
 * Learn **Next.js**
-* Explore new design (close to DnD)
-* Have fun
+* Explore **new design** (close to DnD)
+* Try **shadcn/ui** components
+* Have **fun**
 
 ## Goals BACKEND
 
@@ -38,6 +39,7 @@ Online demo : *TODO*
 * [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
 * [ ] Add 404 page
 * [ ] Add an existing persona to a project
+* [ ] Add a custom component for creating tags (or use the one to update them)
 * [ ] Hide block info
 * [ ] Delete error message on input focus
 * [ ] Border on error input (with the help of tailwind-merge ?)
@@ -79,6 +81,7 @@ npm run dev
 * **TailwindCSS** for styling
 * **emoji-picker-react** for handling emojis in form
 * **Iconify** for easy to use icons
+* **Sonner** for notifications
 
 ### Packages BACKEND
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { ProjectDto } from "@/app/api";
@@ -13,11 +13,11 @@ import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import InputEmoji from "../common/InputEmoji";
 import { useFormState } from "react-dom";
 import {
-  ErrorMessageCreateUpdate,
   FormDataForEntity,
   FormStateCreateUpdateProject,
 } from "../settings/form-actions-settings";
 import { getProjectFormErrors } from "../validation/project-validation";
+import { toast } from "sonner";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
   const [state, formAction] = useFormState(onSubmit, null);
@@ -59,7 +59,7 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
       description: formData.get("description"),
     };
 
-    const errors = getProjectFormErrors(currentState, rawFormData);
+    let errors = getProjectFormErrors(currentState, rawFormData);
 
     if (errors) {
       return errors;
@@ -74,15 +74,30 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
       personas: updatedPersonas,
     };
 
-    const data = await updateProject(updatedProject);
-
-    goToPageDetails(data.id as number);
+    try {
+      const data = await updateProject(updatedProject);
+      goToPageDetails(data.id as number);
+    } catch (error) {
+      errors = { errors: { errorMessage: `${error}` } };
+      return errors;
+    }
   }
 
   function goToPageDetails(projectId: number) {
     router.replace("/projects/" + projectId);
     router.refresh();
   }
+
+  useEffect(() => {
+    if (state?.errors.errorMessage) {
+      toast.error(
+        `Oops! Something went wrong. Error message: ${state.errors.errorMessage}. Please try again later.`,
+        {
+          duration: 5000,
+        }
+      );
+    }
+  }, [state]);
 
   return (
     <form action={formAction} className="flex flex-col gap-8">

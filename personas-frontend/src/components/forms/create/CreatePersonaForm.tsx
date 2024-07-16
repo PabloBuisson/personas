@@ -6,6 +6,8 @@ import { handleCreatePersona } from "@/app/actions/persona-actions";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import { useFormState } from "react-dom";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function CreatePersonaForm({
   projectId,
@@ -14,6 +16,17 @@ export default function CreatePersonaForm({
 }) {
   const createPersona = handleCreatePersona.bind(null, projectId);
   const [state, formAction] = useFormState(createPersona, null);
+
+  useEffect(() => {
+    if (state?.errors.errorMessage) {
+      toast.error(
+        `Oops! Something went wrong. Error message: ${state.errors.errorMessage}. Please try again later.`,
+        {
+          duration: 5000,
+        }
+      );
+    }
+  }, [state]);
 
   return (
     <form action={formAction} className="flex flex-col gap-8">

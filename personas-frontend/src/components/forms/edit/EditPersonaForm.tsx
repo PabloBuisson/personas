@@ -3,7 +3,7 @@
 import { PersonaDto, ProjectDto } from "@/app/api";
 import InputWithHiddenLabel from "../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { updatePersona } from "@/app/api/endpoints";
 import { useRouter } from "next/navigation";
 import PersonalInformationsRow from "../common/PersonalInformationsRow";
@@ -24,6 +24,7 @@ import {
   FormStateCreateUpdatePersona,
 } from "../settings/form-actions-settings";
 import { getPersonaFormErrors } from "../validation/persona-validation";
+import { toast } from "sonner";
 
 export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
   const router = useRouter();
@@ -56,7 +57,7 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
       family: formData.get("family"),
     };
 
-    const errors = getPersonaFormErrors(currentState, rawFormData);
+    let errors = getPersonaFormErrors(currentState, rawFormData);
 
     if (errors) {
       return errors;
@@ -102,15 +103,30 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
       project: updatedProject,
     };
 
-    const data = await updatePersona(updatedPersona);
-
-    goToPageDetails(data.id as string);
+    try {
+      const data = await updatePersona(updatedPersona);
+      goToPageDetails(data.id as string);
+    } catch (error) {
+      errors = { errors: { errorMessage: `${error}` } };
+      return errors;
+    }
   }
 
   function goToPageDetails(personaId: string) {
     router.replace("/personas/" + personaId);
     router.refresh();
   }
+
+  useEffect(() => {
+    if (state?.errors.errorMessage) {
+      toast.error(
+        `Oops! Something went wrong. Error message: ${state.errors.errorMessage}. Please try again later.`,
+        {
+          duration: 5000,
+        }
+      );
+    }
+  }, [state]);
 
   return (
     <form action={formAction} className="flex flex-col gap-8 text-purple-800">

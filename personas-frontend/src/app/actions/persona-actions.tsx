@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { PersonaDto } from "../api";
 import { createPersona } from "../api/endpoints";
 import {
-  ErrorMessageCreateUpdate,
   FormDataForEntity,
   FormStateCreateUpdatePersona,
 } from "@/components/forms/settings/form-actions-settings";
@@ -22,13 +21,12 @@ export async function handleCreatePersona(
     age: formData.get("age"),
   };
 
-  const errors = getPersonaFormErrors(currentState, rawFormData);
+  let errors = getPersonaFormErrors(currentState, rawFormData);
 
   if (errors) {
     return errors;
   }
 
-  // TODO validation
   const newProject: PersonaDto = {
     image: rawFormData.image as string,
     name: rawFormData.name as string,
@@ -41,8 +39,11 @@ export async function handleCreatePersona(
     brands: undefined,
   };
 
-  const response: PersonaDto = await createPersona(newProject, projectId);
-
-  // TODO validation
-  redirect("/personas/" + response.id);
+  try {
+    const response: PersonaDto = await createPersona(newProject, projectId);
+    redirect("/personas/" + response.id);
+  } catch (error) {
+    errors = { errors: { errorMessage: `${error}` } };
+    return errors;
+  }
 }

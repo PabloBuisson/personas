@@ -7,9 +7,22 @@ import ButtonPrimary from "../../buttons/ButtonPrimary";
 import InputEmoji from "../common/InputEmoji";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import { useFormState } from "react-dom";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function CreateProjectForm() {
   const [state, formAction] = useFormState(handleCreateProject, null);
+
+  useEffect(() => {
+    if (state?.errors.errorMessage) {
+      toast.error(
+        `Oops! Something went wrong. Error message: ${state.errors.errorMessage}. Please try again later.`,
+        {
+          duration: 5000,
+        }
+      );
+    }
+  }, [state]);
 
   return (
     <form action={formAction} className="flex flex-col gap-8">

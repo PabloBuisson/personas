@@ -20,7 +20,7 @@ export async function handleCreateProject(
     tags: formData.get("tags"),
   };
 
-  const errors = getProjectFormErrors(currentState, rawFormData);
+  let errors = getProjectFormErrors(currentState, rawFormData);
 
   if (errors) {
     return errors;
@@ -35,7 +35,6 @@ export async function handleCreateProject(
       .map((tagValue) => ({ label: tagValue.trim() }));
   }
 
-  // TODO validation
   const newProject: ProjectDto = {
     icon: rawFormData.icon as string,
     name: rawFormData.name as string,
@@ -43,8 +42,11 @@ export async function handleCreateProject(
     tags: tagsDTO,
   };
 
-  const response: ProjectDto = await createProject(newProject);
-
-  // TODO validation
-  redirect("/projects/" + response.id);
+  try {
+    const response: ProjectDto = await createProject(newProject);
+    redirect("/projects/" + response.id);
+  } catch (error) {
+    errors = { errors: { errorMessage: `${error}` } };
+    return errors;
+  }
 }
