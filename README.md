@@ -29,8 +29,22 @@ Online demo : *TODO*
 
 ## :white_check_mark: Todos
 
-* Add a Front (Next.js)
-* Add basic security with Spring Security
+* [x] Add a Front-end (Next.js)
+* [x] Add form components
+* [x] Add basic security with Spring Security
+* [x] Add design
+* [x] Create/Update form client validation 🔥
+* [ ] Handle error requests (add a toaster whith shadcdn ui ?) 🔥
+* [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
+* [ ] Add 404 page
+* [ ] Add an existing persona to a project
+* [ ] Hide block info
+* [ ] Delete error message on input focus
+* [ ] Border on error input (with the help of tailwind-merge ?)
+* [ ] Metadata
+* [ ] Responsive
+* [ ] Handle empty data (homepage, etc.)
+* [ ] Authentication ?
   
 ## :iphone: Images
 
@@ -87,19 +101,3 @@ npm run dev
 * Docker Desktop 4.27.2 (137060)
 * Postgresql
 * Bruno v1.8.0
-
-
-## TODOS
-
-- [x] Update form client validation 🔥
-- [ ] Handle error requests (add a toaster whith shadcdn ui ?) 🔥
-- [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
-- [ ] Add 404 page
-- [ ] Add an existing persona to a project
-- [ ] Hide block info
-- [ ] Delete error message on input focus
-- [ ] Border on error input (with the help of tailwind-merge ?)
-- [ ] Metadata
-- [ ] Responsive
-- [ ] Handle empty data (homepage, etc.)
-- [ ] Authentication ?
