@@ -54,16 +54,18 @@ export default function PersonalInformationsRow(
   }
 
   return (
-    <section className="w-full bg-white p-8">
-      <ul className=" flex">
+    <section className="w-full bg-white">
+      <ul className="flex">
         {informations.cells.map((cell) => (
           <li
-            className={`flex flex-col gap-2 ${classesByOrder[cell.order]}`}
+            className={`flex flex-col gap-2 py-8 px-8 ${
+              classesByOrder[cell.order]
+            }`}
             key={cell.name}
           >
             <AppIcon icon={cell.icon} className="text-2xl text-pink-500" />
             <h4 className="text-xl font-medium">{cell.label}</h4>
-            <p className="text-xl">{cell.value}</p>
+            <p className="text-xl min-w-[20ch]">{cell.value}</p>
           </li>
         ))}
       </ul>
