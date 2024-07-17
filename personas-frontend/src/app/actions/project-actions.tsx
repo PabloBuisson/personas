@@ -6,11 +6,11 @@ import { createProject, updateProject } from "../api/endpoints";
 import {
   FormDataForEntity,
   FormStateCreateUpdateProject,
-} from "@/components/forms/settings/form-actions-settings";
+} from "@/components/forms/settings/form-actions-settings-type.type";
 import { getProjectFormErrors } from "@/components/forms/validation/project-validation";
 
 export async function handleCreateProject(
-  currentState: FormStateCreateUpdateProject,
+  currentState: FormStateCreateUpdateProject | undefined,
   formData: FormData
 ) {
   const rawFormData: FormDataForEntity<ProjectDto> = {

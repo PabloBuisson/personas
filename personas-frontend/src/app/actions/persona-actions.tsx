@@ -6,7 +6,7 @@ import { createPersona, updatePersona } from "../api/endpoints";
 import {
   FormDataForEntity,
   FormStateCreateUpdatePersona,
-} from "@/components/forms/settings/form-actions-settings";
+} from "@/components/forms/settings/form-actions-settings-type.type";
 import { getPersonaFormErrors } from "@/components/forms/validation/persona-validation";
 
 export async function handleCreatePersona(

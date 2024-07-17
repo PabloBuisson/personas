@@ -5,7 +5,7 @@ import {
 } from "../forms/settings/personal-informations-settings";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
 import SecondaryTitle from "./SecondaryTitle";
-import { PersonalInformationsCell } from "../forms/settings/personal-informations-cell";
+import { PersonalInformationsCell } from "../forms/settings/personal-informations-cell-type.type";
 
 type PersonaSectionMultiInfosProps = {
   mode: "view" | "edit";

@@ -3,7 +3,7 @@ import {
   FormDataForEntity,
   ErrorMessageCreateUpdate,
   FormStateCreateUpdateProject,
-} from "../settings/form-actions-settings";
+} from "../settings/form-actions-settings-type.type";
 
 export function getProjectFormErrors(
   currentState: FormStateCreateUpdateProject | undefined,

@@ -3,7 +3,7 @@ import {
   FormDataForEntity,
   ErrorMessageCreateUpdate,
   FormStateCreateUpdatePersona,
-} from "../settings/form-actions-settings";
+} from "../settings/form-actions-settings-type.type";
 
 export function getPersonaFormErrors(
   currentState: FormStateCreateUpdatePersona | undefined,

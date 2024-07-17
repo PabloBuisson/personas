@@ -3,8 +3,8 @@ import {
   EmotionalMotivationsDto,
   PersonaDto,
 } from "@/app/api";
-import { PersonalInformationsCell } from "./personal-informations-cell";
-import { FormStateCreateUpdatePersona } from "./form-actions-settings";
+import { PersonalInformationsCell } from "./personal-informations-cell-type.type";
+import { FormStateCreateUpdatePersona } from "./form-actions-settings-type.type";
 
 export function getCharacteristicsInfos(
   persona: PersonaDto

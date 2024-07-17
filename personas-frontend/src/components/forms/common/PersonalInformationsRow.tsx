@@ -1,4 +1,4 @@
-import { PersonalInformationsCell } from "../settings/personal-informations-cell";
+import { PersonalInformationsCell } from "../settings/personal-informations-cell-type.type";
 import AppIcon from "@/components/UI/AppIcon";
 
 export type PersonalInformationsRowProps = {

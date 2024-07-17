@@ -1,5 +1,5 @@
 import { PersonaDto } from "@/app/api";
-import { PersonalInformationsCell } from "../forms/settings/personal-informations-cell";
+import { PersonalInformationsCell } from "../forms/settings/personal-informations-cell-type.type";
 import { getCharacteristicsInfos } from "../forms/settings/personal-informations-settings";
 import PersonaSecondaryInfosBlock from "../forms/common/PersonaSecondaryInfosBlock";
 
