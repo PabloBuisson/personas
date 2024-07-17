@@ -35,11 +35,11 @@ Online demo : *TODO*
 * [x] Add basic security with Spring Security
 * [x] Add design
 * [x] Create/Update form client validation 🔥
-* [ ] Handle error requests (add a toaster whith shadcdn ui ?) 🔥
+* [x] Handle error requests (add a toaster whith shadcdn ui, add error page fallback) 🔥
+* [ ] Add 404 page 🔥
 * [ ] Basic client validation (required) 🔥
 * [ ] Add interceptors
 * [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
-* [ ] Add 404 page
 * [ ] Add an existing persona to a project
 * [ ] Add a custom component for creating tags (or use the one to update them)
 * [ ] Hide block info
