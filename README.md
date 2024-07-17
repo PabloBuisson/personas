@@ -34,14 +34,14 @@ Online demo : *TODO*
 * [x] Add form components
 * [x] Add basic security with Spring Security
 * [x] Add design
-* [x] Create/Update form client validation 🔥
+* [x] Create/Update form server validation (with server actions) 🔥
 * [x] Handle error requests (add a toaster whith shadcdn ui, add error page fallback) 🔥
 * [x] Add 404 page 🔥
-* [ ] Basic client validation (required) 🔥
-* [ ] Add interceptors
-* [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
-* [ ] Add an existing persona to a project
 * [ ] Add a custom component for creating tags (or use the one to update them)
+* [ ] Basic client validation (required, with zod ?) 🔥
+* [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
+* [ ] Add interceptors
+* [ ] Add an existing persona to a project
 * [ ] Hide block info
 * [ ] Delete error message on input focus
 * [ ] Border on error input (with the help of tailwind-merge ?)
