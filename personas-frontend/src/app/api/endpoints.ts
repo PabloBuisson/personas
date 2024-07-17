@@ -39,8 +39,7 @@ export async function getPersonaById(personaId: string): Promise<PersonaDto> {
   );
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to get persona");
   }
 
   return response.json();
@@ -52,8 +51,7 @@ export async function getPersonas(): Promise<PersonaDto[]> {
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to get personas");
   }
 
   return response.json();
@@ -79,11 +77,16 @@ export async function createPersona(
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to create persona");
   }
 
   return response.json();
+}
+
+async function throwRequestError(response: Response, defaultMessage: string): Promise<never> {
+  const responseStatus = response.status;
+  const responseText = await response.text();
+  throw new Error(`${responseText ? responseText : defaultMessage}`);
 }
 
 export async function updatePersona(
@@ -102,8 +105,7 @@ export async function updatePersona(
   );
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to update persona");
   }
 
   return response.json();
@@ -116,8 +118,7 @@ export async function deletePersona(personaId: string): Promise<void> {
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to delete persona");
   }
 }
 
@@ -134,8 +135,7 @@ export async function getProjectById(
   );
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to get project");
   }
 
   return response.json();
@@ -153,8 +153,7 @@ export async function getProjects(tagId?: number): Promise<ProjectDto[]> {
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to get projects");
   }
 
   return response.json();
@@ -173,8 +172,7 @@ export async function createProject(
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to create project");
   }
 
   return response.json();
@@ -196,8 +194,7 @@ export async function updateProject(
   );
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to update project");
   }
 
   return response.json();
@@ -210,8 +207,7 @@ export async function deleteProject(projectId: number): Promise<void> {
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to delete project");
   }
 }
 
@@ -223,8 +219,7 @@ export async function getTags(): Promise<TagDto[]> {
   });
 
   if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+    await throwRequestError(response, "Failed to get tags");
   }
 
   return response.json();

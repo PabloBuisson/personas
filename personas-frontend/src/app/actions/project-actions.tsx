@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { ProjectDto, TagDto } from "../api";
-import { createProject } from "../api/endpoints";
+import { createProject, updateProject } from "../api/endpoints";
 import {
   FormDataForEntity,
   FormStateCreateUpdateProject,
@@ -42,11 +42,58 @@ export async function handleCreateProject(
     tags: tagsDTO,
   };
 
+  let data: ProjectDto;
+
   try {
-    const response: ProjectDto = await createProject(newProject);
-    redirect("/projects/" + response.id);
+    data = await createProject(newProject);
   } catch (error) {
-    errors = { errors: { errorMessage: `${error}` } };
+    errors = { errors: { errorMessage: (error as Error).message } };
     return errors;
+  }
+
+  if (data.id) {
+    // redirect throw an Error, don't use it in a try/catch block
+    redirect("/projects/" + data.id);
+  }
+}
+
+export async function handleUpdateProject(
+  project: ProjectDto,
+  currentState: FormStateCreateUpdateProject | undefined,
+  formData: FormData
+) {
+  const rawFormData: FormDataForEntity<ProjectDto> = {
+    icon: formData.get("icon"),
+    name: formData.get("title"),
+    description: formData.get("description"),
+  };
+
+  let errors = getProjectFormErrors(currentState, rawFormData);
+
+  if (errors) {
+    return errors;
+  }
+
+  const updatedProject: ProjectDto = {
+    id: project.id,
+    icon: rawFormData.icon as string,
+    name: rawFormData.name as string,
+    description: rawFormData.description as string,
+    tags: project.tags,
+    personas: project.personas,
+  };
+
+  let data: ProjectDto;
+
+  try {
+    data = await updateProject(updatedProject);
+  } catch (error) {
+    errors = { errors: { errorMessage: (error as Error).message } };
+    return errors;
+  }
+
+  if (data.id) {
+    // redirect throw an Error, don't use it in a try/catch block
+    redirect("/projects/" + data.id);
   }
 }

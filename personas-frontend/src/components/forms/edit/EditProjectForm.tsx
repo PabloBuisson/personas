@@ -1,32 +1,34 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+
+import { toast } from "sonner";
 
 import { ProjectDto } from "@/app/api";
-import { updateProject } from "@/app/api/endpoints";
 import Tag from "../../tags/Tag";
 import InputWithHiddenLabel from "./../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import PersonaCard from "../../cards/PersonaCard";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import InputEmoji from "../common/InputEmoji";
-import { useFormState } from "react-dom";
-import {
-  FormDataForEntity,
-  FormStateCreateUpdateProject,
-} from "../settings/form-actions-settings";
-import { getProjectFormErrors } from "../validation/project-validation";
-import { toast } from "sonner";
+import { handleUpdateProject } from "@/app/actions/project-actions";
 
 export default function EditProjectForm({ project }: { project: ProjectDto }) {
-  const [state, formAction] = useFormState(onSubmit, null);
   const [updatedTags, setUpdatedTags] = useState(project.tags ?? []);
   const [updatedPersonas, setUpdatedPersonas] = useState(
     project.personas ?? []
   );
+
+  const updateProject = handleUpdateProject.bind(null, {
+    ...project,
+    tags: updatedTags,
+    personas: updatedPersonas,
+  });
+  
+  const [state, formAction] = useFormState(updateProject, null);
+
   const inputTagRef = useRef<HTMLInputElement | null>(null);
-  const router = useRouter();
 
   function deleteTag(tagIndex: number) {
     setUpdatedTags(updatedTags?.filter((_tag, index) => index !== tagIndex));
@@ -42,50 +44,9 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
   }
 
   async function onDeletePersona(personaId: string | undefined) {
-    console.log("deletePersona", personaId);
-
     setUpdatedPersonas(
       updatedPersonas?.filter((persona) => persona.id != personaId)
     );
-  }
-
-  async function onSubmit(
-    currentState: FormStateCreateUpdateProject | undefined,
-    formData: FormData
-  ) {
-    const rawFormData: FormDataForEntity<ProjectDto> = {
-      icon: formData.get("icon"),
-      name: formData.get("title"),
-      description: formData.get("description"),
-    };
-
-    let errors = getProjectFormErrors(currentState, rawFormData);
-
-    if (errors) {
-      return errors;
-    }
-
-    const updatedProject: ProjectDto = {
-      id: project.id,
-      icon: rawFormData.icon as string,
-      name: rawFormData.name as string,
-      description: rawFormData.description as string,
-      tags: updatedTags,
-      personas: updatedPersonas,
-    };
-
-    try {
-      const data = await updateProject(updatedProject);
-      goToPageDetails(data.id as number);
-    } catch (error) {
-      errors = { errors: { errorMessage: `${error}` } };
-      return errors;
-    }
-  }
-
-  function goToPageDetails(projectId: number) {
-    router.replace("/projects/" + projectId);
-    router.refresh();
   }
 
   useEffect(() => {

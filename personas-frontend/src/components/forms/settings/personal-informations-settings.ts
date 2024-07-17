@@ -43,7 +43,7 @@ export function getCharacteristicsInfos(
 
 export function getPersonalLifeInfos(
   persona: PersonaDto,
-  currentState: FormStateCreateUpdatePersona | undefined
+  currentState?: FormStateCreateUpdatePersona
 ): PersonalInformationsCell[] {
   return [
     {
@@ -73,7 +73,7 @@ export function getPersonalLifeInfos(
 
 export function getJobInfos(
   persona: PersonaDto,
-  currentState: FormStateCreateUpdatePersona | undefined
+  currentState?: FormStateCreateUpdatePersona
 ): PersonalInformationsCell[] {
   return [
     {

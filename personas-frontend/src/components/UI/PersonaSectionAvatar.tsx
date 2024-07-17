@@ -24,7 +24,8 @@ export default function PersonaSectionAvatar({
             className="hidden"
             size={1}
             type="text"
-            defaultValue={avatar}
+            onChange={(e) => setAvatar(e.target.value)}
+            value={avatar}
           />
           {avatar && (
             <Image
@@ -34,7 +35,7 @@ export default function PersonaSectionAvatar({
             />
           )}
         </div>
-        <div className="flex gap-4 justify-between items-start mb-8 z-10">
+        <div className="flex gap-4 justify-between items-start mb-8 z-20">
           <AvatarSelector onAvatarClick={(avatar) => setAvatar(avatar)} />
           <button
             type="button"

@@ -4,8 +4,6 @@ import { PersonaDto, ProjectDto } from "@/app/api";
 import InputWithHiddenLabel from "../common/InputWithHiddenLabel";
 import ButtonPrimary from "../../buttons/ButtonPrimary";
 import { useEffect, useState } from "react";
-import { updatePersona } from "@/app/api/endpoints";
-import { useRouter } from "next/navigation";
 import PersonalInformationsRow from "../common/PersonalInformationsRow";
 import {
   getJobInfos,
@@ -19,21 +17,21 @@ import SecondaryTitle from "@/components/UI/SecondaryTitle";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
 import PersonaSectionCharacteristics from "@/components/UI/PersonaSectionCharacteristics";
 import { useFormState } from "react-dom";
-import {
-  FormDataForEntity,
-  FormStateCreateUpdatePersona,
-} from "../settings/form-actions-settings";
-import { getPersonaFormErrors } from "../validation/persona-validation";
 import { toast } from "sonner";
+import { handleUpdatePersona } from "@/app/actions/persona-actions";
 
 export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
-  const router = useRouter();
   const [updatedProject, setUpdatedProject] = useState(
     persona.project ?? undefined
   );
-  const [state, formAction] = useFormState(onSubmit, null);
 
-  const personalLifeInfos = getPersonalLifeInfos(persona, state);
+  const updatePersona = handleUpdatePersona.bind(null, {
+    ...persona,
+    project: updatedProject,
+  });
+  const [state, formAction] = useFormState(updatePersona, null);
+
+  const personalLifeInfos = getPersonalLifeInfos(persona, state)
   const jobInfos = getJobInfos(persona, state);
 
   async function onDeleteProject() {
@@ -42,79 +40,6 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
 
   async function onAddProject(project: ProjectDto) {
     setUpdatedProject(project);
-  }
-
-  async function onSubmit(
-    currentState: FormStateCreateUpdatePersona | undefined,
-    formData: FormData
-  ) {
-    const rawFormData: FormDataForEntity<PersonaDto> = {
-      image: formData.get("icon"),
-      name: formData.get("title"),
-      story: formData.get("story"),
-      age: formData.get("age"),
-      location: formData.get("location"),
-      family: formData.get("family"),
-    };
-
-    let errors = getPersonaFormErrors(currentState, rawFormData);
-
-    if (errors) {
-      return errors;
-    }
-
-    const updatedPersona: PersonaDto = {
-      id: persona.id,
-      image: rawFormData.image as string,
-      age: rawFormData.age as string,
-      name: rawFormData.name as string,
-      story: rawFormData.story as string,
-      location: rawFormData.location,
-      family: rawFormData.family,
-      education: formData.get("education"),
-      personalityTraits: formData.get("personality"),
-      idols: formData.get("idols"),
-      brands: formData.get("brands"),
-      job: {
-        id: persona.job?.id,
-        title: formData.get("job-title") as string,
-        salary: formData.get("salary") as string,
-        company: formData.get("company") as string,
-        industry: formData.get("industry") as string,
-      },
-      culture: {
-        id: persona.culture?.id,
-        movies: formData.get("movies") as string,
-        music: formData.get("music") as string,
-        books: formData.get("books") as string,
-        games: formData.get("games") as string,
-        comics: formData.get("comics") as string,
-        tv: formData.get("tv") as string,
-      },
-      emotions: {
-        id: persona.emotions?.id,
-        passions: formData.get("passions") as string,
-        fears: formData.get("fears") as string,
-        goals: formData.get("goals") as string,
-        joys: formData.get("joys") as string,
-        frustrations: formData.get("frustrations") as string,
-        habits: formData.get("habits") as string,
-      },
-      project: updatedProject,
-    };
-
-    try {
-      const data = await updatePersona(updatedPersona);
-      goToPageDetails(data.id as string);
-    } catch (error) {
-      errors = { errors: { errorMessage: `${error}` } };
-      return errors;
-    }
-  }
-
-  function goToPageDetails(personaId: string) {
-    router.replace("/personas/" + personaId);
-    router.refresh();
   }
 
   useEffect(() => {
