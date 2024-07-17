@@ -36,7 +36,7 @@ Online demo : *TODO*
 * [x] Add design
 * [x] Create/Update form client validation 🔥
 * [x] Handle error requests (add a toaster whith shadcdn ui, add error page fallback) 🔥
-* [ ] Add 404 page 🔥
+* [x] Add 404 page 🔥
 * [ ] Basic client validation (required) 🔥
 * [ ] Add interceptors
 * [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
