@@ -1,20 +1,16 @@
 import AppIcon from "@/components/UI/AppIcon";
 import LabelForm from "./LabelForm";
 
+type InputWithVisibleLabelProps = InputWithLabelProps | TextAreaWithLabelProps;
+
 export default function InputWithLabel({
   label,
   inputId,
   informationMessage,
   errorMessage,
-  withLongText = false,
+  withLongText,
   ...props
-}: {
-  label: string;
-  inputId: string;
-  informationMessage?: string;
-  errorMessage?: string;
-  withLongText?: boolean;
-}) {
+}: InputWithVisibleLabelProps) {
   return (
     <div className="flex flex-col gap-4">
       <LabelForm label={label} inputId={inputId} />
@@ -30,14 +26,14 @@ export default function InputWithLabel({
       <div className="relative w-full">
         {withLongText ? (
           <textarea
-            {...props}
+            {...props as React.ComponentPropsWithoutRef<"textarea">}
             id={inputId}
             name={inputId}
             className="px-3 py-4 text-xl font-normal rounded-md w-full"
           />
         ) : (
           <input
-            {...props}
+            {...props as React.ComponentPropsWithoutRef<"input">}
             id={inputId}
             name={inputId}
             className="px-3 py-4 text-xl font-normal rounded-md w-full"

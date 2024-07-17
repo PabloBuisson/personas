@@ -1,26 +1,16 @@
 import AppIcon from "@/components/UI/AppIcon";
 import LabelForm from "./LabelForm";
 
-interface InputWithLabelProps {
-  label: string;
-  inputId: string;
-  informationMessage?: string;
-  errorMessage?: string;
-  withLongText?: boolean;
-}
+type InputWithHiddenLabelProps = InputWithLabelProps | TextAreaWithLabelProps;
 
 export default function InputWithHiddenLabel({
   label,
   inputId,
   informationMessage,
   errorMessage,
-  withLongText = false,
+  withLongText,
   ...props
-}: InputWithLabelProps &
-  (
-    | React.InputHTMLAttributes<HTMLInputElement>
-    | React.TextareaHTMLAttributes<HTMLTextAreaElement>
-  )) {
+}: InputWithHiddenLabelProps) {
   return (
     <div className="flex flex-col gap-4">
       {informationMessage && (
@@ -32,17 +22,17 @@ export default function InputWithHiddenLabel({
         <LabelForm className="sr-only" label={label} inputId={inputId} />
         {withLongText ? (
           <textarea
-            {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
             id={inputId}
             style={{ width: "100%" }}
             name={inputId}
+            {...(props as React.ComponentPropsWithoutRef<"textarea">)}
           />
         ) : (
           <input
-            {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
             id={inputId}
             style={{ width: "100%" }}
             name={inputId}
+            {...(props as React.ComponentPropsWithoutRef<"input">)}
           />
         )}
         {errorMessage && (
