@@ -37,7 +37,7 @@ Online demo : *TODO*
 * [x] Create/Update form server validation (with server actions) 🔥
 * [x] Handle error requests (add a toaster whith shadcdn ui, add error page fallback) 🔥
 * [x] Add 404 page 🔥
-* [ ] Add a custom component for creating tags (or use the one to update them)
+* [x] Add a custom component for creating tags (or use the one to update them)
 * [ ] Basic client validation (required, with zod ?) 🔥
 * [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
 * [ ] Add interceptors
