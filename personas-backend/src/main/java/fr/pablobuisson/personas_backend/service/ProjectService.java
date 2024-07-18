@@ -39,7 +39,7 @@ public class ProjectService {
     }
 
     public List<ProjectDto> getLastProjects() {
-        return this.projectRepository.findTop5ByOrderByIdDesc().stream().map(this.projectMapper::toDto).toList();
+        return this.projectRepository.findTop5ByOrderByCreatedAtDesc().stream().map(this.projectMapper::toDto).toList();
     }
 
     public List<ProjectDto> getByTagId(Long id) {
@@ -59,6 +59,7 @@ public class ProjectService {
     @Transactional
     public ProjectDto create(ProjectDto projectDto) throws Exception {
         Project projectToCreate = this.projectMapper.toEntity(projectDto);
+        projectToCreate.setCreatedAt(new Date());
 
         if (projectToCreate.getPersonas() != null && !projectToCreate.getPersonas().isEmpty()) {
             projectToCreate.getPersonas().forEach(persona -> persona.setProject(projectToCreate));
@@ -191,6 +192,8 @@ public class ProjectService {
             Set<Tag> updatedTags = updateTags(projectDto.tags().stream().map(tagService::tagDtoToTagEntity).collect(Collectors.toSet()));
             projectSaved.setTags(updatedTags);
         }
+
+        projectSaved.setUpdatedAt(new Date());
 
         Project updatedProject = this.projectRepository.save(projectSaved);
 

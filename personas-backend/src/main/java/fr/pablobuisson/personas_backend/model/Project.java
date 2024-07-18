@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -28,6 +29,11 @@ public class Project {
 
     private String icon;
 
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    //TODO only use MERGE and update updatePersonas method in ProjectService
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Persona> personas = new LinkedHashSet<>();

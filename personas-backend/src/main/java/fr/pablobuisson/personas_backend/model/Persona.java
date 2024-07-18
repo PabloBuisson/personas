@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -45,6 +46,10 @@ public class Persona {
     private String idols;
 
     private String brands;
+
+    private Date createdAt;
+
+    private Date updatedAt;
 
     @EqualsAndHashCode.Exclude
     @ManyToOne

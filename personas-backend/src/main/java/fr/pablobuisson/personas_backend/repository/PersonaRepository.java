@@ -12,5 +12,5 @@ import java.util.UUID;
 public interface PersonaRepository extends ListCrudRepository<Persona, UUID> {
     Set<Persona> findByProjectId(Long projectId);
 
-    List<Persona> findTop5ByOrderByIdDesc();
+    List<Persona> findTop5ByOrderByCreatedAtDesc();
 }

@@ -41,6 +41,7 @@ export default async function Home() {
           <Image
             src={`/avatars/avatar-0.svg`}
             fill={true}
+            priority={true}
             alt="Picture of the avatar"
           />
         </div>

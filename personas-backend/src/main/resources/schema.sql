@@ -2,7 +2,9 @@ CREATE TABLE IF NOT EXISTS project (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     icon VARCHAR(255),
-    description TEXT
+    description TEXT,
+    created_at DATE,
+    updated_at DATE
 );
 
 CREATE TABLE IF NOT EXISTS job_details (
@@ -46,7 +48,9 @@ CREATE TABLE IF NOT EXISTS persona (
     education TEXT,
     idols TEXT,
     brands TEXT,
-    project_id INT
+    project_id INT,
+    created_at DATE,
+    updated_at DATE
 );
 
 ALTER TABLE persona DROP CONSTRAINT IF EXISTS persona_project_id_fk;

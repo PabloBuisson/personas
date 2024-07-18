@@ -47,7 +47,7 @@ public class PersonaService {
     }
 
     public List<PersonaDto> getLastPersonas() {
-        return this.personaRepository.findTop5ByOrderByIdDesc().stream().map(this.personaMapper::toDto).toList();
+        return this.personaRepository.findTop5ByOrderByCreatedAtDesc().stream().map(this.personaMapper::toDto).toList();
     }
 
     public PersonaDto getById(UUID id) {
@@ -92,6 +92,7 @@ public class PersonaService {
     @Transactional
     public PersonaDto create(PersonaDto personaDto, Long projectId) {
         Persona persona = this.personaMapper.toEntity(personaDto);
+        persona.setCreatedAt(new Date());
 
         if (projectId != null) {
             Project projectLinked = getLinkedProject(projectId);
@@ -135,6 +136,8 @@ public class PersonaService {
                 personaSaved.setProject(projectLinked);
             }
         }
+
+        personaSaved.setUpdatedAt(new Date());
 
         return this.personaMapper.toDto(this.personaMapper.partialUpdate(personaDto, personaSaved));
     }

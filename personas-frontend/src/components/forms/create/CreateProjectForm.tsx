@@ -46,12 +46,6 @@ export default function CreateProjectForm() {
           withLongText={true}
         />
         <InputTag label="Tags" tags={updatedTags} setTags={setUpdatedTags} />
-        <InputWithLabel
-          label="Tags"
-          errorMessage={state?.errors.tags}
-          inputId="tags"
-          informationMessage="Separate your tags with blank space, commas, or any special character (, ; . - _ / \ |)"
-        />
       </section>
       <section className="flex items-center gap-8 mt-8">
         <ButtonSecondary

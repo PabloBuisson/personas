@@ -38,8 +38,8 @@ Online demo : *TODO*
 * [x] Handle error requests (add a toaster whith shadcdn ui, add error page fallback) 🔥
 * [x] Add 404 page 🔥
 * [x] Add a custom component for creating tags (or use the one to update them)
+* [x] Add `createdAt` on Project and Persona for filtering last items 🔥
 * [ ] Basic client validation (required, with zod ?) 🔥
-* [ ] Add `createdAt` on Project and Persona for filtering last items 🔥
 * [ ] Add interceptors
 * [ ] Add an existing persona to a project
 * [ ] Hide block info

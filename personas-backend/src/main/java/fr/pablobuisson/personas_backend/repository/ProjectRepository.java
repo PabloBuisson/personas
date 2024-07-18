@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,5 +17,5 @@ public interface ProjectRepository extends ListCrudRepository<Project, Long> {
 
     Project findByPersonasId(UUID personaId);
 
-    List<Project> findTop5ByOrderByIdDesc();
+    List<Project> findTop5ByOrderByCreatedAtDesc();
 }
