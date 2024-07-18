@@ -80,7 +80,12 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
         errorMessage={state?.errors.description}
       />
       <section className="mt-8 flex flex-col gap-4">
-        <InputTag tags={updatedTags} setTags={setUpdatedTags} />
+        <InputTag
+          label="Tags"
+          isLabelHidden={true}
+          tags={updatedTags}
+          setTags={setUpdatedTags}
+        />
       </section>
       {updatedPersonas && (
         <section className="mt-16">

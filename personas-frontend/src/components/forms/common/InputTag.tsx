@@ -2,13 +2,21 @@ import { TagDto } from "@/app/api";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
 import Tag from "@/components/tags/Tag";
 import { useRef } from "react";
+import LabelForm from "./LabelForm";
 
 type InputTagProps = {
+  label: string;
+  isLabelHidden?: boolean;
   tags: TagDto[];
   setTags: React.Dispatch<React.SetStateAction<TagDto[]>>;
 };
 
-export default function InputTag({ tags, setTags }: InputTagProps) {
+export default function InputTag({
+  label,
+  isLabelHidden,
+  tags,
+  setTags,
+}: InputTagProps) {
   const inputTagRef = useRef<HTMLInputElement | null>(null);
 
   function deleteTag(tagIndex: number) {
@@ -25,7 +33,12 @@ export default function InputTag({ tags, setTags }: InputTagProps) {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
+      <LabelForm
+        label={label}
+        inputId="new-tag"
+        {...(isLabelHidden ? { className: "sr-only" } : undefined)}
+      />
       {tags && (
         <ul className="flex flex-wrap gap-2">
           {tags.map((tag, index) => (
@@ -58,6 +71,6 @@ export default function InputTag({ tags, setTags }: InputTagProps) {
           }}
         />
       </div>
-    </>
+    </div>
   );
 }

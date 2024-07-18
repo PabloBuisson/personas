@@ -10,6 +10,7 @@ import {
 import { getProjectFormErrors } from "@/components/forms/validation/project-validation";
 
 export async function handleCreateProject(
+  tags: TagDto[],
   currentState: FormStateCreateUpdateProject | undefined,
   formData: FormData
 ) {
@@ -25,21 +26,12 @@ export async function handleCreateProject(
   if (errors) {
     return errors;
   }
-
-  let tagsDTO: TagDto[] = [];
-
-  if (rawFormData.tags) {
-    tagsDTO = rawFormData.tags
-      .toString()
-      .split(/[,\;.\\_\-\/|\s]+/)
-      .map((tagValue) => ({ label: tagValue.trim() }));
-  }
-
+  
   const newProject: ProjectDto = {
     icon: rawFormData.icon as string,
     name: rawFormData.name as string,
     description: rawFormData.description as string,
-    tags: tagsDTO,
+    tags: tags,
   };
 
   let data: ProjectDto;

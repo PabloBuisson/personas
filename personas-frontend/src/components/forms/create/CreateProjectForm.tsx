@@ -7,11 +7,15 @@ import ButtonPrimary from "../../buttons/ButtonPrimary";
 import InputEmoji from "../common/InputEmoji";
 import ButtonSecondary from "@/components/buttons/ButtonSecondary";
 import { useFormState } from "react-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { TagDto } from "@/app/api";
+import InputTag from "../common/InputTag";
 
 export default function CreateProjectForm() {
-  const [state, formAction] = useFormState(handleCreateProject, null);
+  const [updatedTags, setUpdatedTags] = useState([] as TagDto[]);
+  const createProject = handleCreateProject.bind(null, updatedTags);
+  const [state, formAction] = useFormState(createProject, null);
 
   useEffect(() => {
     if (state?.errors.errorMessage) {
@@ -41,6 +45,7 @@ export default function CreateProjectForm() {
           inputId="description"
           withLongText={true}
         />
+        <InputTag label="Tags" tags={updatedTags} setTags={setUpdatedTags} />
         <InputWithLabel
           label="Tags"
           errorMessage={state?.errors.tags}
