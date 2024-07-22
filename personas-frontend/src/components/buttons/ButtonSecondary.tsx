@@ -1,17 +1,18 @@
+import { cn } from "@/app/utils/utils";
 import Link, { LinkProps } from "next/link";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, HTMLProps } from "react";
 
 type ButtonSecondaryButtonProps = {
   element: "button";
   label: string;
-  additionalCSS?: string;
+  className?: HTMLProps<HTMLElement>["className"];
   elementProps?: ButtonHTMLAttributes<HTMLButtonElement>;
 };
 
 type ButtonSecondaryLinkProps = {
   element: "link";
   label: string;
-  additionalCSS?: string;
+  className?: HTMLProps<HTMLElement>["className"];
   elementProps?: LinkProps;
 };
 
@@ -22,18 +23,17 @@ type ButtonSecondaryProps =
 export default function ButtonSecondary({
   element,
   label,
-  additionalCSS,
+  className,
   elementProps,
 }: ButtonSecondaryProps) {
-  let finalCSS = `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap ${
-    additionalCSS ?? ""
-  }`;
-
   if (element === "link") {
     return (
       <Link
         {...elementProps}
-        className={finalCSS}
+        className={cn(
+          `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap`,
+          className
+        )}
         href={elementProps?.href ?? ""}
       >
         {label}
@@ -42,7 +42,13 @@ export default function ButtonSecondary({
   }
 
   return (
-    <button {...elementProps} className={finalCSS}>
+    <button
+      {...elementProps}
+      className={cn(
+        `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap`,
+        className
+      )}
+    >
       {label}
     </button>
   );

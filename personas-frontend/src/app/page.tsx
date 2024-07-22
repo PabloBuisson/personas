@@ -26,13 +26,13 @@ export default async function Home() {
                 element="link"
                 label="Start a project"
                 elementProps={{ href: "projects/new" }}
-                additionalCSS="text-xl font-medium"
+                className="text-xl font-medium"
               />
               <ButtonSecondary
                 element="link"
                 label="Create a persona"
                 elementProps={{ href: "personas/new" }}
-                additionalCSS="text-xl font-medium"
+                className="text-xl font-medium"
               />
             </div>
           </div>

@@ -31,7 +31,7 @@ export default function ErrorPage({
         element="button"
         label="Try again"
         elementProps={{ onClick: resetAndRefresh }}
-        additionalCSS="mt-8"
+        className="mt-8"
       />
     </section>
   );

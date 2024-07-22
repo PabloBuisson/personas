@@ -61,7 +61,7 @@ export default function InputTag({
           name="new-tag"
         ></input>
         <ButtonPrimary
-          additionalCSS="text-sm"
+          className="text-sm"
           element="button"
           label="Add a tag"
           elementProps={{

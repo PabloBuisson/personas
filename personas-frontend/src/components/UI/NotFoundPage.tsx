@@ -8,7 +8,7 @@ export default function NotFoundPage() {
         element="link"
         label="Return to the home page"
         elementProps={{ href: "/" }}
-        additionalCSS="mt-8"
+        className="mt-8"
       />
     </section>
   );
