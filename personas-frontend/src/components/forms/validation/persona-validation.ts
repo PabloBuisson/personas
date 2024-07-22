@@ -12,17 +12,18 @@ export function getPersonaFormErrors(
   errors: ErrorMessageCreateUpdate<PersonaDto>;
 } | null {
   const errors: ErrorMessageCreateUpdate<PersonaDto> = {};
+  const timestamp = Date.now();
 
   if (!formData.name || formData.name.toString().trim().length === 0) {
-    errors.name = "Name is required";
+    errors.name = { message: "Name is required", timestamp };
   }
 
   if (!formData.story || formData.story.toString().trim().length === 0) {
-    errors.story = "Story is required";
+    errors.story = { message: "Story is required", timestamp };
   }
 
   if (!formData.age || formData.age.toString().trim().length === 0) {
-    errors.age = "Age is required";
+    errors.age = { message: "Age is required", timestamp };
   }
 
   if (Object.keys(errors).length > 0) {

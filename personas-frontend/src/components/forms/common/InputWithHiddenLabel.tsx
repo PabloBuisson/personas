@@ -6,8 +6,7 @@ type InputWithHiddenLabelProps = InputWithLabelProps | TextAreaWithLabelProps;
 
 type ErrorState = {
   message?: string;
-  hasBeenChecked?: boolean;
-  hasBeenCleared?: boolean;
+  timestamp?: number;
 };
 
 export default function InputWithHiddenLabel({
@@ -24,21 +23,23 @@ export default function InputWithHiddenLabel({
     if (errorMessage && event.target.value) {
       setErrorState((previousState) => ({
         ...previousState,
-        message: undefined,
-        hasBeenCleared: true,
+        message: undefined
       }));
     }
   }
 
+  // Display the error message after the first AND the next server side validations
+  // The timestamp act as a unique identifier for the error message
+  // If the timestamp is different, this means that it's coming from a different validation
   if (
-    errorMessage &&
+    errorMessage?.message &&
     !errorState?.message &&
-    !errorState?.hasBeenCleared &&
-    !errorState?.hasBeenChecked
+    (!errorState?.timestamp ||
+      errorState?.timestamp !== errorMessage?.timestamp)
   ) {
     setErrorState({
-      message: errorMessage,
-      hasBeenChecked: true,
+      message: errorMessage?.message,
+      timestamp: errorMessage?.timestamp,
     });
   }
 
@@ -57,6 +58,7 @@ export default function InputWithHiddenLabel({
             style={{ width: "100%" }}
             name={inputId}
             {...(props as React.ComponentPropsWithoutRef<"textarea">)}
+            onInput={(e) => clearErrorMessage(e)}
           />
         ) : (
           <input

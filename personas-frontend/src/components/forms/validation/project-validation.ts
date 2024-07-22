@@ -12,16 +12,17 @@ export function getProjectFormErrors(
   errors: ErrorMessageCreateUpdate<ProjectDto>;
 } | null {
   const errors: ErrorMessageCreateUpdate<ProjectDto> = {};
+  const timestamp = Date.now();
 
   if (!formData.name || formData.name.toString().trim().length === 0) {
-    errors.name = "Name is required";
+    errors.name = { message: "Name is required", timestamp };
   }
 
   if (
     !formData.description ||
     formData.description.toString().trim().length === 0
   ) {
-    errors.description = "Description is required";
+    errors.description = { message: "Description is required", timestamp };
   }
 
   if (Object.keys(errors).length > 0) {

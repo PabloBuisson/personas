@@ -9,7 +9,7 @@ export type FormStateCreateUpdateProject = {
 } | null;
 
 export type ErrorMessageCreateUpdate<T> = {
-  [K in keyof T]?: string;
+  [K in keyof T]?: { message: string, timestamp: number };
 } & { errorMessage?: string; successMessage?: string };
 
 export type FormDataForEntity<T> = {

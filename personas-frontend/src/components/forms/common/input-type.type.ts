@@ -2,7 +2,7 @@ type InputBaseProps = {
   label: string;
   inputId: string;
   informationMessage?: string;
-  errorMessage?: string;
+  errorMessage?: { message: string; timestamp: number };
 };
 
 type InputWithLabelProps = InputBaseProps & {
