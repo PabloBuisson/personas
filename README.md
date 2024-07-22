@@ -40,7 +40,8 @@ Online demo : *TODO*
 * [x] Add a custom component for creating tags (or use the one to update them)
 * [x] Add `createdAt` on Project and Persona for filtering last items 🔥
 * [x] Delete error message on input focus
-* [ ] Border on error input (with the help of tailwind-merge ?)
+* [x] Border on error input
+* [x] Use tailwind-merge to improve CSS flexibility
 * [ ] Basic client validation (required, with zod ?) 🔥
 * [ ] Add interceptors
 * [ ] Add an existing persona to a project
@@ -82,8 +83,9 @@ npm run dev
 
 * **TailwindCSS** for styling
 * **emoji-picker-react** for handling emojis in form
-* **Iconify** for easy to use icons
+* **Iconify** for easy-to-use icons
 * **Sonner** for notifications
+* **tailwind-merge** and **clsx** for *className* flexibility
 
 ### Packages BACKEND
 
