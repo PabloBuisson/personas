@@ -39,12 +39,12 @@ Online demo : *TODO*
 * [x] Add 404 page 🔥
 * [x] Add a custom component for creating tags (or use the one to update them)
 * [x] Add `createdAt` on Project and Persona for filtering last items 🔥
+* [x] Delete error message on input focus
+* [ ] Border on error input (with the help of tailwind-merge ?)
 * [ ] Basic client validation (required, with zod ?) 🔥
 * [ ] Add interceptors
 * [ ] Add an existing persona to a project
 * [ ] Hide block info
-* [ ] Delete error message on input focus
-* [ ] Border on error input (with the help of tailwind-merge ?)
 * [ ] Metadata
 * [ ] Responsive
 * [ ] Handle empty data (homepage, etc.)
