@@ -23,7 +23,7 @@ export default function InputWithHiddenLabel({
     if (errorMessage && event.target.value) {
       setErrorState((previousState) => ({
         ...previousState,
-        message: undefined
+        message: undefined,
       }));
     }
   }
@@ -57,7 +57,15 @@ export default function InputWithHiddenLabel({
             id={inputId}
             style={{ width: "100%" }}
             name={inputId}
-            {...(props as React.ComponentPropsWithoutRef<"textarea">)}
+            {...{
+              ...(props as React.ComponentPropsWithoutRef<"textarea">),
+              className: undefined,
+            }}
+            className={`${props.className} ${
+              errorState?.message
+                ? "shadow-[0_0_0_0.125rem_red] shadow-red-800"
+                : ""
+            }`}
             onInput={(e) => clearErrorMessage(e)}
           />
         ) : (
@@ -65,7 +73,15 @@ export default function InputWithHiddenLabel({
             id={inputId}
             style={{ width: "100%" }}
             name={inputId}
-            {...(props as React.ComponentPropsWithoutRef<"input">)}
+            {...{
+              ...(props as React.ComponentPropsWithoutRef<"input">),
+              className: undefined,
+            }}
+            className={`${props.className} ${
+              errorState?.message
+                ? "shadow-[0_0_0_0.125rem_red] shadow-red-800"
+                : ""
+            }`}
             onInput={(e) => clearErrorMessage(e)}
           />
         )}

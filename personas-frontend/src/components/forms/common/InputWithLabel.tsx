@@ -64,7 +64,7 @@ export default function InputWithLabel({
             name={inputId}
             className={`px-3 py-4 text-xl font-normal rounded-md w-full ${
               errorState?.message
-                ? "shadow-[0_0_0_0.1em_red] shadow-red-800"
+                ? "shadow-[0_0_0_0.125rem_red] shadow-red-800"
                 : ""
             }`}
             onInput={(e) => clearErrorMessage(e)}
@@ -76,7 +76,7 @@ export default function InputWithLabel({
             name={inputId}
             className={`px-3 py-4 text-xl font-normal rounded-md w-full ${
               errorState?.message
-                ? "shadow-[0_0_0_0.1em_red] shadow-red-800"
+                ? "shadow-[0_0_0_0.125rem_red] shadow-red-800"
                 : ""
             }`}
             onInput={(e) => clearErrorMessage(e)}

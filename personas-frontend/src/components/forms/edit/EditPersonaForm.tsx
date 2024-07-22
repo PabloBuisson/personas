@@ -31,7 +31,7 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
   });
   const [state, formAction] = useFormState(updatePersona, null);
 
-  const personalLifeInfos = getPersonalLifeInfos(persona, state)
+  const personalLifeInfos = getPersonalLifeInfos(persona, state);
   const jobInfos = getJobInfos(persona, state);
 
   async function onDeleteProject() {
@@ -75,7 +75,7 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
         <div className="basis-3/4 flex flex-col gap-8">
           <div className="flex justify-between items-start gap-8 w-full">
             <InputWithHiddenLabel
-              className="text-5xl font-extrabold text-orange-900 bg-transparent"
+              className="text-5xl font-extrabold text-orange-900 bg-transparent rounded"
               label="Project name"
               inputId="title"
               errorMessage={state?.errors.name}
