@@ -15,6 +15,6 @@ public interface PersonaMapper {
     @Mapping(target = "project.personas", ignore = true)
     PersonaDto toDto(Persona persona);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.SET_TO_NULL)
     Persona partialUpdate(PersonaDto personaDto, @MappingTarget Persona persona);
 }

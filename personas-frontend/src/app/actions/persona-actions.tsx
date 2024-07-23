@@ -1,7 +1,12 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { PersonaDto } from "../api";
+import {
+  PersonaDto,
+  JobDetailsDto,
+  CultureFavoritesDto,
+  EmotionalMotivationsDto,
+} from "../api";
 import { createPersona, updatePersona } from "../api/endpoints";
 import {
   FormDataForEntity,
@@ -9,16 +14,37 @@ import {
 } from "@/components/forms/settings/form-actions-settings-type.type";
 import { getPersonaFormErrors } from "@/components/forms/validation/persona-validation";
 
+// By default, the FormData API returns all values as strings, even the null ones ("").
+function getFormDataEntryValue<
+  K extends
+    | keyof PersonaDto
+    | keyof JobDetailsDto
+    | keyof CultureFavoritesDto
+    | keyof EmotionalMotivationsDto
+>(
+  formEntryKey: K | "personalityTraits" | "job-title",
+  formData: FormData
+): string | undefined {
+  const formEntryValue = formData.get(formEntryKey);
+
+  if (
+    !formEntryValue ||
+    (typeof formEntryValue === "string" && formEntryValue.length === 0)
+  )
+    return undefined;
+  return formEntryValue as string;
+}
+
 export async function handleCreatePersona(
   projectId: number | undefined,
   currentState: FormStateCreateUpdatePersona | undefined,
   formData: FormData
 ) {
   const rawFormData: FormDataForEntity<PersonaDto> = {
-    image: formData.get("icon"),
-    name: formData.get("name"),
-    story: formData.get("story"),
-    age: formData.get("age"),
+    avatar: getFormDataEntryValue("avatar", formData),
+    age: getFormDataEntryValue("age", formData),
+    name: getFormDataEntryValue("name", formData),
+    story: getFormDataEntryValue("story", formData),
   };
 
   let errors = getPersonaFormErrors(currentState, rawFormData);
@@ -27,17 +53,7 @@ export async function handleCreatePersona(
     return errors;
   }
 
-  const newProject: PersonaDto = {
-    image: rawFormData.image as string,
-    name: rawFormData.name as string,
-    story: rawFormData.story as string,
-    age: rawFormData.age as string,
-    location: undefined,
-    family: undefined,
-    education: undefined,
-    idols: undefined,
-    brands: undefined,
-  };
+  const newProject: PersonaDto = rawFormData as PersonaDto;
 
   let data: PersonaDto;
 
@@ -60,12 +76,12 @@ export async function handleUpdatePersona(
   formData: FormData
 ) {
   const rawFormData: FormDataForEntity<PersonaDto> = {
-    image: formData.get("icon"),
-    name: formData.get("title"),
-    story: formData.get("story"),
-    age: formData.get("age"),
-    location: formData.get("location"),
-    family: formData.get("family"),
+    avatar: getFormDataEntryValue("avatar", formData),
+    age: getFormDataEntryValue("age", formData),
+    name: getFormDataEntryValue("name", formData),
+    story: getFormDataEntryValue("story", formData),
+    location: getFormDataEntryValue("location", formData),
+    family: getFormDataEntryValue("family", formData),
   };
 
   let errors = getPersonaFormErrors(currentState, rawFormData);
@@ -76,40 +92,40 @@ export async function handleUpdatePersona(
 
   const updatedPersona: PersonaDto = {
     id: persona.id,
-    image: rawFormData.image as string,
-    age: rawFormData.age as string,
-    name: rawFormData.name as string,
-    story: rawFormData.story as string,
-    location: rawFormData.location,
-    family: rawFormData.family,
-    education: formData.get("education"),
-    personalityTraits: formData.get("personality"),
-    idols: formData.get("idols"),
-    brands: formData.get("brands"),
+    avatar: getFormDataEntryValue("avatar", formData),
+    age: getFormDataEntryValue("age", formData) as string,
+    name: getFormDataEntryValue("name", formData) as string,
+    story: getFormDataEntryValue("story", formData) as string,
+    location: getFormDataEntryValue("location", formData),
+    family: getFormDataEntryValue("family", formData),
+    education: getFormDataEntryValue("education", formData),
+    personalityTraits: getFormDataEntryValue("personalityTraits", formData),
+    idols: getFormDataEntryValue("idols", formData),
+    brands: getFormDataEntryValue("brands", formData),
     job: {
       id: persona.job?.id,
-      title: formData.get("job-title") as string,
-      salary: formData.get("salary") as string,
-      company: formData.get("company") as string,
-      industry: formData.get("industry") as string,
+      title: getFormDataEntryValue("job-title", formData),
+      salary: getFormDataEntryValue("salary", formData),
+      company: getFormDataEntryValue("company", formData),
+      industry: getFormDataEntryValue("industry", formData),
     },
     culture: {
       id: persona.culture?.id,
-      movies: formData.get("movies") as string,
-      music: formData.get("music") as string,
-      books: formData.get("books") as string,
-      games: formData.get("games") as string,
-      comics: formData.get("comics") as string,
-      tv: formData.get("tv") as string,
+      movies: getFormDataEntryValue("movies", formData),
+      music: getFormDataEntryValue("music", formData),
+      books: getFormDataEntryValue("books", formData),
+      games: getFormDataEntryValue("games", formData),
+      comics: getFormDataEntryValue("comics", formData),
+      tv: getFormDataEntryValue("tv", formData),
     },
     emotions: {
       id: persona.emotions?.id,
-      passions: formData.get("passions") as string,
-      fears: formData.get("fears") as string,
-      goals: formData.get("goals") as string,
-      joys: formData.get("joys") as string,
-      frustrations: formData.get("frustrations") as string,
-      habits: formData.get("habits") as string,
+      passions: getFormDataEntryValue("passions", formData),
+      fears: getFormDataEntryValue("fears", formData),
+      goals: getFormDataEntryValue("goals", formData),
+      joys: getFormDataEntryValue("joys", formData),
+      frustrations: getFormDataEntryValue("frustrations", formData),
+      habits: getFormDataEntryValue("habits", formData),
     },
     project: persona.project,
   };

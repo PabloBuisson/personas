@@ -1,6 +1,7 @@
 import AppIcon from "@/components/UI/AppIcon";
 import LabelForm from "./LabelForm";
 import { useState } from "react";
+import { InputWithLabelProps, TextAreaWithLabelProps } from "./input-type.type";
 
 type InputWithHiddenLabelProps = InputWithLabelProps | TextAreaWithLabelProps;
 

@@ -1,14 +1,16 @@
-type InputBaseProps = {
+import { ErrorMessageInput } from "../settings/form-actions-settings-type.type";
+
+export type InputBaseProps = {
   label: string;
   inputId: string;
   informationMessage?: string;
-  errorMessage?: { message: string; timestamp: number };
+  errorMessage?: ErrorMessageInput;
 };
 
-type InputWithLabelProps = InputBaseProps & {
+export type InputWithLabelProps = InputBaseProps & {
   withLongText?: false;
 } & React.ComponentPropsWithoutRef<"input">;
 
-type TextAreaWithLabelProps = InputBaseProps & {
+export type TextAreaWithLabelProps = InputBaseProps & {
   withLongText: true;
 } & React.ComponentPropsWithoutRef<"textarea">;
