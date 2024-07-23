@@ -1,4 +1,5 @@
 import { AppIconNameProps } from "@/components/UI/AppIcon";
+import { ErrorMessageInput } from "./form-actions-settings-type.type";
 
 export type PersonalInformationsCell = {
   order: number;
@@ -6,5 +7,5 @@ export type PersonalInformationsCell = {
   label: string;
   name: string;
   value: string | number | undefined;
-  errorMessage?: string;
+  errorMessage?: ErrorMessageInput;
 };

@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS persona (
     name VARCHAR(255) NOT NULL,
     age VARCHAR(255) NOT NULL,
     story TEXT NOT NULL,
-    image VARCHAR(255),
+    avatar VARCHAR(255),
     color VARCHAR(255),
     location VARCHAR(255),
     family TEXT,

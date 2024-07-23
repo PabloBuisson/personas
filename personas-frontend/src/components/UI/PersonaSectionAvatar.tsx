@@ -20,7 +20,7 @@ export default function PersonaSectionAvatar({
       <>
         <div className="bg-white relative rounded-full w-36 h-36 flex justify-center items-center z-10 overflow-hidden border-white border-8">
           <input
-            name="icon"
+            name="avatar"
             className="hidden"
             size={1}
             type="text"

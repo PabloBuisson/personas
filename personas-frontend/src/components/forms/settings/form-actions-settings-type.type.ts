@@ -15,3 +15,8 @@ export type ErrorMessageCreateUpdate<T> = {
 export type FormDataForEntity<T> = {
   [K in keyof T]?: FormDataEntryValue | null;
 };
+
+export type ErrorMessageInput = {
+  message: string;
+  timestamp: number;
+};

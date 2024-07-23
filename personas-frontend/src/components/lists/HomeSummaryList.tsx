@@ -32,7 +32,7 @@ export default function HomeSummaryList({
     >
       <div className="flex items-center gap-8">
         <SecondaryTitle title={`Last created ${targetName ?? "projects"}`} />
-        {data && data.length > 0 && (
+        {data && data.length > 1 && (
           <Link
             className="text-lg font-bold underline underline-offset-4 decoration-[0.2rem] decoration-dotted decoration-darkorange-500"
             href={`${"/" + targetName ?? "projects"}`}

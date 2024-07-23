@@ -278,7 +278,7 @@ export interface PersonaDto {
      * @type {string}
      * @memberof PersonaDto
      */
-    image?: string;
+    avatar?: string;
     /**
      * 
      * @type {string}
@@ -1775,7 +1775,7 @@ export const UserControllerApiFetchParamCreator = function (configuration?: Conf
          * @throws {RequiredError}
          */
         getSummary(options: any = {}): FetchArgs {
-            const localVarPath = `/api/projects/summary`;
+            const localVarPath = `/api/user/summary`;
             const localVarUrlObj = url.parse(localVarPath, true);
             const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
             const localVarHeaderParameter = {} as any;

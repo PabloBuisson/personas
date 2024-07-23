@@ -30,7 +30,7 @@ public class Persona {
     @NotBlank
     private String story;
 
-    private String image;
+    private String avatar;
 
     private String color;
 

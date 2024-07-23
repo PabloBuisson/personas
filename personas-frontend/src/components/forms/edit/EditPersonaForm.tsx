@@ -57,7 +57,7 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
     <form action={formAction} className="flex flex-col gap-8 text-purple-800">
       <div className="flex justify-start items-start gap-16">
         <div className="basis-1/4 flex flex-col justify-center items-center gap-4">
-          <PersonaSectionAvatar mode="edit" image={persona.image} />
+          <PersonaSectionAvatar mode="edit" image={persona.avatar} />
           <div className="flex flex-col gap-12 w-full">
             <PersonaSectionLinkedProject
               onAdd={onAddProject}
@@ -76,8 +76,8 @@ export default function EditPersonaForm({ persona }: { persona: PersonaDto }) {
           <div className="flex justify-between items-start gap-8 w-full">
             <InputWithHiddenLabel
               className="text-5xl font-extrabold text-orange-900 bg-transparent rounded"
-              label="Project name"
-              inputId="title"
+              label="Name of the persona"
+              inputId="name"
               errorMessage={state?.errors.name}
               defaultValue={persona.name}
             />
