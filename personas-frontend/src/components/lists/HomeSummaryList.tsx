@@ -58,7 +58,7 @@ export default function HomeSummaryList({
         </div>
       )}
       {(!data || data.length === 0) && (
-        <ul className="w-[30ch] h-[30ch]">
+        <ul className="flex">
           {targetName === "personas" && <CreatePersonaCard id="new" />}
           {targetName === "projects" && <CreateProjectCard id="new" />}
         </ul>

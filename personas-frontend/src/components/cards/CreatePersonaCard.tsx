@@ -10,9 +10,9 @@ export default function CreatePersonaCard({
 }) {
   return (
     <li className="text-base font-medium" key={id}>
-      <article className="flex justify-center items-center bg-pink-200 text-pink-900 noisy-background">
+      <article className="h-full flex justify-center items-center bg-pink-200 text-pink-900 noisy-background">
         <Link
-          className="relative p-2 flex flex-col grow min-h-[30ch] min-w-[30ch]"
+          className="relative p-2 flex flex-col grow h-full min-h-[20ch] min-w-[30ch]"
           href={`/personas/new${projectId ? "?project=" + projectId : ""}`}
         >
           <div className="absolute flex justify-center items-center top-0 translate-y-[-25%] left-1/2 translate-x-[-50%] bg-pink-100 w-16 h-16 rounded-full border-[0.125em] border-pink-200 overflow-hidden">

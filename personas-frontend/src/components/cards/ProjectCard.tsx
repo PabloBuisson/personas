@@ -30,7 +30,13 @@ export default function ProjectCard({
           <ul className="flex flex-wrap items-baseline gap-2">
             {project.tags.slice(0, 2).map((tag) => (
               // TODO improve logic with ch width
-              <Tag key={tag.id} id={tag.id} name={tag.label} size="text-sm" />
+              <Tag
+                key={tag.id}
+                id={tag.id}
+                name={tag.label}
+                size="text-sm"
+                className="border-purple-300 bg-purple-25"
+              />
             ))}
             {project.tags.length > 2 && <li className="text-sm ml-2">...</li>}
           </ul>

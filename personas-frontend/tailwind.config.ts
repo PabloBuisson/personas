@@ -39,6 +39,7 @@ const config: Config = {
         50: "hsl(var(--purple-50))",
         100: "hsl(var(--purple-100))",
         200: "hsl(var(--purple-200))",
+        300: "hsl(var(--purple-300))",
         600: "hsl(var(--purple-600))",
         800: "hsl(var(--purple-800))",
         900: "hsl(var(--purple-900))",

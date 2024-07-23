@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AppIcon from "../UI/AppIcon";
+
 import { ProjectDto } from "@/app/api";
 import ButtonPrimary from "../buttons/ButtonPrimary";
 

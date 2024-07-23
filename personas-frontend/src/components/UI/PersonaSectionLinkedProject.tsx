@@ -1,11 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { ProjectDto } from "@/app/api";
 import ProjectCard from "../cards/ProjectCard";
 import SecondaryTitle from "./SecondaryTitle";
 import ProjectSelector from "../selectors/project-selector";
-import { useEffect, useState } from "react";
 import { getProjects } from "@/app/api/endpoints";
+import ButtonPrimary from "../buttons/ButtonPrimary";
 
 type PersonaSectionLinkedProjectProps =
   | PersonaEditSectionLinkedProject
@@ -33,12 +35,19 @@ export default function PersonaSectionLinkedProject(
       <p className="py-4 px-5 bg-orange-25 text-orange-900 w-full rounded-sm">
         {`No linked project (yet) !`}
       </p>
-      {props.mode === "edit" && (
+      {props.mode === "edit" && projects && projects.length > 0 && (
         <ProjectSelector
           projects={projects}
           onProjectClick={(projectId) => {
             props.onAdd(projects.find((p) => p.id === projectId) as ProjectDto);
           }}
+        />
+      )}
+      {props.mode === "edit" && (!projects || projects.length === 0) && (
+        <ButtonPrimary
+          element="link"
+          label="Create a project"
+          elementProps={{ href: "/projects/new" }}
         />
       )}
     </div>
