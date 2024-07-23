@@ -5,3 +5,11 @@ import { clsx, ClassValue } from "clsx";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export function isEmpty(value: any): boolean {
+  return value === null || value === undefined || value === "";
+}
+
+export function isNotEmpty(value: any): boolean {
+  return !isEmpty(value);
+}
