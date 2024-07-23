@@ -26,13 +26,13 @@ export default function PersonalInformationsRow(
               }`}
               key={cell.name}
             >
-              {cell.errorMessage && (
+              {cell.errorMessage?.message && (
                 <div className="flex items-center gap-2 bg-red-800 py-2 pl-2 pr-4 absolute top-0 translate-y-[-50%] left-3 rounded-sm">
                   <AppIcon
                     icon="mdi:alert-circle-outline"
                     className="text-lg text-red-300"
                   />
-                  <p className=" text-red-50 text-sm">{cell.errorMessage}</p>
+                  <p className=" text-red-50 text-sm">{cell.errorMessage.message}</p>
                 </div>
               )}
               <AppIcon icon={cell.icon} className="text-2xl text-pink-500" />
