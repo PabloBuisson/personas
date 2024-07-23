@@ -1,6 +1,7 @@
 import AppIcon from "@/components/UI/AppIcon";
 import LabelForm from "./LabelForm";
 import { useState } from "react";
+import { InputWithLabelProps, TextAreaWithLabelProps } from "./input-type.type";
 
 type InputWithVisibleLabelProps = InputWithLabelProps | TextAreaWithLabelProps;
 
@@ -62,7 +63,7 @@ export default function InputWithLabel({
             {...(props as React.ComponentPropsWithoutRef<"textarea">)}
             id={inputId}
             name={inputId}
-            className={`px-3 py-4 text-xl font-normal rounded-md w-full ${
+            className={`px-3 py-4 text-xl text-purple-800 font-normal rounded-md w-full ${
               errorState?.message
                 ? "shadow-[0_0_0_0.125rem_red] shadow-red-800"
                 : ""
@@ -74,7 +75,7 @@ export default function InputWithLabel({
             {...(props as React.ComponentPropsWithoutRef<"input">)}
             id={inputId}
             name={inputId}
-            className={`px-3 py-4 text-xl font-normal rounded-md w-full ${
+            className={`px-3 py-4 text-xl text-purple-800 font-normal rounded-md w-full ${
               errorState?.message
                 ? "shadow-[0_0_0_0.125rem_red] shadow-red-800"
                 : ""
