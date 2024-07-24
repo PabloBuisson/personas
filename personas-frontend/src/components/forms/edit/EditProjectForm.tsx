@@ -46,13 +46,13 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
   }, [state]);
 
   return (
-    <form action={formAction} className="flex flex-col gap-8">
-      <div className="flex justify-between items-start gap-16">
-        <div className="bg-white relative rounded-full w-28 h-28 flex justify-center items-center">
+    <form action={formAction} className="flex flex-col gap-16 md:gap-8">
+      <div className="flex flex-wrap justify-between items-start gap-16">
+        <div className="bg-white relative rounded-full w-28 h-28 flex justify-center items-center order-2 md:order-1 z-10">
           <InputEmoji name="icon" value={project.icon} />
         </div>
 
-        <div className="flex justify-end gap-8">
+        <div className="flex flex-wrap justify-end gap-8 order-1 md:order-2 w-full md:w-auto">
           <ButtonSecondary
             element="link"
             label="Cancel"
@@ -66,14 +66,14 @@ export default function EditProjectForm({ project }: { project: ProjectDto }) {
         </div>
       </div>
       <InputWithHiddenLabel
-        className="text-5xl font-extrabold bg-transparent"
+        className="text-5xl font-extrabold bg-transparent rounded-md"
         label="Project name"
         inputId="title"
         defaultValue={project.name}
         errorMessage={state?.errors.name}
       />
       <InputWithHiddenLabel
-        className="text-xl font-medium bg-transparent"
+        className="text-xl font-medium bg-transparent rounded-md"
         label="Description"
         inputId="description"
         defaultValue={project.description}

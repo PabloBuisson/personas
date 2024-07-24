@@ -22,9 +22,9 @@ export default async function Project({
   let project: ProjectDto = await getProjectById(projectId);
 
   return (
-    <main className="p-0 pt-8 md:p-16 flex flex-col gap-8">
-      <div className="flex justify-between items-start gap-16">
-        <div className="bg-white rounded-full w-28 h-28 flex justify-center items-center">
+    <main className="p-0 pt-8 md:p-16 flex flex-col gap-16 md:gap-8">
+      <div className="flex flex-wrap justify-between items-start gap-16">
+        <div className="bg-white rounded-full w-28 h-28 flex justify-center items-center order-2 md:order-1 z-10">
           {project.icon && (
             <span className="text-6xl" role="image">
               {project.icon}
@@ -32,7 +32,7 @@ export default async function Project({
           )}
         </div>
 
-        <div className="flex justify-end gap-8">
+        <div className="flex flex-wrap justify-end gap-8 order-1 md:order-2 w-full md:w-auto">
           <ButtonPrimary
             element="link"
             label="Edit Project"

@@ -34,7 +34,7 @@ export default function ButtonPrimary({
       <Link
         {...elementProps}
         className={cn(
-          `bg-darkorange-500 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap grow md:grow-0 text-center`,
+          `bg-darkorange-500 hover:bg-darkorange-600 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap grow md:grow-0 text-center`,
           className
         )}
         href={elementProps?.href ?? ""}
@@ -49,7 +49,7 @@ export default function ButtonPrimary({
       {...elementProps}
       disabled={pending}
       className={cn(
-        `bg-darkorange-500 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap grow md:grow-0 text-center`,
+        `bg-darkorange-500 hover:bg-darkorange-600 border-[0.2em] text-white border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap grow md:grow-0 text-center`,
         className
       )}
     >
