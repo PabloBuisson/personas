@@ -43,14 +43,17 @@ Online demo : *TODO*
 * [x] Border on error input
 * [x] Use tailwind-merge to improve CSS flexibility
 * [x] Handle empty data (homepage, etc.)
+* [x] Base Metadata
+* [ ] Responsive
+* [ ] Images, gifs
+* [ ] Details metadata (dynamic metadata, opengraph)
 * [ ] Basic client validation (required, with zod ?) 🔥
+* [ ] Scroll to top on page change
 * [ ] Skeleton loader
 * [ ] Reset active tag
 * [ ] Add interceptors
 * [ ] Add an existing persona to a project
 * [ ] Hide block info
-* [ ] Metadata
-* [ ] Responsive
 * [ ] Authentication ?
   
 ## :iphone: Images
