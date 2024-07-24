@@ -1,6 +1,12 @@
+import { Metadata } from "next";
+
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
 import EditPersonaForm from "@/components/forms/edit/EditPersonaForm";
+
+export const metadata: Metadata = {
+  title: "Edit persona",
+};
 
 export default async function EditPersona({
   params,

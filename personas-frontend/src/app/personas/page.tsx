@@ -1,5 +1,11 @@
-import PersonaList from "@/components/lists/PersonaList";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+import PersonaList from "@/components/lists/PersonaList";
+
+export const metadata: Metadata = {
+  title: "My personas",
+};
 
 export default function Personas() {
   return (

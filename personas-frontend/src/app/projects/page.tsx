@@ -1,6 +1,12 @@
+import { Metadata } from "next";
+import { Suspense } from "react";
+
 import ProjectList from "@/components/lists/ProjectList";
 import TagList from "@/components/tags/TagList";
-import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "My projects",
+};
 
 export default async function Projects({
   searchParams,

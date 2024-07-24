@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import { PersonaDto } from "@/app/api";
 import { getPersonaById } from "@/app/api/endpoints";
 import PersonaSectionAvatar from "@/components/UI/PersonaSectionAvatar";
@@ -8,27 +10,17 @@ import SecondaryTitle from "@/components/UI/SecondaryTitle";
 import PersonalInformationsBlockView from "@/components/UI/PersonalInformationsBlockView";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
-import CreatePersonaForm from "@/components/forms/create/CreatePersonaForm";
+
+export const metadata: Metadata = {
+  title: "Persona details",
+};
 
 export default async function Persona({
   params,
-  searchParams,
 }: {
   params: { personaId: string };
-  searchParams: { project?: string };
 }) {
   const personaId = params.personaId;
-  const projectId = isNaN(Number(searchParams.project))
-    ? undefined
-    : Number(searchParams.project);
-
-  if (personaId === "new") {
-    return (
-      <main className="p-16">
-        <CreatePersonaForm projectId={projectId} />
-      </main>
-    );
-  }
 
   let persona: PersonaDto = await getPersonaById(personaId);
 

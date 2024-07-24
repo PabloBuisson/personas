@@ -1,6 +1,12 @@
+import { Metadata } from "next";
+
 import { ProjectDto } from "@/app/api";
 import { getProjectById } from "@/app/api/endpoints";
 import EditProjectForm from "@/components/forms/edit/EditProjectForm";
+
+export const metadata: Metadata = {
+  title: "Edit project",
+};
 
 export default async function EditProject({
   params,

@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import { ProjectDto } from "@/app/api";
 import { getProjectById } from "@/app/api/endpoints";
 import CreatePersonaCard from "@/components/cards/CreatePersonaCard";
@@ -5,6 +7,10 @@ import PersonaCard from "@/components/cards/PersonaCard";
 import Tag from "@/components/tags/Tag";
 import ButtonDeleteItem from "@/components/buttons/ButtonDeleteItem";
 import ButtonPrimary from "@/components/buttons/ButtonPrimary";
+
+export const metadata: Metadata = {
+  title: "Project details",
+};
 
 export default async function Project({
   params,
