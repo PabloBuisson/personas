@@ -22,7 +22,7 @@ export default async function Project({
   let project: ProjectDto = await getProjectById(projectId);
 
   return (
-    <main className="p-16 flex flex-col gap-8">
+    <main className="p-0 pt-8 md:p-16 flex flex-col gap-8">
       <div className="flex justify-between items-start gap-16">
         <div className="bg-white rounded-full w-28 h-28 flex justify-center items-center">
           {project.icon && (

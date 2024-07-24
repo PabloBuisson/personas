@@ -31,7 +31,7 @@ export default function ButtonSecondary({
       <Link
         {...elementProps}
         className={cn(
-          `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap`,
+          `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap grow md:grow-0 text-center`,
           className
         )}
         href={elementProps?.href ?? ""}
@@ -45,7 +45,7 @@ export default function ButtonSecondary({
     <button
       {...elementProps}
       className={cn(
-        `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap`,
+        `bg-gray-50 border-[0.2em] border-darkorange-500 px-[1.6em] py-[1.2em] rounded-lg whitespace-nowrap grow md:grow-0 text-center`,
         className
       )}
     >

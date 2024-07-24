@@ -19,7 +19,7 @@ export default async function EditProject({
   let project: ProjectDto = await getProjectById(projectId);
 
   return (
-    <main className="p-16 flex flex-col gap-8">
+    <main className="p-0 pt-8 md:p-16 flex flex-col gap-8">
       <EditProjectForm project={project} />
     </main>
   );

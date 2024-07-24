@@ -30,7 +30,7 @@ export default function HomeSummaryList({
         targetName === "projects" ? "gap-10" : "gap-8"
       }`}
     >
-      <div className="flex items-center gap-8">
+      <div className="flex flex-wrap items-center gap-8">
         <SecondaryTitle title={`Last created ${targetName ?? "projects"}`} />
         {data && data.length > 1 && (
           <Link
@@ -43,7 +43,7 @@ export default function HomeSummaryList({
       </div>
       {data && data.length > 0 && (
         <div>
-          <ul className="flex flex-wrap gap-8">
+          <ul className="flex flex-wrap gap-x-8 gap-y-12">
             {targetName === "projects" &&
               data &&
               data.map((project) => {

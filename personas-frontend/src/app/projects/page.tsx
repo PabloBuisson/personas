@@ -14,7 +14,7 @@ export default async function Projects({
   searchParams: { tag: number };
 }) {
   return (
-    <main className="p-16 flex flex-col gap-16">
+    <main className="p-0 pt-8 md:p-16 flex flex-col gap-16">
       <h1 className="text-5xl font-extrabold">My projects</h1>
       <div className="flex flex-col gap-16">
         {/* TODO one Suspense with skeleton */}

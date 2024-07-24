@@ -16,7 +16,7 @@ export default async function CreatePersona({
     : Number(searchParams.project);
 
   return (
-    <main className="p-16">
+    <main className="p-0 pt-8 md:p-16">
       <CreatePersonaForm projectId={projectId} />
     </main>
   );

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default async function CreateProject() {
   return (
-    <main className="p-16">
+    <main className="p-0 pt-8 md:p-16">
       <CreateProjectForm />
     </main>
   );

@@ -2,7 +2,7 @@ import AppIcon from "./AppIcon";
 
 export default function SecondaryTitle({ title }: { title: string }) {
   return (
-    <div className="flex items-center justify-start gap-4">
+    <div className="flex flex-wrap items-center justify-start gap-4">
       <AppIcon
         icon="mdi:plus-thick"
         className="text-4xl font-semibold text-darkorange-500"

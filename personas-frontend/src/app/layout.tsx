@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + " p-8 min-h-screen"}>
+      <body className={inter.className + " p-6 md:p-8 min-h-screen"}>
         <header>
           <Link className="text-lg" href={"/"}>
             Personas

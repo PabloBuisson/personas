@@ -52,7 +52,7 @@ export default function CreatePersonaForm({
           informationMessage="You can give a ballpark (i.e 15-25 years)"
         />
       </section>
-      <section className="flex items-center gap-8 mt-8">
+      <section className="flex flex-wrap items-center gap-8 mt-8">
         <ButtonSecondary
           element="link"
           elementProps={{ href: "../" }}

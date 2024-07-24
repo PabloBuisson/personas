@@ -47,7 +47,7 @@ export default function CreateProjectForm() {
         />
         <InputTag label="Tags" tags={updatedTags} setTags={setUpdatedTags} />
       </section>
-      <section className="flex items-center gap-8 mt-8">
+      <section className="flex flex-wrap items-center gap-8 mt-8">
         <ButtonSecondary
           element="link"
           elementProps={{ href: "../" }}

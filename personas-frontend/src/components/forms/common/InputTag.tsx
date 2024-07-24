@@ -53,7 +53,7 @@ export default function InputTag({
           ))}
         </ul>
       )}
-      <div className="flex gap-4 items-stretch">
+      <div className="flex flex-wrap gap-4 items-stretch">
         <input
           className="px-2 py-1 text-sm font-normal rounded-md"
           id="new-tag"
@@ -61,7 +61,7 @@ export default function InputTag({
           name="new-tag"
         ></input>
         <ButtonPrimary
-          className="text-sm"
+          className="text-sm grow-0"
           element="button"
           label="Add a tag"
           elementProps={{
