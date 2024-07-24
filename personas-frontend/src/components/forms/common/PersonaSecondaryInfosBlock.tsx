@@ -18,7 +18,7 @@ export default function PersonaSecondaryInfosBlock(
       <section
         key={props.id}
         className={`flex flex-col gap-2 ${
-          props.isStandalone ? "w-full" : "w-1/3"
+          props.isStandalone ? "w-full grow" : "w-full xl:w-1/3 grow"
         }`}
       >
         <header className="relative w-full bg-white p-4">
@@ -54,7 +54,7 @@ export default function PersonaSecondaryInfosBlock(
     <section
       key={props.id}
       className={`flex flex-col gap-2 ${
-        props.isStandalone ? "w-full" : "w-1/3"
+        props.isStandalone ? "w-full grow" : "w-full xl:w-1/3 grow"
       }`}
     >
       <header className="relative w-full bg-white p-4">

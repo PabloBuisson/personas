@@ -7,9 +7,9 @@ export type PersonalInformationsRowProps = {
 };
 
 const classesByOrder: Record<number, string> = {
-  1: "basis-1/12 border-purple-100 border-r-2 border-dotted",
-  2: "border-r-2 border-purple-100 border-dotted",
-  3: "basis-1/2",
+  1: "grow basis-1/12 border-purple-100 border-b-2 xl:border-r-2 xl:border-b-0 border-dotted",
+  2: "grow border-b-2 xl:border-r-2 xl:border-b-0 border-purple-100 border-dotted",
+  3: "grow basis-1/2",
 };
 
 export default function PersonalInformationsRow(
@@ -18,7 +18,7 @@ export default function PersonalInformationsRow(
   if (informations.mode === "edit") {
     return (
       <section className="w-full bg-white">
-        <ul className="flex">
+        <ul className="flex flex-col xl:flex-row">
           {informations.cells.map((cell) => (
             <li
               className={`flex flex-col gap-2 py-8 px-8 relative ${
@@ -32,7 +32,9 @@ export default function PersonalInformationsRow(
                     icon="mdi:alert-circle-outline"
                     className="text-lg text-red-300"
                   />
-                  <p className=" text-red-50 text-sm">{cell.errorMessage.message}</p>
+                  <p className=" text-red-50 text-sm">
+                    {cell.errorMessage.message}
+                  </p>
                 </div>
               )}
               <AppIcon icon={cell.icon} className="text-2xl text-pink-500" />
@@ -55,7 +57,7 @@ export default function PersonalInformationsRow(
 
   return (
     <section className="w-full bg-white">
-      <ul className="flex">
+      <ul className="flex flex-col xl:flex-row">
         {informations.cells.map((cell) => (
           <li
             className={`flex flex-col gap-2 py-8 px-8 ${
