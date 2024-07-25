@@ -26,23 +26,23 @@ export default async function Persona({
 
   return (
     <main className="p-0 pt-8 md:p-16 md:pt-8 flex flex-col gap-8 w-full text-purple-800">
-      <div className="w-full flex flex-wrap justify-center xl:justify-end gap-8 mb-8 xl:mb-0">
+      <div className="w-full flex flex-wrap justify-center 2xl:justify-end gap-8 mb-8 2xl:mb-0">
         <ButtonPrimary
           element="link"
           label="Edit Persona"
           elementProps={{ href: "edit" }}
-          className="grow md:grow xl:grow-0"
+          className="grow md:grow 2xl:grow-0"
         />
         {persona.id && (
           <ButtonDeleteItem
             item="persona"
             itemId={persona.id}
-            className="grow md:grow xl:grow-0"
+            className="grow md:grow 2xl:grow-0"
           />
         )}
       </div>
-      <div className="flex flex-col xl:flex-row justify-start items-start gap-16">
-        <div className="basis-auto xl:basis-1/4 w-full xl:w-auto flex flex-col justify-center items-center gap-4">
+      <div className="flex flex-col 2xl:flex-row justify-start items-start gap-16">
+        <div className="basis-auto 2xl:basis-1/4 w-full 2xl:w-auto flex flex-col justify-center items-center gap-4">
           <PersonaSectionAvatar mode="view" image={persona.avatar} />
           <div className="flex flex-col gap-[8.4rem] w-full">
             <PersonaSectionLinkedProject
@@ -52,7 +52,7 @@ export default async function Persona({
           </div>
         </div>
 
-        <div className="basis-auto xl:basis-3/4 w-full xl:w-auto flex flex-col gap-8">
+        <div className="basis-auto 2xl:basis-3/4 w-full 2xl:w-auto flex flex-col gap-8">
           <div className="flex justify-between gap-8 w-full">
             <h1 className="text-5xl font-extrabold text-orange-900">
               {persona.name}
@@ -65,13 +65,13 @@ export default async function Persona({
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row justify-start items-start gap-16">
-        <div className="basis-auto xl:basis-1/4 flex flex-col gap-20 w-full">
+      <div className="flex flex-col 2xl:flex-row justify-start items-start gap-16">
+        <div className="basis-auto 2xl:basis-1/4 flex flex-col gap-20 w-full">
           <SecondaryTitle title="Characteristics" />
           <PersonaSectionCharacteristics mode="view" persona={persona} />
         </div>
 
-        <div className="basis-auto xl:basis-3/4 flex flex-col gap-8">
+        <div className="basis-auto 2xl:basis-3/4 flex flex-col gap-8">
           <PersonaSectionMultiInfos
             mode="view"
             title="Culture"
