@@ -54,6 +54,8 @@ Online demo : *TODO*
 * [ ] Add interceptors
 * [ ] Add an existing persona to a project
 * [ ] Hide block info
+* [ ] Add color palette for the persona
+* [ ] Delete orphan tags on update project
 * [ ] Authentication ?
   
 ## :iphone: Images
