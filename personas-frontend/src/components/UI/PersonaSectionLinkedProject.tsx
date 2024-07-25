@@ -68,7 +68,7 @@ export default function PersonaSectionLinkedProject(
 
   return (
     <section
-      className={`flex flex-col justify-start items-start z-10 ${
+      className={`flex flex-col justify-start items-start z-10 w-full ${
         !props.project ? "gap-8" : "gap-12"
       }`}
     >

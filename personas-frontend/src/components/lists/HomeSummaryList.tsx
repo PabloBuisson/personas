@@ -47,7 +47,13 @@ export default function HomeSummaryList({
             {targetName === "projects" &&
               data &&
               data.map((project) => {
-                return <ProjectCard key={project.id} project={project} />;
+                return (
+                  <ProjectCard
+                    className="w-[30ch]"
+                    key={project.id}
+                    project={project}
+                  />
+                );
               })}
             {targetName === "personas" &&
               data &&

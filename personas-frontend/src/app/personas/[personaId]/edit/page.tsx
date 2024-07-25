@@ -18,9 +18,9 @@ export default async function EditPersona({
   // TODO get cached Project ?
   let persona: PersonaDto = await getPersonaById(personaId);
 
-    return (
-      <main className="p-0 pt-8 md:p-16 flex flex-col gap-8">
-        <EditPersonaForm persona={persona} />
-      </main>
-    );
+  return (
+    <main className="p-0 pt-8 md:p-16 md:pt-8 flex flex-col gap-8">
+      <EditPersonaForm persona={persona} />
+    </main>
+  );
 }

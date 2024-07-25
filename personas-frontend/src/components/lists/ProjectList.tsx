@@ -11,7 +11,11 @@ export default async function ProjectList({ tagId }: { tagId?: number }) {
       <ul className="flex flex-wrap items-stretch gap-16">
         <CreateProjectCard id="new" />
         {projects.map((project: any) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            className="w-[30ch]"
+          />
         ))}
       </ul>
     );

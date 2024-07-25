@@ -44,12 +44,7 @@ export default async function Persona({
       <div className="flex flex-col 2xl:flex-row justify-start items-start gap-16">
         <div className="basis-auto 2xl:basis-1/4 w-full 2xl:w-auto flex flex-col justify-center items-center gap-4">
           <PersonaSectionAvatar mode="view" image={persona.avatar} />
-          <div className="flex flex-col gap-[8.4rem] w-full">
-            <PersonaSectionLinkedProject
-              mode="view"
-              project={persona.project}
-            />
-          </div>
+          <PersonaSectionLinkedProject mode="view" project={persona.project} />
         </div>
 
         <div className="basis-auto 2xl:basis-3/4 w-full 2xl:w-auto flex flex-col gap-8">

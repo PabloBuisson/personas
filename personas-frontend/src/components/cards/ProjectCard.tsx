@@ -2,12 +2,16 @@ import Link from "next/link";
 import { ProjectDto } from "@/app/api";
 import Tag from "../tags/Tag";
 import ButtonPrimary from "../buttons/ButtonPrimary";
+import { HTMLProps } from "react";
+import { cn } from "@/app/utils/utils";
 
 export default function ProjectCard({
   project,
   onDelete,
+  className,
 }: {
   project: ProjectDto;
+  className?: HTMLProps<HTMLElement>["className"];
   onDelete?: (projectId: number | undefined) => void;
 }) {
   const cardContent = (
@@ -48,10 +52,13 @@ export default function ProjectCard({
 
   return (
     <li
-      className="text-base font-medium flex flex-col justify-center gap-4"
+      className={cn(
+        "text-base font-medium flex flex-col justify-center gap-4 w-full",
+        className
+      )}
       key={project.id}
     >
-      <article className="flex justify-center items-center h-full w-[30ch] text-purple-800 border-[0.15em] border-white relative">
+      <article className="flex justify-center items-center h-full w-full text-purple-800 border-[0.15em] border-white relative">
         <div className="bg-transparent border-transparent border-r-white border-[0.15em] w-[calc(2rem+0.4em)] h-[calc(2rem+0.7em)] absolute top-[calc(-1rem-0.35em)] left-[calc(-1rem-0.2em)] rotate-45"></div>
         <div className="bg-transparent border-transparent border-l-white border-[0.15em] w-[calc(2rem+0.4em)] h-[calc(2rem+0.7em)] absolute top-[calc(-1rem-0.35em)] right-[calc(-1rem-0.2em)] rotate-[-45deg]"></div>
         <div className="bg-transparent border-transparent border-r-white border-[0.15em] w-[calc(2rem+0.4em)] h-[calc(2rem+0.7em)] absolute bottom-[calc(-1rem-0.35em)] left-[calc(-1rem-0.2em)] rotate-[-45deg]"></div>

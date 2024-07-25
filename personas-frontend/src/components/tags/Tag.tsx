@@ -1,5 +1,6 @@
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link";
+
 import AppIcon from "../UI/AppIcon";
 import { HTMLProps } from "react";
 import { cn } from "@/app/utils/utils";
@@ -21,6 +22,8 @@ export default function Tag({
   link?: Url;
   onDelete?: (tagId: number) => void;
 }) {
+  const nameLower = name.toLowerCase();
+
   if (link) {
     return (
       <li
@@ -32,7 +35,7 @@ export default function Tag({
         key={id}
       >
         <Link className="block px-[1em] py-[0.3em]" href={link}>
-          {name}
+          {nameLower}
         </Link>
       </li>
     );
@@ -53,7 +56,7 @@ export default function Tag({
           className="flex justify-between items-center gap-4"
           onClick={() => onDelete(index)}
         >
-          {name}
+          {nameLower}
           <span className="sr-only">Delete tag named {name}</span>
           <AppIcon
             icon="mdi:close"
@@ -73,7 +76,7 @@ export default function Tag({
       )}
       key={id}
     >
-      {name}
+      {nameLower}
     </li>
   );
 }
