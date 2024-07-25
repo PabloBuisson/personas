@@ -44,10 +44,10 @@ Online demo : *TODO*
 * [x] Use tailwind-merge to improve CSS flexibility
 * [x] Handle empty data (homepage, etc.)
 * [x] Base Metadata
-* [ ] Responsive
+* [x] Responsive
 * [ ] Images, gifs
 * [ ] Details metadata (dynamic metadata, opengraph)
-* [ ] Basic client validation (required, with zod ?) 🔥
+* [ ] Basic client validation (required, with zod ?)
 * [ ] Scroll to top on page change
 * [ ] Skeleton loader
 * [ ] Reset active tag
