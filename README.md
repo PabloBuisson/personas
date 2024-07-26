@@ -45,7 +45,7 @@ Online demo : *TODO*
 * [x] Handle empty data (homepage, etc.)
 * [x] Base Metadata
 * [x] Responsive
-* [ ] Images, gifs
+* [x] Images, gifs
 * [ ] Details metadata (dynamic metadata, opengraph)
 * [ ] Basic client validation (required, with zod ?)
 * [ ] Scroll to top on page change
@@ -60,15 +60,15 @@ Online demo : *TODO*
   
 ## :iphone: Images
 
-![homepage](https://github.com/PabloBuisson/personas/tree/main/personas-frontend/src/assets/screens/homepage.png)
+![homepage](personas-frontend/src/assets/screens/homepage.png)
 
-![persona-craig-edit](https://github.com/PabloBuisson/personas/tree/main/personas-frontend/src/assets/screens/persona-craig-edit.png)
+![persona-craig-edit](personas-frontend/src/assets/screens/persona-craig-edit.png)
 
-![persona-craig-avatar-selector](https://github.com/PabloBuisson/personas/tree/main/personas-frontend/src/assets/screens/persona-craig-avatar-selector.png)
+![persona-craig-avatar-selector](personas-frontend/src/assets/screens/persona-craig-avatar-selector.png)
 
-![create-project-whale](https://github.com/PabloBuisson/personas/tree/main/personas-frontend/src/assets/screens/create-project-whale.png)
+![create-project-whale](personas-frontend/src/assets/screens/create-project-whale.png)
 
-![create-project-blackthorn-icon-selector](https://github.com/PabloBuisson/personas/tree/main/personas-frontend/src/assets/screens/create-project-blackthorn-icon-selector.png)
+![create-project-blackthorn-icon-selector](personas-frontend/src/assets/screens/create-project-blackthorn-icon-selector.png)
 
 ## 🏍 Run the project
 1. Clone the repo
