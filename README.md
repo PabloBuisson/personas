@@ -25,8 +25,12 @@ Online demo : *TODO*
 
 ## :dart: Presentation of the project
 
-* **Personas** is a web application for creating and managing personas.
-* For now, you can test the project with [Bruno](https://www.usebruno.com/), a new API Client.
+* **Personas** is a web application for creating and managing detailed personas.
+* Create a **project** — such as your *new novel* or *new DnD campaign* — where you can store multiple personas like main characters, villains, etc., all linked to your project.
+* Additionally, you can create **standalone personas** and add them to a project later.
+* The application has a design inspired by the look and feel of **D&D**.
+* The back-end is built using **Spring Boot**.
+* The front-end use **Next.js**.
 
 ## :white_check_mark: Todos
 
