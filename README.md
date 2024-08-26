@@ -26,6 +26,7 @@ Online demo : *TODO*
 ## :dart: Presentation of the project
 
 * **Personas** is a web application for creating and managing detailed personas.
+* A persona is a **fictional character** that represents a specific individual or group. It's used to guide design, storytelling, or marketing decisions. 
 * Create a **project** — such as your *new novel* or a *new DnD campaign* — where you can store multiple personas like main characters, villains, etc., all linked to your project.
 * Additionally, you can create **standalone personas** and add them to a project later.
 * The application has a design inspired by the look and feel of **D&D**.
