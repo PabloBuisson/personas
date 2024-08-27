@@ -67,7 +67,7 @@ Online demo : *TODO*
 
 ![homepage](personas-frontend/src/assets/screens/homepage.png)
 
-![persona-craig-edit](personas-frontend/src/assets/screens/persona-craig-edit.png)
+![persona-craig-details](personas-frontend/src/assets/screens/persona-craig-details.png)
 
 ![persona-craig-avatar-selector](personas-frontend/src/assets/screens/persona-craig-avatar-selector.png)
 
